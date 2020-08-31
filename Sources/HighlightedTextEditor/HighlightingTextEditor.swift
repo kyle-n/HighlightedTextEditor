@@ -19,7 +19,7 @@ struct HighlightRule {
 
 internal protocol HighlightingTextEditor {
     var text: String { get set }
-    let highlightRules: [HighlightRule] { get }
+    var highlightRules: [HighlightRule] { get }
 }
 
 extension HighlightingTextEditor {

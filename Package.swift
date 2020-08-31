@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-let package = Package(
+public let package = Package(
     name: "HighlightedTextEditor",
     platforms: [
         .macOS(.v10_15),
