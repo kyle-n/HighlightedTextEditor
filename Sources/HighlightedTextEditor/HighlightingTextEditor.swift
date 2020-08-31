@@ -35,10 +35,14 @@ extension HighlightingTextEditor {
         
         #if os(macOS)
         let systemFont = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        let systemTextColor = NSColor.labelColor
         #else
         let systemFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        let systemTextColor = UIColor.label
         #endif
+        
         highlightedString.addAttribute(.font, value: systemFont, range: all)
+        highlightedString.addAttribute(.foregroundColor, value: systemTextColor, range: all)
         
         highlightRules.forEach { rule in
             let matches = rule.pattern.matches(in: text, options: [], range: all)
