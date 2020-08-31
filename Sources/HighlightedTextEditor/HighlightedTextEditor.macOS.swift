@@ -9,7 +9,7 @@ import SwiftUI
 import AppKit
 import Combine
 
-struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
+public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
     
     @Binding var text: String
     let highlightRules: [HighlightRule]

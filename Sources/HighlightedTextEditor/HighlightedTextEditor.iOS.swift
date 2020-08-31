@@ -2,7 +2,7 @@
 import SwiftUI
 import UIKit
 
-struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
+public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
 
     @Binding var text: String
     let highlightRules: [HighlightRule]
