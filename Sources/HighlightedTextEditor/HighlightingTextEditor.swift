@@ -30,7 +30,7 @@ extension HighlightingTextEditor {
         #if os(macOS)
         let systemFont = NSFont.systemFont(ofSize: NSFont.systemFontSize)
         #else
-        let systemFont = UIFont.systemFont(ofSize: NSFont.systemFontSize)
+        let systemFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         #endif
         highlightedString.addAttribute(.font, value: systemFont, range: all)
         
