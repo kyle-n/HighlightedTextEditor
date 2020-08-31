@@ -15,6 +15,12 @@ public struct HighlightRule {
     let pattern: NSRegularExpression
     let attributeKey: NSAttributedString.Key
     let attributeValue: Any
+    
+    public init(pattern: NSRegularExpression, attributeKey: NSAttributedString.Key, attributeValue: Any) {
+        self.pattern = pattern
+        self.attributeKey = attributeKey
+        self.attributeValue = attributeValue
+    }
 }
 
 internal protocol HighlightingTextEditor {
