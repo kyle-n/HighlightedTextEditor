@@ -5,7 +5,7 @@ import UIKit
 struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
 
     @Binding var text: String
-    let highlightPatterns: [NSRegularExpression]
+    let highlightRules: [HighlightRule]
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -23,7 +23,7 @@ struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.isScrollEnabled = false
         
-        let highlightedText = NSMutableAttributedString(string: "")
+        let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
 
         print("self text", self.text)
         uiView.attributedText = highlightedText

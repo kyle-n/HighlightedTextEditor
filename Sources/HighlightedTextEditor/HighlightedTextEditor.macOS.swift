@@ -12,7 +12,7 @@ import Combine
 struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
     
     @Binding var text: String
-    let highlightPatterns: [NSRegularExpression]
+    let highlightRules: [HighlightRule]
     
     var isEditable: Bool = true
     var font: NSFont?    = .systemFont(ofSize: 14, weight: .regular)
@@ -40,7 +40,7 @@ struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
         view.text = text
         view.selectedRanges = context.coordinator.selectedRanges
         
-        let highlightedText = NSMutableAttributedString(string: "")
+        let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
 
         print("self text", self.text)
         
