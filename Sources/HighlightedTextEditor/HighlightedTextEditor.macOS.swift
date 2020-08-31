@@ -21,11 +21,11 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
     
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
-    func makeNSView(context: Context) -> CustomTextView {
+    public func makeNSView(context: Context) -> CustomTextView {
         let textView = CustomTextView(
             text: text,
             isEditable: isEditable,
@@ -36,7 +36,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         return textView
     }
     
-    func updateNSView(_ view: CustomTextView, context: Context) {
+    public func updateNSView(_ view: CustomTextView, context: Context) {
         view.text = text
         view.selectedRanges = context.coordinator.selectedRanges
         
@@ -51,7 +51,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
 // MARK: - Coordinator
 extension HighlightedTextEditor {
     
-    class Coordinator: NSObject, NSTextViewDelegate {
+    public class Coordinator: NSObject, NSTextViewDelegate {
 
         var parent: HighlightedTextEditor
         var selectedRanges: [NSValue] = []
@@ -61,12 +61,12 @@ extension HighlightedTextEditor {
             self.parent = parent
         }
         
-        func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
+        public func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
             lastKeyPressed = replacementString ?? ""
             return true
         }
         
-        func textDidBeginEditing(_ notification: Notification) {
+        public func textDidBeginEditing(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else {
                 return
             }
@@ -75,7 +75,7 @@ extension HighlightedTextEditor {
             self.parent.onEditingChanged()
         }
         
-        func textDidChange(_ notification: Notification) {
+        public func textDidChange(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else {
                 return
             }
@@ -84,7 +84,7 @@ extension HighlightedTextEditor {
             self.parent.text = content
         }
         
-        func textDidEndEditing(_ notification: Notification) {
+        public func textDidEndEditing(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else {
                 return
             }
@@ -96,7 +96,7 @@ extension HighlightedTextEditor {
 }
 
 // MARK: - CustomTextView
-final class CustomTextView: NSView {
+public final class CustomTextView: NSView {
     private var isEditable: Bool
     private var font: NSFont?
     
@@ -187,7 +187,7 @@ final class CustomTextView: NSView {
     
     // MARK: - Life cycle
     
-    override func viewWillDraw() {
+    public override func viewWillDraw() {
         super.viewWillDraw()
         
         setupScrollViewConstraints()
