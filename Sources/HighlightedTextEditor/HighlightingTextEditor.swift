@@ -11,7 +11,7 @@ import AppKit
 import UIKit
 #endif
 
-struct HighlightRule {
+public struct HighlightRule {
     let pattern: NSRegularExpression
     let attributeKey: NSAttributedString.Key
     let attributeValue: Any

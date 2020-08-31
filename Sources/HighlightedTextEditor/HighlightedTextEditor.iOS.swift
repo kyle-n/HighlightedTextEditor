@@ -6,6 +6,11 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
     @Binding var text: String
     let highlightRules: [HighlightRule]
+    
+    public init(text: Binding<String>, highlightRules: [HighlightRule]) {
+        _text = text
+        self.highlightRules = highlightRules
+    }
 
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
