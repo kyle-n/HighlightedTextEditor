@@ -5,6 +5,7 @@ import UIKit
 struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
 
     @Binding var text: String
+    let highlightPatterns: [NSRegularExpression]
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)

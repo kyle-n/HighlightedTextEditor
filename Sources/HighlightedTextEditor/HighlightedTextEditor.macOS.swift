@@ -10,7 +10,9 @@ import AppKit
 import Combine
 
 struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
+    
     @Binding var text: String
+    let highlightPatterns: [NSRegularExpression]
     
     var isEditable: Bool = true
     var font: NSFont?    = .systemFont(ofSize: 14, weight: .regular)
