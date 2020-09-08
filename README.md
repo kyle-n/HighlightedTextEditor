@@ -53,10 +53,13 @@ Notice the NSRegularExpression is instantiated **once**, not somewhere where it 
 
 ### TextFormattingRule
 
-| Parameter | Type | Requires iOS 14 / macOS 11.0 | Description |
-| ------------------------------------------------ |
+| Parameter | Type | Description |
+| --- | --- | --- |
 | `key` | [NSAttributedString.Key](2) | No | The style to set (e.x. `.foregroundColor`, `.underlineStyle`), |
 | `value` | Any | No | The actual style applied to the `key` (e.x. for `key = .foregroundColor`, `value` is `UIColor.red` or `NSColor.red`). This is an older API and `value`'s type changes by `key`. |
+
+| Parameter | Type | Description |
+| --- | --- | --- |
 | `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | No | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
 
 [2]: https://developer.apple.com/documentation/foundation/nsattributedstring/key
@@ -64,3 +67,10 @@ Notice the NSRegularExpression is instantiated **once**, not somewhere where it 
 [3]: https://developer.apple.com/documentation/uikit/uifontdescriptor/symbolictraits
 
 [4]: https://developer.apple.com/documentation/appkit/nsfontdescriptor/symbolictraits
+
+If you are targeting iOS 14 / macOS 11, you can use a convenience initializer taking advantage of new SwiftUI APIs for converting Colors to UIColors or NSColors. 
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `foregroundColor` | Color | Color of the text |
+| `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
