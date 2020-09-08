@@ -106,7 +106,8 @@ extension HighlightingTextEditor {
             let matches = rule.pattern.matches(in: text, options: [], range: all)
             matches.forEach { match in
                 rule.attributeKeyValues.forEach {
-                    highlightedString.addAttribute($0.key, value: $0.value, range: match.range)
+                    guard let key = $0.key, let value = $0.value else { return }
+                    highlightedString.addAttribute(key, value: value, range: match.range)
                 }
             }
         }
