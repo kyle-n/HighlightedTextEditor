@@ -2,9 +2,7 @@
 // https://stackoverflow.com/questions/4713236/how-do-i-set-bold-and-italic-on-uilabel-of-iphone-ipad
 
 import Foundation
-#if os(iOS)
 import UIKit
-#endif
 
 extension UIFont {
     var bold: UIFont {
