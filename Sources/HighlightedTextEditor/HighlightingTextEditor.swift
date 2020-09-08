@@ -25,13 +25,6 @@ public struct TextFormattingRule {
     
     // ------------------- convenience ------------------------
     
-    #if os(macOS)
-    @available(macOS 11.0, *)
-    public init(foregroundColor color: Color) {
-        self.init(key: .foregroundColor, value: NSColor(color), fontTraits: [])
-    }
-    #endif
-    
     public init(key: NSAttributedString.Key, value: Any) {
         self.init(key: key, value: value, fontTraits: [])
     }
