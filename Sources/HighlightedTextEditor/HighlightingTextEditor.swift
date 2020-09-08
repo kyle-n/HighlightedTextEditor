@@ -49,26 +49,6 @@ public struct HighlightRule {
     
     // ------------------- convenience ------------------------
     
-    public init(pattern: NSRegularExpression, highlightColor color: Color) {
-        #if os(macOS)
-        let convertedColor = color.nsColor()
-        #else
-        let convertedColor = color.uiColor()
-        #endif
-        let backgroundColor = TextFormattingRule(key: .backgroundColor, value: convertedColor as Any)
-        self.init(pattern: pattern, formattingRules: [backgroundColor])
-    }
-    
-    public init(pattern: NSRegularExpression, foregroundColor color: Color) {
-        #if os(macOS)
-        let convertedColor = color.nsColor()
-        #else
-        let convertedColor = color.uiColor()
-        #endif
-        let textColor = TextFormattingRule(key: .foregroundColor, value: convertedColor as Any)
-        self.init(pattern: pattern, formattingRules: [textColor])
-    }
-    
     public init(pattern: NSRegularExpression, formattingRule: TextFormattingRule) {
         self.init(pattern: pattern, formattingRules: [formattingRule])
     }
