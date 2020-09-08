@@ -86,7 +86,7 @@ extension HighlightingTextEditor {
         let systemFont = NSFont.systemFont(ofSize: NSFont.systemFontSize)
         let systemTextColor = NSColor.labelColor
         #else
-        let systemFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        let systemFont = UIFont.preferredFont(forTextStyle: .body)
         let systemTextColor = UIColor.label
         #endif
         
