@@ -30,7 +30,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
 
-        print("self text", self.text)
         uiView.attributedText = highlightedText
         uiView.isScrollEnabled = true
     }
@@ -43,10 +42,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         }
         
         public func textViewDidChange(_ textView: UITextView) {
-            print("textView content:", textView.text!)
             self.parent.text = textView.text
-//            textView.selectedRange = transformData.1
-            print("post update parent text binding", self.parent.text)
         }
         
     }

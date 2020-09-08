@@ -49,8 +49,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         view.selectedRanges = context.coordinator.selectedRanges
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
-
-        print("self text", self.text)
         
         view.attributedText = highlightedText
     }
@@ -63,14 +61,12 @@ extension HighlightedTextEditor {
 
         var parent: HighlightedTextEditor
         var selectedRanges: [NSValue] = []
-        var lastKeyPressed: String = ""
         
         init(_ parent: HighlightedTextEditor) {
             self.parent = parent
         }
         
         public func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
-            lastKeyPressed = replacementString ?? ""
             return true
         }
         
