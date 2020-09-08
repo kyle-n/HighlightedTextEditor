@@ -12,7 +12,7 @@ import AppKit
 import UIKit
 #endif
 
-public struct AttributedStringKeyValue {
+public struct TextFormattingRule {
     let key: NSAttributedString.Key
     let value: Any
     
@@ -25,7 +25,7 @@ public struct AttributedStringKeyValue {
 public struct HighlightRule {
     let pattern: NSRegularExpression
     
-    let attributeKeyValues: Array<AttributedStringKeyValue>
+    let attributeKeyValues: Array<TextFormattingRule>
     
     public init(pattern: NSRegularExpression, highlightColor color: Color) {
         #if os(macOS)
@@ -33,7 +33,7 @@ public struct HighlightRule {
         #else
         let convertedColor = UIColor(color)
         #endif
-        let backgroundColor = AttributedStringKeyValue(key: .backgroundColor, value: convertedColor as Any)
+        let backgroundColor = TextFormattingRule(key: .backgroundColor, value: convertedColor as Any)
         self.init(pattern: pattern, attributedStringKeyValues: [backgroundColor])
     }
     
@@ -43,15 +43,15 @@ public struct HighlightRule {
         #else
         let convertedColor = UIColor(color)
         #endif
-        let textColor = AttributedStringKeyValue(key: .foregroundColor, value: convertedColor as Any)
+        let textColor = TextFormattingRule(key: .foregroundColor, value: convertedColor as Any)
         self.init(pattern: pattern, attributedStringKeyValues: [textColor])
     }
     
-    public init(pattern: NSRegularExpression, attributedStringKeyValue: AttributedStringKeyValue) {
+    public init(pattern: NSRegularExpression, attributedStringKeyValue: TextFormattingRule) {
         self.init(pattern: pattern, attributedStringKeyValues: [attributedStringKeyValue])
     }
     
-    public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<AttributedStringKeyValue>) {
+    public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<TextFormattingRule>) {
         self.pattern = pattern
         self.attributeKeyValues = attributedStringKeyValues
     }
