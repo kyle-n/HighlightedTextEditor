@@ -11,15 +11,29 @@ import AppKit
 import UIKit
 #endif
 
+public struct AttributedStringKeyValue {
+    let key: NSAttributedString.Key
+    let value: Any
+    
+    public init(key: NSAttributedString.Key, value: Any) {
+        self.key = key
+        self.value = value
+    }
+}
+
 public struct HighlightRule {
     let pattern: NSRegularExpression
-    let attributeKey: NSAttributedString.Key
-    let attributeValue: Any
     
-    public init(pattern: NSRegularExpression, attributeKey: NSAttributedString.Key, attributeValue: Any) {
+    let attributeKeyValues: Array<AttributedStringKeyValue>
+    
+    public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<AttributedStringKeyValue>) {
         self.pattern = pattern
-        self.attributeKey = attributeKey
-        self.attributeValue = attributeValue
+        self.attributeKeyValues = attributedStringKeyValues
+    }
+    
+    public init(pattern: NSRegularExpression, attributedStringKeyValue: AttributedStringKeyValue) {
+        self.pattern = pattern
+        self.attributeKeyValues = [attributedStringKeyValue]
     }
 }
 
@@ -47,7 +61,9 @@ extension HighlightingTextEditor {
         highlightRules.forEach { rule in
             let matches = rule.pattern.matches(in: text, options: [], range: all)
             matches.forEach { match in
-                highlightedString.addAttribute(rule.attributeKey, value: rule.attributeValue, range: match.range)
+                rule.attributeKeyValues.forEach {
+                    highlightedString.addAttribute($0.key, value: $0.value, range: match.range)
+                }
             }
         }
         
