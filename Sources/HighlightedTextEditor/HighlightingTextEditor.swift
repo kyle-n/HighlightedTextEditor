@@ -27,6 +27,16 @@ public struct HighlightRule {
     
     let attributeKeyValues: Array<AttributedStringKeyValue>
     
+    public init(pattern: NSRegularExpression, highlightColor color: Color) {
+        #if os(macOS)
+        let convertedColor = NSColor(cgColor: color.cgColor!)
+        #else
+        let convertedColor = UIColor(color)
+        #endif
+        let backgroundColor = AttributedStringKeyValue(key: .backgroundColor, value: convertedColor as Any)
+        self.init(pattern: pattern, attributedStringKeyValues: [backgroundColor])
+    }
+    
     public init(pattern: NSRegularExpression, foregroundColor color: Color) {
         #if os(macOS)
         let convertedColor = NSColor(cgColor: color.cgColor!)
