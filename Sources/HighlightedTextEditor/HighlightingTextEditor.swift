@@ -51,7 +51,7 @@ public struct HighlightRule {
     
     public init(pattern: NSRegularExpression, highlightColor color: Color) {
         #if os(macOS)
-        let convertedColor = NSColor(cgColor: color.cgColor!)
+        let convertedColor = NSColor(color)
         #else
         let convertedColor = UIColor(cgColor: color.cgColor!)
         #endif
