@@ -13,12 +13,28 @@ import UIKit
 #endif
 
 public struct TextFormattingRule {
-    let key: NSAttributedString.Key
-    let value: Any
+    #if os(macOS)
+    typealias SymbolicTraits = NSFontDescriptor.SymbolicTraits
+    #else
+    typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
+    #endif
+    
+    let key: NSAttributedString.Key? = nil
+    let value: Any? = nil
+    let fontTraits: Array<SymbolicTraits> = []
+    
+    // ------------------- convenience ------------------------
     
     public init(key: NSAttributedString.Key, value: Any) {
+        self.init(key: key, value: value, fontTraits: [])
+    }
+    
+    // ------------------ most powerful initializer ------------------
+    
+    public init(key: NSAttributedString.Key, value: Any, fontTraits: Array<SymbolicTraits>) {
         self.key = key
         self.value = value
+        self.fontTraits = fontTraits
     }
 }
 
