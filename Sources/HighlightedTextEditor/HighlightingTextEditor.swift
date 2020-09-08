@@ -19,9 +19,9 @@ public struct TextFormattingRule {
     public typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
     #endif
     
-    let key: NSAttributedString.Key? = nil
-    let value: Any? = nil
-    let fontTraits: Array<SymbolicTraits> = []
+    let key: NSAttributedString.Key?
+    let value: Any?
+    let fontTraits: SymbolicTraits
     
     // ------------------- convenience ------------------------
     
@@ -29,13 +29,13 @@ public struct TextFormattingRule {
         self.init(key: key, value: value, fontTraits: [])
     }
     
-    public init(fontTrait: SymbolicTraits) {
-        self.init(key: nil, value: nil, fontTraits: [fontTrait])
+    public init(fontTraits: SymbolicTraits) {
+        self.init(key: nil, value: nil, fontTraits: fontTraits)
     }
     
     // ------------------ most powerful initializer ------------------
     
-    public init(key: NSAttributedString.Key?, value: Any?, fontTraits: Array<SymbolicTraits>) {
+    public init(key: NSAttributedString.Key? = nil, value: Any? = nil, fontTraits: SymbolicTraits = []) {
         self.key = key
         self.value = value
         self.fontTraits = fontTraits
@@ -53,7 +53,7 @@ public struct HighlightRule {
         #if os(macOS)
         let convertedColor = NSColor(cgColor: color.cgColor!)
         #else
-        let convertedColor = UIColor(color)
+        let convertedColor = UIColor(cgColor: color.cgColor!)
         #endif
         let backgroundColor = TextFormattingRule(key: .backgroundColor, value: convertedColor as Any)
         self.init(pattern: pattern, formattingRules: [backgroundColor])
@@ -63,7 +63,7 @@ public struct HighlightRule {
         #if os(macOS)
         let convertedColor = NSColor(cgColor: color.cgColor!)
         #else
-        let convertedColor = UIColor(color)
+        let convertedColor = UIColor(cgColor: color.cgColor!)
         #endif
         let textColor = TextFormattingRule(key: .foregroundColor, value: convertedColor as Any)
         self.init(pattern: pattern, formattingRules: [textColor])
@@ -87,6 +87,17 @@ internal protocol HighlightingTextEditor {
 }
 
 extension HighlightingTextEditor {
+    
+    #if os(macOS)
+    var placeholderFont: NSFont {
+        get { NSFont() }
+    }
+    #else
+    var placeholderFont: UIFont {
+        get { UIFont() }
+    }
+    #endif
+    
     static func getHighlightedText(text: String, highlightRules: [HighlightRule]) -> NSMutableAttributedString {
         let highlightedString = NSMutableAttributedString(string: text)
         let all = NSRange(location: 0, length: text.count)
@@ -105,8 +116,25 @@ extension HighlightingTextEditor {
         highlightRules.forEach { rule in
             let matches = rule.pattern.matches(in: text, options: [], range: all)
             matches.forEach { match in
-                rule.formattingRules.forEach {
-                    guard let key = $0.key, let value = $0.value else { return }
+                rule.formattingRules.forEach { formattingRule in
+                    
+                    #if os(macOS)
+                    var font = NSFont()
+                    #else
+                    var font = UIFont()
+                    #endif
+                    highlightedString.enumerateAttributes(in: match.range, options: []) { attributes, range, stop in
+                        let fontAttribute = attributes.first { $0.key == .font }!
+                        #if os(macOS)
+                        let previousFont = fontAttribute.value as! NSFont
+                        #else
+                        let previousFont = fontAttribute.value as! UIFont
+                        #endif
+                        font = previousFont.with(formattingRule.fontTraits)
+                    }
+                    highlightedString.addAttribute(.font, value: font, range: match.range)
+                    
+                    guard let key = formattingRule.key, let value = formattingRule.value else { return }
                     highlightedString.addAttribute(key, value: value, range: match.range)
                 }
             }
