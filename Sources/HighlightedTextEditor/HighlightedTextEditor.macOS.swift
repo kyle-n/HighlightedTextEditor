@@ -1,9 +1,12 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Kyle Nazario on 8/31/20.
-//
+/**
+ *  MacEditorTextView
+ *  Copyright (c) Thiago Holanda 2020
+ *  https://twitter.com/tholanda
+ *
+ *  Modified by Kyle Nazario 2020
+ *
+ *  MIT license
+ */
 #if os(macOS)
 import SwiftUI
 import AppKit

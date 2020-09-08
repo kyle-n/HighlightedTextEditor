@@ -2,7 +2,7 @@
 
 A simple, powerful SwiftUI text editor for iOS and macOS with live syntax highlighting.
 
-Don't leave your users typing unstyled text in your app - highlight what's important as they type. 
+Highlight what's important as your users type. 
 
 ## Installation
 
@@ -14,14 +14,16 @@ https://github.com/kyle-n/HighlightedTextEditor
 
 ## Usage
 
-HighlightedTextEditor requires regex patterns to highlight and styles to apply to those patterns. You can apply multiple styles to each regex pattern, as shown in the example below. 
+HighlightedTextEditor applies styles to text matching regex patterns you provide. You can apply multiple styles to each regex pattern, as shown in the example below. 
 
 ```swift
+import HighlightedTextEditor
 
+// highlights text between underscores
 let boldItalics = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
 
 struct ContentView: View {
-    @State private var text: String = "abc _em_"
+    @State private var text: String = "here is _bold emphasis text_"
     
     private let rules: [HighlightRule] = [
         HighlightRule(pattern: boldItalics, formattingRules: [
@@ -39,7 +41,7 @@ struct ContentView: View {
 }
 ```
 
-Notice the NSRegularExpression is instantiated **once**, not somewhere where it will be recreated when the view is redrawn. This [helps performance](https://stackoverflow.com/questions/41705728/optimize-nsregularexpression-performance). 
+Notice the NSRegularExpression is instantiated **once**. It should not be recreated every time the view is redrawn. This [helps performance](https://stackoverflow.com/questions/41705728/optimize-nsregularexpression-performance). 
 
 ## API
 
@@ -55,12 +57,12 @@ Notice the NSRegularExpression is instantiated **once**, not somewhere where it 
 
 | Parameter | Type | Description |
 | --- | --- | --- |
-| `key` | [NSAttributedString.Key](2) | No | The style to set (e.x. `.foregroundColor`, `.underlineStyle`), |
-| `value` | Any | No | The actual style applied to the `key` (e.x. for `key = .foregroundColor`, `value` is `UIColor.red` or `NSColor.red`). This is an older API and `value`'s type changes by `key`. |
+| `key` | [NSAttributedString.Key](2) | The style to set (e.x. `.foregroundColor`, `.underlineStyle`), |
+| `value` | Any | The actual style applied to the `key` (e.x. for `key = .foregroundColor`, `value` is `UIColor.red` or `NSColor.red`). This is an older API so you'll have to check the documentation for what type can be passed in for a given `key`. |
 
 | Parameter | Type | Description |
 | --- | --- | --- |
-| `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | No | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
+| `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
 
 [2]: https://developer.apple.com/documentation/foundation/nsattributedstring/key
 
@@ -74,3 +76,11 @@ If you are targeting iOS 14 / macOS 11, you can use a convenience initializer ta
 | --- | --- | --- |
 | `foregroundColor` | Color | Color of the text |
 | `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
+
+## Credits
+
+This code was originally created for [Compose for Substack](https://twitter.com/ComposeSubstack). If you are a Substack author and would like to use a high-quality, clean, native Markdown editor for writing newsletters, please give it a try. 
+
+AppKit text editor code based on [MacEditorTextView](https://gist.github.com/unnamedd/6e8c3fbc806b8deb60fa65d6b9affab0) by [Thiago Holanda](https://twitter.com/tholanda).
+
+Created by [Kyle Nazario](https://twitter.com/kbn_au).
