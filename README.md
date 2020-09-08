@@ -55,10 +55,14 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 
 ### TextFormattingRule
 
+TextFormattingRule uses two different initializers that each set one style.
+
 | Parameter | Type | Description |
 | --- | --- | --- |
-| `key` | [NSAttributedString.Key](2) | The style to set (e.x. `.foregroundColor`, `.underlineStyle`), |
-| `value` | Any | The actual style applied to the `key` (e.x. for `key = .foregroundColor`, `value` is `UIColor.red` or `NSColor.red`). This is an older API so you'll have to check the documentation for what type can be passed in for a given `key`. |
+| `key` | [NSAttributedString.Key](2) | The style to set (e.x. `.foregroundColor`, `.underlineStyle`) |
+| `value` | Any | The actual style applied to the `key` (e.x. for `key = .foregroundColor`, `value` is `UIColor.red` or `NSColor.red`) |
+
+`value` uses an older, untyped API so you'll have to check the [documentation](2) for what type can be passed in for a given `key`.
 
 | Parameter | Type | Description |
 | --- | --- | --- |
