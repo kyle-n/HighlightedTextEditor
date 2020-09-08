@@ -35,7 +35,7 @@ public struct TextFormattingRule {
     
     // ------------------ most powerful initializer ------------------
     
-    public init(key: NSAttributedString.Key? = nil, value: Any? = nil, fontTraits: SymbolicTraits = []) {
+    init(key: NSAttributedString.Key? = nil, value: Any? = nil, fontTraits: SymbolicTraits = []) {
         self.key = key
         self.value = value
         self.fontTraits = fontTraits
