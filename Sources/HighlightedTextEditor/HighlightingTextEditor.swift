@@ -5,6 +5,7 @@
 //  Created by Kyle Nazario on 8/31/20.
 //
 
+import SwiftUI
 #if os(macOS)
 import AppKit
 #else
@@ -26,14 +27,23 @@ public struct HighlightRule {
     
     let attributeKeyValues: Array<AttributedStringKeyValue>
     
-    public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<AttributedStringKeyValue>) {
-        self.pattern = pattern
-        self.attributeKeyValues = attributedStringKeyValues
+    public init(pattern: NSRegularExpression, foregroundColor color: Color) {
+        #if os(macOS)
+        let convertedColor = NSColor(cgColor: color.cgColor!)
+        #else
+        let convertedColor = UIColor(color)
+        #endif
+        let textColor = AttributedStringKeyValue(key: .foregroundColor, value: convertedColor as Any)
+        self.init(pattern: pattern, attributedStringKeyValues: [textColor])
     }
     
     public init(pattern: NSRegularExpression, attributedStringKeyValue: AttributedStringKeyValue) {
+        self.init(pattern: pattern, attributedStringKeyValues: [attributedStringKeyValue])
+    }
+    
+    public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<AttributedStringKeyValue>) {
         self.pattern = pattern
-        self.attributeKeyValues = [attributedStringKeyValue]
+        self.attributeKeyValues = attributedStringKeyValues
     }
 }
 
