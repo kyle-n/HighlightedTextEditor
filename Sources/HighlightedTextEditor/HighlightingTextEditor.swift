@@ -14,9 +14,9 @@ import UIKit
 
 public struct TextFormattingRule {
     #if os(macOS)
-    typealias SymbolicTraits = NSFontDescriptor.SymbolicTraits
+    public typealias SymbolicTraits = NSFontDescriptor.SymbolicTraits
     #else
-    typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
+    public typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
     #endif
     
     let key: NSAttributedString.Key? = nil
@@ -29,9 +29,13 @@ public struct TextFormattingRule {
         self.init(key: key, value: value, fontTraits: [])
     }
     
+    public init(fontTrait: SymbolicTraits) {
+        self.init(key: nil, value: nil, fontTraits: [fontTrait])
+    }
+    
     // ------------------ most powerful initializer ------------------
     
-    public init(key: NSAttributedString.Key, value: Any, fontTraits: Array<SymbolicTraits>) {
+    public init(key: NSAttributedString.Key?, value: Any?, fontTraits: Array<SymbolicTraits>) {
         self.key = key
         self.value = value
         self.fontTraits = fontTraits
