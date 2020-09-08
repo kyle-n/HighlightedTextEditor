@@ -6,6 +6,7 @@
 //  Based on UIFont extension by Maksymilian Wojakowski
 //
 
+#if os(macOS)
 import Foundation
 import AppKit
 
@@ -35,4 +36,4 @@ extension NSFont {
         return NSFont(descriptor: descriptor, size: 0) ?? self
     }
 }
-
+#endif

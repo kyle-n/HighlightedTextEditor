@@ -1,6 +1,7 @@
 // Maksymilian Wojakowski
 // https://stackoverflow.com/questions/4713236/how-do-i-set-bold-and-italic-on-uilabel-of-iphone-ipad
 
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -34,3 +35,4 @@ extension UIFont {
         return UIFont(descriptor: descriptor, size: 0)
     }
 }
+#endif
