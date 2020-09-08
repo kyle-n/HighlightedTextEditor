@@ -45,7 +45,7 @@ public struct TextFormattingRule {
 public struct HighlightRule {
     let pattern: NSRegularExpression
     
-    let attributeKeyValues: Array<TextFormattingRule>
+    let formattingRules: Array<TextFormattingRule>
     
     // ------------------- convenience ------------------------
     
@@ -56,7 +56,7 @@ public struct HighlightRule {
         let convertedColor = UIColor(color)
         #endif
         let backgroundColor = TextFormattingRule(key: .backgroundColor, value: convertedColor as Any)
-        self.init(pattern: pattern, attributedStringKeyValues: [backgroundColor])
+        self.init(pattern: pattern, formattingRules: [backgroundColor])
     }
     
     public init(pattern: NSRegularExpression, foregroundColor color: Color) {
@@ -66,18 +66,18 @@ public struct HighlightRule {
         let convertedColor = UIColor(color)
         #endif
         let textColor = TextFormattingRule(key: .foregroundColor, value: convertedColor as Any)
-        self.init(pattern: pattern, attributedStringKeyValues: [textColor])
+        self.init(pattern: pattern, formattingRules: [textColor])
     }
     
-    public init(pattern: NSRegularExpression, attributedStringKeyValue: TextFormattingRule) {
-        self.init(pattern: pattern, attributedStringKeyValues: [attributedStringKeyValue])
+    public init(pattern: NSRegularExpression, formattingRule: TextFormattingRule) {
+        self.init(pattern: pattern, formattingRules: [formattingRule])
     }
     
     // ------------------ most powerful initializer ------------------
     
-    public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<TextFormattingRule>) {
+    public init(pattern: NSRegularExpression, formattingRules: Array<TextFormattingRule>) {
         self.pattern = pattern
-        self.attributeKeyValues = attributedStringKeyValues
+        self.formattingRules = formattingRules
     }
 }
 
@@ -105,7 +105,7 @@ extension HighlightingTextEditor {
         highlightRules.forEach { rule in
             let matches = rule.pattern.matches(in: text, options: [], range: all)
             matches.forEach { match in
-                rule.attributeKeyValues.forEach {
+                rule.formattingRules.forEach {
                     guard let key = $0.key, let value = $0.value else { return }
                     highlightedString.addAttribute(key, value: value, range: match.range)
                 }
