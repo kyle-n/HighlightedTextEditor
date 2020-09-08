@@ -1,14 +1,20 @@
 # HighlightedTextEditor
 
-A simple, powerful SwiftUI text editor for iOS and macOS with live syntax highlighting. Don't leave your users typing unstyled text in your app - highlight what's important as they type. 
+A simple, powerful SwiftUI text editor for iOS and macOS with live syntax highlighting.
+
+Don't leave your users typing unstyled text in your app - highlight what's important as they type. 
 
 ## Installation
 
-Xcode -> File -> Swift Packages -> Add Package Dependency -> `https://github.com/kyle-n/HighlightedTextEditor`
+Swift Package Manager: 
+
+```
+https://github.com/kyle-n/HighlightedTextEditor
+```
 
 ## Usage
 
-**HighlightedTextEditor** requires regex patterns to highlight and styles to apply to those patterns. You can apply multiple styles to each regex pattern, as shown in the example below. 
+HighlightedTextEditor requires regex patterns to highlight and styles to apply to those patterns. You can apply multiple styles to each regex pattern, as shown in the example below. 
 
 ```swift
 
@@ -40,7 +46,7 @@ Notice the NSRegularExpression is instantiated **once**, not somewhere where it 
 ### HighlightRule
 
 | Parameter | Type | Description |
-| ----------------------- |
+| --- | --- | --- |
 | `pattern` | NSRegularExpression | The content you want to highlight. Should be instantiated **once** for performance. |
 | `formattingRule` | TextFormattingRule | Style applying to all text matching the `pattern` |
 | `formattingRules` | [TextFormattingRule] | Array of styles applying to all text matching the `pattern` |
