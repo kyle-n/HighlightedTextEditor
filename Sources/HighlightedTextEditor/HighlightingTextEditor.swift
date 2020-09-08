@@ -27,6 +27,8 @@ public struct HighlightRule {
     
     let attributeKeyValues: Array<TextFormattingRule>
     
+    // ------------------- convenience ------------------------
+    
     public init(pattern: NSRegularExpression, highlightColor color: Color) {
         #if os(macOS)
         let convertedColor = NSColor(cgColor: color.cgColor!)
@@ -50,6 +52,8 @@ public struct HighlightRule {
     public init(pattern: NSRegularExpression, attributedStringKeyValue: TextFormattingRule) {
         self.init(pattern: pattern, attributedStringKeyValues: [attributedStringKeyValue])
     }
+    
+    // ------------------ most powerful initializer ------------------
     
     public init(pattern: NSRegularExpression, attributedStringKeyValues: Array<TextFormattingRule>) {
         self.pattern = pattern
