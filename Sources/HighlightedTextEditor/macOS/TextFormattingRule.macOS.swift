@@ -5,6 +5,8 @@
 //  Created by Kyle Nazario on 9/8/20.
 //
 
+import SwiftUI
+
 #if os(macOS)
 extension TextFormattingRule {
     @available(macOS 11.0, *)

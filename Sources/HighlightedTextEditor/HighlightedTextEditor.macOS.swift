@@ -18,7 +18,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     let highlightRules: [HighlightRule]
     
     var isEditable: Bool = true
-    var font: NSFont?    = .systemFont(ofSize: 14, weight: .regular)
+    var font: NSFont?    = .systemFont(ofSize: 18, weight: .regular)
     
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
