@@ -53,6 +53,14 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 | `formattingRule` | TextFormattingRule | Style applying to all text matching the `pattern` |
 | `formattingRules` | [TextFormattingRule] | Array of styles applying to all text matching the `pattern` |
 
+I've included a [preset](https://github.com/kyle-n/HighlightedTextEditor/blob/main/Sources/HighlightedTextEditor/System%20Extensions/HighlightedTextEditor.swift) `[HighlightRule]` for Markdown syntax highlighting, accessed by the variable `HighlightRule.markdown`. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls). 
+
+Example of using a preset:
+
+```swift
+HighlightedTextEditor(text: $text, highlightRules: HighlightRule.markdown)
+```
+
 ### TextFormattingRule
 
 TextFormattingRule uses two different initializers that each set one style.
