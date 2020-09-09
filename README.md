@@ -4,7 +4,7 @@ A simple, powerful SwiftUI text editor for iOS and macOS with live syntax highli
 
 Highlight what's important as your users type. 
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="9LVbPJZ"><a href="https://imgur.com/9LVbPJZ">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+![HighlightedTextEditor demo](https://i.imgur.com/BHrB0UP.gif)
 
 ## Installation
 
