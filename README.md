@@ -6,6 +6,8 @@ Highlight what's important as your users type.
 
 ## Installation
 
+Supports iOS 13.0+ and macOS 10.15+.
+
 Swift Package Manager: 
 
 ```
@@ -52,6 +54,14 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 | `pattern` | NSRegularExpression | The content you want to highlight. Should be instantiated **once** for performance. |
 | `formattingRule` | TextFormattingRule | Style applying to all text matching the `pattern` |
 | `formattingRules` | [TextFormattingRule] | Array of styles applying to all text matching the `pattern` |
+
+I've included a [preset](https://github.com/kyle-n/HighlightedTextEditor/blob/main/Sources/HighlightedTextEditor/System%20Extensions/HighlightedTextEditor.swift) `[HighlightRule]` for Markdown syntax highlighting, accessed by the variable `HighlightRule.markdown`. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls). 
+
+Example of using a preset:
+
+```swift
+HighlightedTextEditor(text: $text, highlightRules: HighlightRule.markdown)
+```
 
 ### TextFormattingRule
 
