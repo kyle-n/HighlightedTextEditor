@@ -4,7 +4,7 @@ A simple, powerful SwiftUI text editor for iOS and macOS with live syntax highli
 
 Highlight what's important as your users type. 
 
-![HighlightedTextEditor demo](https://i.imgur.com/BHrB0UP.gif)
+![HighlightedTextEditor demo](https://raw.githubusercontent.com/kyle-n/kyle-n.github.io/master/static/img/hte-demo.gif)
 
 ## Installation
 
