@@ -4,6 +4,8 @@ A simple, powerful SwiftUI text editor for iOS and macOS with live syntax highli
 
 Highlight what's important as your users type. 
 
+![HighlightedTextEditor demo for iOS and macOS](https://i.imgur.com/9LVbPJZ.mp4)
+
 ## Installation
 
 Supports iOS 13.0+ and macOS 10.15+.
@@ -55,7 +57,7 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 | `formattingRule` | TextFormattingRule | Style applying to all text matching the `pattern` |
 | `formattingRules` | [TextFormattingRule] | Array of styles applying to all text matching the `pattern` |
 
-I've included a [preset](https://github.com/kyle-n/HighlightedTextEditor/blob/main/Sources/HighlightedTextEditor/System%20Extensions/HighlightedTextEditor.swift) `[HighlightRule]` for Markdown syntax highlighting, accessed by the variable `HighlightRule.markdown`. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls). 
+I've included a [preset](https://github.com/kyle-n/HighlightedTextEditor/blob/main/Sources/HighlightedTextEditor/System%20Extensions/HighlightedTextEditor.swift) `[HighlightRule]` for Markdown syntax highlighting, accessed by the variable `HighlightedTextEditor.markdown`. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls). 
 
 Example of using a preset:
 
