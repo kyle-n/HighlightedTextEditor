@@ -46,11 +46,11 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     
     public func updateNSView(_ view: CustomTextView, context: Context) {
         view.text = text
-        view.selectedRanges = context.coordinator.selectedRanges
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
         
         view.attributedText = highlightedText
+        view.selectedRanges = context.coordinator.selectedRanges
     }
 }
 
@@ -86,6 +86,7 @@ extension HighlightedTextEditor {
             let content: String = String(textView.textStorage?.string ?? "")
             
             self.parent.text = content
+            selectedRanges = textView.selectedRanges
         }
         
         public func textDidEndEditing(_ notification: Notification) {
