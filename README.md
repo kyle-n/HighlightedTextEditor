@@ -93,6 +93,8 @@ If you are targeting iOS 14 / macOS 11, you can use a convenience initializer ta
 | `foregroundColor` | Color | Color of the text |
 | `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
 
+Apple, in its wisdom, has not enabled these features for the XCode 12 GM. If you are using the XCode beta and want to enable this initializer, go to project_name -> Targets -> specified platform -> Build Settings -> Swift Compiler - Custom Flags and add flag `-DBETA`.
+
 ## Credits
 
 This code was originally created for [Compose for Substack](https://twitter.com/ComposeSubstack). If you are a Substack author and would like to use a high-quality, clean, native Markdown editor for writing newsletters, please give it a try. 
