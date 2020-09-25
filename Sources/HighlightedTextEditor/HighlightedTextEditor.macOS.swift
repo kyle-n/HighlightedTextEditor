@@ -28,11 +28,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
     
-    public init(text: Binding<String>, highlightRules: [HighlightRule]) {
-        _text = text
-        self.highlightRules = highlightRules
-    }
-    
     public init(
         text: Binding<String>,
         highlightRules: [HighlightRule],
