@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#if os(iOS)
+#if os(iOS) && BETA
 extension TextFormattingRule {
     @available(iOS 14.0, *)
     public init(foregroundColor color: Color, fontTraits: SymbolicTraits = []) {
@@ -21,7 +21,7 @@ extension TextFormattingRule {
 }
 #endif
 
-#if os(macOS)
+#if os(macOS) && BETA
 extension TextFormattingRule {
     @available(macOS 11.0, *)
     public init(foregroundColor color: Color, fontTraits: SymbolicTraits = []) {

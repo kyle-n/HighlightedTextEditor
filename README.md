@@ -49,6 +49,16 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 
 ## API
 
+### HighlightedTextEditor
+
+| Parameter | Type | Optional | Description |
+| --- | --- | --- | --- |
+| `text` | Binding<String> | No | Text content of the field |
+| `highlightRules` | [HighlightRule] | No | Patterns and formatting for those patterns |
+| `onEditingChanged` | () -> Void | Yes | Called when the user begins editing |
+| `onCommit` | () -> Void | Yes | Called when the user stops editing |
+| `onTextChange` | (String) -> Void | Yes | Called whenever `text` changes |
+
 ### HighlightRule
 
 | Parameter | Type | Description |
@@ -92,6 +102,8 @@ If you are targeting iOS 14 / macOS 11, you can use a convenience initializer ta
 | --- | --- | --- |
 | `foregroundColor` | Color | Color of the text |
 | `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
+
+Apple, in its wisdom, has not enabled these features for the XCode 12 GM. If you are using the XCode beta and want to enable this initializer, go to project_name -> Targets -> specified platform -> Build Settings -> Swift Compiler - Custom Flags and add flag `-DBETA`.
 
 ## Credits
 
