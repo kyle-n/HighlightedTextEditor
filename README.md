@@ -49,6 +49,16 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 
 ## API
 
+### HighlightedTextEditor
+
+| Parameter | Type | Optional | Description |
+| --- | --- | --- | --- |
+| `text` | Binding<String> | No | Text content of the field |
+| `highlightRules` | [HighlightRule] | No | Patterns and formatting for those patterns |
+| `onEditingChanged` | () -> Void | Yes | Called when the user begins editing |
+| `onCommit` | () -> Void | Yes | Called when the user stops editing |
+| `onTextChange` | (String) -> Void | Yes | Called whenever `text` changes |
+
 ### HighlightRule
 
 | Parameter | Type | Description |
