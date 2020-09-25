@@ -4,12 +4,34 @@ import UIKit
 
 public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
 
-    @Binding var text: String
+    @Binding var text: String {
+        didSet {
+            self.onTextChange(text)
+        }
+    }
     let highlightRules: [HighlightRule]
+    
+    var onEditingChanged: () -> Void       = {}
+    var onCommit        : () -> Void       = {}
+    var onTextChange    : (String) -> Void = { _ in }
     
     public init(text: Binding<String>, highlightRules: [HighlightRule]) {
         _text = text
         self.highlightRules = highlightRules
+    }
+    
+    public init(
+        text: Binding<String>,
+        highlightRules: [HighlightRule],
+        onEditingChanged: @escaping () -> Void = {},
+        onCommit: @escaping () -> Void = {},
+        onTextChange: @escaping (String) -> Void = { _ in }
+    ) {
+        _text = text
+        self.highlightRules = highlightRules
+        self.onEditingChanged = onEditingChanged
+        self.onCommit = onCommit
+        self.onTextChange = onTextChange
     }
 
     public func makeCoordinator() -> Coordinator {
@@ -45,6 +67,13 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             self.parent.text = textView.text
         }
         
+        public func textViewDidBeginEditing(_ textView: UITextView) {
+            parent.onEditingChanged()
+        }
+        
+        public func textViewDidEndEditing(_ textView: UITextView) {
+            parent.onCommit()
+        }
     }
 }
 #endif
