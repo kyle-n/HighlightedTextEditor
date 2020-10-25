@@ -14,6 +14,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
+    var keyboardType    : UIKeyboardType   = .default
     
     public init(
         text: Binding<String>,
@@ -38,6 +39,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isScrollEnabled = true
+        textView.keyboardType = keyboardType
 
         return textView
     }
@@ -69,6 +71,14 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         public func textViewDidEndEditing(_ textView: UITextView) {
             parent.onCommit()
         }
+    }
+}
+
+extension HighlightedTextEditor {
+    public func keyboardType(_ type: UIKeyboardType) -> Self {
+        var new = self
+        new.keyboardType = type
+        return new
     }
 }
 #endif
