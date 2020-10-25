@@ -14,6 +14,7 @@ fileprivate let horizontalRuleRegex = try! NSRegularExpression(pattern: "\n\n(-{
 fileprivate let unorderedListRegex = try! NSRegularExpression(pattern: "^(\\-|\\*)\\s", options: [.anchorsMatchLines])
 fileprivate let orderedListRegex = try! NSRegularExpression(pattern: "^\\d*\\.\\s", options: [.anchorsMatchLines])
 fileprivate let buttonRegex = try! NSRegularExpression(pattern: "<\\s*button[^>]*>(.*?)<\\s*/\\s*button>", options: [])
+fileprivate let strikethroughRegex = try! NSRegularExpression(pattern: "(~)((?!\\1).)+\\1", options: [])
 
 #if os(macOS)
 let codeFont = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .thin)
@@ -23,6 +24,7 @@ let emphasisTraits: NSFontDescriptor.SymbolicTraits = [.italic]
 let boldEmphasisTraits: NSFontDescriptor.SymbolicTraits = [.bold, .italic]
 let secondaryBackground = NSColor.windowBackgroundColor
 let lighterColor = NSColor.lightGray
+let textColor = NSColor.labelColor
 #else
 let codeFont = UIFont.monospacedSystemFont(ofSize: UIFont.systemFontSize, weight: .thin)
 let headingTraits: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitExpanded]
@@ -31,6 +33,7 @@ let emphasisTraits: UIFontDescriptor.SymbolicTraits = [.traitItalic]
 let boldEmphasisTraits: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic]
 let secondaryBackground = UIColor.secondarySystemBackground
 let lighterColor = UIColor.lightGray
+let textColor = UIColor.label
 #endif
 
 public extension HighlightedTextEditor {
@@ -50,6 +53,10 @@ public extension HighlightedTextEditor {
         HighlightRule(pattern: horizontalRuleRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
         HighlightRule(pattern: unorderedListRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
         HighlightRule(pattern: orderedListRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
-        HighlightRule(pattern: buttonRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor))
+        HighlightRule(pattern: buttonRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+        HighlightRule(pattern: strikethroughRegex, formattingRules: [
+            TextFormattingRule(key: .strikethroughStyle, value: NSUnderlineStyle.single.rawValue),
+            TextFormattingRule(key: .strikethroughColor, value: textColor)
+        ])
     ]
 }

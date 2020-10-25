@@ -47,6 +47,21 @@ struct ContentView: View {
 
 Notice the NSRegularExpression is instantiated **once**. It should not be recreated every time the view is redrawn. This [helps performance](https://stackoverflow.com/questions/41705728/optimize-nsregularexpression-performance). 
 
+## Presets
+
+I've included a few useful presets for syntax highlighting. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) with your preset code.
+
+Current presets include:
+
+- `markdown`
+- `url` 
+
+Example of using a preset:
+
+```swift
+HighlightedTextEditor(text: $text, highlightRules: HighlightedTextEditor.markdown)
+```
+
 ## API
 
 ### HighlightedTextEditor
@@ -66,14 +81,6 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 | `pattern` | NSRegularExpression | The content you want to highlight. Should be instantiated **once** for performance. |
 | `formattingRule` | TextFormattingRule | Style applying to all text matching the `pattern` |
 | `formattingRules` | [TextFormattingRule] | Array of styles applying to all text matching the `pattern` |
-
-I've included a [preset](https://github.com/kyle-n/HighlightedTextEditor/blob/main/Sources/HighlightedTextEditor/System%20Extensions/HighlightedTextEditor.swift) `[HighlightRule]` for Markdown syntax highlighting, accessed by the variable `HighlightedTextEditor.markdown`. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls). 
-
-Example of using a preset:
-
-```swift
-HighlightedTextEditor(text: $text, highlightRules: HighlightRule.markdown)
-```
 
 ### TextFormattingRule
 
@@ -105,9 +112,11 @@ If you are targeting iOS 14 / macOS 11, you can use a convenience initializer ta
 
 Apple, in its wisdom, has not enabled these features for the XCode 12 GM. If you are using the XCode beta and want to enable this initializer, go to project_name -> Targets -> specified platform -> Build Settings -> Swift Compiler - Custom Flags and add flag `-DBETA`.
 
-## Credits
+## Featured apps
 
-This code was originally created for [Compose for Substack](https://twitter.com/ComposeSubstack). If you are a Substack author and would like to use a high-quality, clean, native Markdown editor for writing newsletters, please give it a try. 
+Are you using HighlightedTextEditor in your app? I would love to feature you here! Please [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) with the name of your app and a link to its TestFlight or App Store page.
+
+## Credits
 
 AppKit text editor code based on [MacEditorTextView](https://gist.github.com/unnamedd/6e8c3fbc806b8deb60fa65d6b9affab0) by [Thiago Holanda](https://twitter.com/tholanda).
 
