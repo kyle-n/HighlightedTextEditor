@@ -34,6 +34,10 @@ struct ContentView: View {
             TextFormattingRule(fontTraits: [.traitItalic, .traitBold]),
             TextFormattingRule(key: .foregroundColor, value: UIColor.red)
         ])
+        // optional modifiers
+        .autocapitalizationType(.words)
+        .keyboardType(.numberPad)
+        .autocorrectionType(.no)
     ]
     
     var body: some View {
