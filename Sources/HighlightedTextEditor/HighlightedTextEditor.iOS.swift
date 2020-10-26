@@ -86,13 +86,13 @@ extension HighlightedTextEditor {
         return new
     }
     
-    public func autocapitalizationType(_ type: UITextAutocapitalizationType) -> Self {
+    public func autocapitalization(_ type: UITextAutocapitalizationType) -> Self {
         var new = self
         new.autocapitalizationType = type
         return new
     }
     
-    public func autocorrectionType(_ type: UITextAutocorrectionType) -> Self {
+    public func autocorrection(_ type: UITextAutocorrectionType) -> Self {
         var new = self
         new.autocorrectionType = type
         return new
