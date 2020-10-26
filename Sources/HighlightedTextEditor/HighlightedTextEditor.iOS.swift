@@ -45,6 +45,13 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.isScrollEnabled = false
         
+        let cursor = uiView.selectedRange
+        defer {
+            if uiView.attributedText.length <= cursor.upperBound {
+                uiView.selectedRange = cursor
+            }
+        }
+        
         let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
 
         uiView.attributedText = highlightedText
