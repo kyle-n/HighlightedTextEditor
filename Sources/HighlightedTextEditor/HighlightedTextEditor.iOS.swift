@@ -11,9 +11,12 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
     let highlightRules: [HighlightRule]
     
-    var onEditingChanged: () -> Void       = {}
-    var onCommit        : () -> Void       = {}
-    var onTextChange    : (String) -> Void = { _ in }
+    var onEditingChanged      : () -> Void                   = {}
+    var onCommit              : () -> Void                   = {}
+    var onTextChange          : (String) -> Void             = { _ in }
+    var keyboardType          : UIKeyboardType               = .default
+    var autocapitalizationType: UITextAutocapitalizationType = .sentences
+    var autocorrectionType    : UITextAutocorrectionType     = .default
     
     public init(
         text: Binding<String>,
@@ -38,6 +41,9 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isScrollEnabled = true
+        textView.keyboardType = keyboardType
+        textView.autocapitalizationType = autocapitalizationType
+        textView.autocorrectionType = autocorrectionType
 
         return textView
     }
@@ -49,10 +55,12 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
         uiView.attributedText = highlightedText
         uiView.isScrollEnabled = true
+        uiView.selectedTextRange = context.coordinator.selectedTextRange
     }
 
     public class Coordinator: NSObject, UITextViewDelegate {
         var parent: HighlightedTextEditor
+        var selectedTextRange: UITextRange? = nil
 
         init(_ markdownEditorView: HighlightedTextEditor) {
             self.parent = markdownEditorView
@@ -60,6 +68,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         
         public func textViewDidChange(_ textView: UITextView) {
             self.parent.text = textView.text
+            selectedTextRange = textView.selectedTextRange
         }
         
         public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -69,6 +78,27 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         public func textViewDidEndEditing(_ textView: UITextView) {
             parent.onCommit()
         }
+    }
+}
+
+extension HighlightedTextEditor {
+    
+    public func keyboardType(_ type: UIKeyboardType) -> Self {
+        var new = self
+        new.keyboardType = type
+        return new
+    }
+    
+    public func autocapitalizationType(_ type: UITextAutocapitalizationType) -> Self {
+        var new = self
+        new.autocapitalizationType = type
+        return new
+    }
+    
+    public func autocorrectionType(_ type: UITextAutocorrectionType) -> Self {
+        var new = self
+        new.autocorrectionType = type
+        return new
     }
 }
 #endif
