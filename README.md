@@ -114,9 +114,9 @@ Apple, in its wisdom, has not enabled these features for the XCode 12 GM. If you
 
 ## Featured apps
 
-Are you using HighlightedTextEditor in your app? I would love to feature you here! Please [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) with the name of your app and a link to its TestFlight or App Store page.
+Are you using HighlightedTextEditor in your app? I would love to feature you here! Please [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) that adds a new bullet to the list below with your app's name and a link to its TestFlight or App Store page.
 
-[MongoKitten](https://apps.apple.com/us/app/id1484086700)
+- [MongoKitten](https://apps.apple.com/us/app/id1484086700)
 
 ## Credits
 
