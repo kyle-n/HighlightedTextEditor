@@ -125,9 +125,10 @@ extension HighlightedTextEditor {
         return new
     }
     
-    public func keyboardType(_ type: UIKeyboardType) -> Self {
+    // Overwritten by font attributes in your HighlightRules
+    public func defaultColor(_ color: UIColor) -> Self {
         var new = self
-        new.keyboardType = type
+        new.color = color
         return new
     }
     
@@ -138,10 +139,9 @@ extension HighlightedTextEditor {
         return new
     }
     
-    // Overwritten by font attributes in your HighlightRules
-    public func defaultColor(_ color: UIColor) -> Self {
+    public func keyboardType(_ type: UIKeyboardType) -> Self {
         var new = self
-        new.color = color
+        new.keyboardType = type
         return new
     }
     

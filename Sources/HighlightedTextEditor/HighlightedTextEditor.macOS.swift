@@ -28,13 +28,13 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
     
-    private(set) var allowsDocumentBackgroundColorChange: Bool = true
-    private(set) var backgroundColor: NSColor = .textBackgroundColor
-    private(set) var color: NSColor? = nil
-    private(set) var drawsBackground: Bool = true
-    private(set) var font: NSFont?    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    private(set) var insertionPointColor: NSColor? = nil
-    private(set) var textAlignment: NSTextAlignment = .natural
+    private(set) var allowsDocumentBackgroundColorChange: Bool             = true
+    private(set) var backgroundColor                    :  NSColor         = .textBackgroundColor
+    private(set) var color                              :  NSColor?        = nil
+    private(set) var drawsBackground                    :  Bool            = true
+    private(set) var font                               :  NSFont?         = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    private(set) var insertionPointColor                :  NSColor?        = nil
+    private(set) var textAlignment                      :  NSTextAlignment = .natural
     
     public init(
         text: Binding<String>,
@@ -295,9 +295,10 @@ extension HighlightedTextEditor {
         return editor
     }
     
-    public func drawsBackground(_ shouldDraw: Bool) -> Self {
+    // Overwritten by font attributes in your HighlightRules
+    public func defaultColor(_ color: NSColor) -> Self {
         var editor = self
-        editor.drawsBackground = shouldDraw
+        editor.color = color
         return editor
     }
     
@@ -308,10 +309,9 @@ extension HighlightedTextEditor {
         return editor
     }
     
-    // Overwritten by font attributes in your HighlightRules
-    public func defaultColor(_ color: NSColor) -> Self {
+    public func drawsBackground(_ shouldDraw: Bool) -> Self {
         var editor = self
-        editor.color = color
+        editor.drawsBackground = shouldDraw
         return editor
     }
     
