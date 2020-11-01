@@ -27,6 +27,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
+    
     private(set) var backgroundColor: NSColor = .textBackgroundColor
     private(set) var drawsBackground: Bool = true
     private(set) var allowsDocumentBackgroundColorChange: Bool = true
@@ -56,9 +57,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
             font: font
         )
         textView.delegate = context.coordinator
-        textView.backgroundColor = backgroundColor
-        textView.drawsBackground = drawsBackground
-        textView.allowsDocumentBackgroundColorChange = allowsDocumentBackgroundColorChange
+        updateTextViewModifiers(textView, isFirstRender: true)
         
         return textView
     }
@@ -67,14 +66,18 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         view.text = text
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
-        view.allowsDocumentBackgroundColorChange = allowsDocumentBackgroundColorChange
-        if (allowsDocumentBackgroundColorChange) {
-            view.backgroundColor = backgroundColor
-        }
-        view.drawsBackground = drawsBackground
+        updateTextViewModifiers(view, isFirstRender: false)
         
         view.attributedText = highlightedText
         view.selectedRanges = context.coordinator.selectedRanges
+    }
+    
+    private func updateTextViewModifiers(_ textView: CustomTextView, isFirstRender: Bool) {
+        textView.drawsBackground = drawsBackground
+        textView.allowsDocumentBackgroundColorChange = allowsDocumentBackgroundColorChange
+        if isFirstRender || allowsDocumentBackgroundColorChange {
+            textView.backgroundColor = backgroundColor
+        }
     }
 }
 
@@ -258,6 +261,12 @@ public final class CustomTextView: NSView {
 }
 
 extension HighlightedTextEditor {
+    public func allowsDocumentBackgroundColorChange(_ allowsChange: Bool) -> Self {
+        var editor = self
+        editor.allowsDocumentBackgroundColorChange = allowsChange
+        return editor
+    }
+    
     public func backgroundColor(_ color: NSColor) -> Self {
         var editor = self
         editor.backgroundColor = color
@@ -267,12 +276,6 @@ extension HighlightedTextEditor {
     public func drawsBackground(_ shouldDraw: Bool) -> Self {
         var editor = self
         editor.drawsBackground = shouldDraw
-        return editor
-    }
-    
-    public func allowsDocumentBackgroundColorChange(_ allowsChange: Bool) -> Self {
-        var editor = self
-        editor.allowsDocumentBackgroundColorChange = allowsChange
         return editor
     }
 }
