@@ -22,7 +22,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     let highlightRules: [HighlightRule]
     
     var isEditable: Bool = true
-    var font: NSFont?    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
     
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
@@ -31,6 +30,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     private(set) var allowsDocumentBackgroundColorChange: Bool = true
     private(set) var backgroundColor: NSColor = .textBackgroundColor
     private(set) var drawsBackground: Bool = true
+    private(set) var font: NSFont?    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
     
     public init(
         text: Binding<String>,
@@ -65,7 +65,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     public func updateNSView(_ view: CustomTextView, context: Context) {
         view.text = text
         
-        let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
+        let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules, font: font)
         updateTextViewModifiers(view, isFirstRender: false)
         
         view.attributedText = highlightedText
@@ -276,6 +276,12 @@ extension HighlightedTextEditor {
     public func drawsBackground(_ shouldDraw: Bool) -> Self {
         var editor = self
         editor.drawsBackground = shouldDraw
+        return editor
+    }
+    
+    public func editorFont(_ font: NSFont) -> Self {
+        var editor = self
+        editor.font = font
         return editor
     }
 }

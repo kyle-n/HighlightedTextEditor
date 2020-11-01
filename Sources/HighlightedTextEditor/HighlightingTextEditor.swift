@@ -78,20 +78,26 @@ extension HighlightingTextEditor {
     }
     #endif
     
-    static func getHighlightedText(text: String, highlightRules: [HighlightRule]) -> NSMutableAttributedString {
+    #if os(macOS)
+    public typealias SystemFontAlias = NSFont
+    #else
+    public typealias SystemFontAlias = UIFont
+    #endif
+    
+    static func getHighlightedText(text: String, highlightRules: [HighlightRule], font: SystemFontAlias?) -> NSMutableAttributedString {
         let highlightedString = NSMutableAttributedString(string: text)
         let all = NSRange(location: 0, length: text.count)
         
         #if os(macOS)
-        let systemFont = NSFont.systemFont(ofSize: NSFont.systemFontSize)
-        let systemTextColor = NSColor.labelColor
+        let editorFont = font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
+        let editorTextColor = NSColor.labelColor
         #else
-        let systemFont = UIFont.preferredFont(forTextStyle: .body)
-        let systemTextColor = UIColor.label
+        let editorFont = font ?? UIFont.preferredFont(forTextStyle: .body)
+        let editorTextColor = UIColor.label
         #endif
         
-        highlightedString.addAttribute(.font, value: systemFont, range: all)
-        highlightedString.addAttribute(.foregroundColor, value: systemTextColor, range: all)
+        highlightedString.addAttribute(.font, value: editorFont, range: all)
+        highlightedString.addAttribute(.foregroundColor, value: editorTextColor, range: all)
         
         highlightRules.forEach { rule in
             let matches = rule.pattern.matches(in: text, options: [], range: all)
