@@ -14,9 +14,11 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     var onEditingChanged                   : () -> Void                   = {}
     var onCommit                           : () -> Void                   = {}
     var onTextChange                       : (String) -> Void             = { _ in }
-    private(set) var keyboardType          : UIKeyboardType               = .default
+    
     private(set) var autocapitalizationType: UITextAutocapitalizationType = .sentences
     private(set) var autocorrectionType    : UITextAutocorrectionType     = .default
+    private(set) var backgroundColor       : UIColor?                     = nil
+    private(set) var keyboardType          : UIKeyboardType               = .default
     
     public init(
         text: Binding<String>,
@@ -62,6 +64,8 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.keyboardType = keyboardType
         textView.autocapitalizationType = autocapitalizationType
         textView.autocorrectionType = autocorrectionType
+        
+        textView.backgroundColor = backgroundColor
     }
 
     public class Coordinator: NSObject, UITextViewDelegate {
@@ -89,12 +93,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
 extension HighlightedTextEditor {
     
-    public func keyboardType(_ type: UIKeyboardType) -> Self {
-        var new = self
-        new.keyboardType = type
-        return new
-    }
-    
     public func autocapitalizationType(_ type: UITextAutocapitalizationType) -> Self {
         var new = self
         new.autocapitalizationType = type
@@ -104,6 +102,18 @@ extension HighlightedTextEditor {
     public func autocorrectionType(_ type: UITextAutocorrectionType) -> Self {
         var new = self
         new.autocorrectionType = type
+        return new
+    }
+    
+    public func backgroundColor(_ color: UIColor) -> Self {
+        var new = self
+        new.backgroundColor = color
+        return new
+    }
+    
+    public func keyboardType(_ type: UIKeyboardType) -> Self {
+        var new = self
+        new.keyboardType = type
         return new
     }
 }
