@@ -22,7 +22,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     let highlightRules: [HighlightRule]
     
     var isEditable: Bool = true
-    @State private var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection = .leftToRight
     
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
@@ -34,7 +33,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     private(set) var drawsBackground                    :  Bool            = true
     private(set) var font                               :  NSFont?         = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
     private(set) var insertionPointColor                :  NSColor?        = nil
-    private(set) var textAlignment                      :  NSTextAlignment = .natural
+    private(set) var textAlignment                      :  TextAlignment   = .leading
     
     public init(
         text: Binding<String>,
@@ -62,7 +61,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         )
         textView.delegate = context.coordinator
         updateTextViewModifiers(textView, isFirstRender: true)
-        userInterfaceLayoutDirection = textView.userInterfaceLayoutDirection
         
         return textView
     }
@@ -88,7 +86,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         if isFirstRender || allowsDocumentBackgroundColorChange {
             textView.backgroundColor = backgroundColor
         }
-        textView.alignment = textAlignment
+        textView.alignment = NSTextAlignment(textAlignment: textAlignment, userInterfaceLayoutDirection: textView.userInterfaceLayoutDirection)
         textView.insertionPointColor = insertionPointColor
     }
 }
@@ -323,7 +321,7 @@ extension HighlightedTextEditor {
     
     public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
         var editor = self
-        editor.textAlignment = NSTextAlignment(textAlignment: alignment, userInterfaceLayoutDirection: self.userInterfaceLayoutDirection)
+        editor.textAlignment = alignment
         return editor
     }
 }

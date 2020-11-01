@@ -22,9 +22,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var font                  : UIFont?                      = nil
     private(set) var insertionPointColor   : UIColor?                     = nil
     private(set) var keyboardType          : UIKeyboardType               = .default
-    private(set) var textAlignment         : NSTextAlignment              = .natural
-    
-    @State private var userInterfaceLayoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    private(set) var textAlignment         : TextAlignment                = .leading
     
     public init(
         text: Binding<String>,
@@ -50,7 +48,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.isEditable = true
         textView.isScrollEnabled = true
         updateTextViewModifiers(textView)
-        userInterfaceLayoutDirection = UIView.userInterfaceLayoutDirection(for: textView.semanticContentAttribute)
 
         return textView
     }
@@ -78,7 +75,8 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.autocorrectionType = autocorrectionType
         
         textView.backgroundColor = backgroundColor
-        textView.textAlignment = textAlignment
+        let layoutDirection = UIView.userInterfaceLayoutDirection(for: textView.semanticContentAttribute)
+        textView.textAlignment = NSTextAlignment(textAlignment: textAlignment, userInterfaceLayoutDirection: layoutDirection)
         textView.tintColor = insertionPointColor ?? textView.tintColor
     }
 
@@ -153,7 +151,7 @@ extension HighlightedTextEditor {
     
     public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
         var new = self
-        new.textAlignment = NSTextAlignment(textAlignment: alignment, userInterfaceLayoutDirection: self.userInterfaceLayoutDirection)
+        new.textAlignment = alignment
         return new
     }
 }
