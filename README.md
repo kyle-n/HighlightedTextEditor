@@ -78,6 +78,27 @@ HighlightedTextEditor(text: $text, highlightRules: HighlightedTextEditor.markdow
 | `onCommit` | () -> Void | Yes | Called when the user stops editing |
 | `onTextChange` | (String) -> Void | Yes | Called whenever `text` changes |
 
+#### Modifiers (UIKit)
+
+- `.autocapitalizationType(_ type: UITextAutocapitalizationType)`
+- `.autocorrectionType(_ type: UITextAutocorrectionType)`
+- `.backgroundColor(_ color: UIColor)`
+- `.defaultColor(_ color: UIColor)`
+- `.defaultColor(_ color: UIColor)`
+- `.keyboardType(_ type: UIKeyboardType)`
+- `.insertionPointColor(_ color: UIColor)`
+- `.multilineTextAlignment(_ alignment: TextAlignment)`
+
+#### Modifiers (AppKit)
+
+- `.allowsDocumentBackgroundColorChange(_ allowsChange: Bool)`
+- `.backgroundColor(_ color: NSColor)`
+- `.defaultColor(_ color: NSColor)`
+- `.defaultFont(_ font: NSFont)`
+- `.drawsBackground(_ shouldDraw: Bool)`
+- `.insertionPointColor(_ color: NSColor)`
+- `.multilineTextAlignment(_ alignment: TextAlignment)`
+
 ### HighlightRule
 
 | Parameter | Type | Description |
