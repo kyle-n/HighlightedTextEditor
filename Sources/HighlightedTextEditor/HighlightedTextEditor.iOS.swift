@@ -15,13 +15,14 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     var onCommit                           : () -> Void                   = {}
     var onTextChange                       : (String) -> Void             = { _ in }
     
-    private(set) var autocapitalizationType: UITextAutocapitalizationType = .sentences
-    private(set) var autocorrectionType    : UITextAutocorrectionType     = .default
+    // autocapitalizationType, autocorrectionType and keyboardType will be private(set) in a future 2.0.0 breaking release
+                 var autocapitalizationType: UITextAutocapitalizationType = .sentences
+                 var autocorrectionType    : UITextAutocorrectionType     = .default
     private(set) var backgroundColor       : UIColor?                     = nil
     private(set) var color                 : UIColor?                     = nil
     private(set) var font                  : UIFont?                      = nil
     private(set) var insertionPointColor   : UIColor?                     = nil
-    private(set) var keyboardType          : UIKeyboardType               = .default
+                 var keyboardType          : UIKeyboardType               = .default
     private(set) var textAlignment         : TextAlignment                = .leading
     
     public init(
