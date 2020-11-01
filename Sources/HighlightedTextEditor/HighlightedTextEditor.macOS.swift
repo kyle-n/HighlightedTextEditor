@@ -33,9 +33,8 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     private(set) var color: NSColor? = nil
     private(set) var drawsBackground: Bool = true
     private(set) var font: NSFont?    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    private(set) var insertionPointColor: NSColor? = nil
     private(set) var textAlignment: NSTextAlignment = .natural
-    
-    
     
     public init(
         text: Binding<String>,
@@ -90,6 +89,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
             textView.backgroundColor = backgroundColor
         }
         textView.alignment = textAlignment
+        textView.insertionPointColor = insertionPointColor
     }
 }
 
@@ -168,6 +168,11 @@ public final class CustomTextView: NSView {
         }
     }
     
+    var alignment: NSTextAlignment {
+        get { textView.alignment }
+        set { textView.alignment = newValue }
+    }
+    
     var allowsDocumentBackgroundColorChange: Bool {
         get { textView.allowsDocumentBackgroundColorChange }
         set { textView.allowsDocumentBackgroundColorChange = newValue }
@@ -183,9 +188,9 @@ public final class CustomTextView: NSView {
         set { textView.drawsBackground = newValue }
     }
     
-    var alignment: NSTextAlignment {
-        get { textView.alignment }
-        set { textView.alignment = newValue }
+    var insertionPointColor: NSColor? {
+        get { textView.insertionPointColor }
+        set { textView.insertionPointColor = newValue ?? textView.insertionPointColor }
     }
     
     private lazy var scrollView: NSScrollView = {
@@ -307,6 +312,12 @@ extension HighlightedTextEditor {
     public func defaultColor(_ color: NSColor) -> Self {
         var editor = self
         editor.color = color
+        return editor
+    }
+    
+    public func insertionPointColor(_ color: NSColor) -> Self {
+        var editor = self
+        editor.insertionPointColor = color
         return editor
     }
     
