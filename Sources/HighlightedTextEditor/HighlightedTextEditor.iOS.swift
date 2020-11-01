@@ -20,6 +20,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var backgroundColor       : UIColor?                     = nil
     private(set) var color                 : UIColor?                     = nil
     private(set) var font                  : UIFont?                      = nil
+    private(set) var insertionPointColor   : UIColor?                     = nil
     private(set) var keyboardType          : UIKeyboardType               = .default
     private(set) var textAlignment         : NSTextAlignment              = .natural
     
@@ -78,6 +79,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         
         textView.backgroundColor = backgroundColor
         textView.textAlignment = textAlignment
+        textView.tintColor = insertionPointColor ?? textView.tintColor
     }
 
     public class Coordinator: NSObject, UITextViewDelegate {
@@ -140,6 +142,12 @@ extension HighlightedTextEditor {
     public func defaultColor(_ color: UIColor) -> Self {
         var new = self
         new.color = color
+        return new
+    }
+    
+    public func insertionPointColor(_ color: UIColor) -> Self {
+        var new = self
+        new.insertionPointColor = color
         return new
     }
     
