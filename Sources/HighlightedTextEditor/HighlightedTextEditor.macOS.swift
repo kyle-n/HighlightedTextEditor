@@ -22,6 +22,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     let highlightRules: [HighlightRule]
     
     var isEditable: Bool = true
+    @State private var userInterfaceLayoutDirection: NSUserInterfaceLayoutDirection = .leftToRight
     
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
@@ -32,6 +33,9 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     private(set) var color: NSColor? = nil
     private(set) var drawsBackground: Bool = true
     private(set) var font: NSFont?    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    private(set) var textAlignment: NSTextAlignment = .natural
+    
+    
     
     public init(
         text: Binding<String>,
@@ -59,6 +63,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         )
         textView.delegate = context.coordinator
         updateTextViewModifiers(textView, isFirstRender: true)
+        userInterfaceLayoutDirection = textView.userInterfaceLayoutDirection
         
         return textView
     }
@@ -84,6 +89,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         if isFirstRender || allowsDocumentBackgroundColorChange {
             textView.backgroundColor = backgroundColor
         }
+        textView.alignment = textAlignment
     }
 }
 
@@ -175,6 +181,11 @@ public final class CustomTextView: NSView {
     var drawsBackground: Bool {
         get { textView.drawsBackground }
         set { textView.drawsBackground = newValue }
+    }
+    
+    var alignment: NSTextAlignment {
+        get { textView.alignment }
+        set { textView.alignment = newValue }
     }
     
     private lazy var scrollView: NSScrollView = {
@@ -296,6 +307,12 @@ extension HighlightedTextEditor {
     public func defaultColor(_ color: NSColor) -> Self {
         var editor = self
         editor.color = color
+        return editor
+    }
+    
+    public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
+        var editor = self
+        editor.textAlignment = NSTextAlignment(textAlignment: alignment, userInterfaceLayoutDirection: self.userInterfaceLayoutDirection)
         return editor
     }
 }
