@@ -41,9 +41,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isScrollEnabled = true
-        textView.keyboardType = keyboardType
-        textView.autocapitalizationType = autocapitalizationType
-        textView.autocorrectionType = autocorrectionType
+        updateTextViewModifiers(textView)
 
         return textView
     }
@@ -54,8 +52,16 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules)
 
         uiView.attributedText = highlightedText
+        updateTextViewModifiers(uiView)
         uiView.isScrollEnabled = true
         uiView.selectedTextRange = context.coordinator.selectedTextRange
+    }
+    
+    private func updateTextViewModifiers(_ textView: UITextView) {
+        // Keyboard properties are changed only if user closes the on-screen keyboard and reopens it (system behavior)
+        textView.keyboardType = keyboardType
+        textView.autocapitalizationType = autocapitalizationType
+        textView.autocorrectionType = autocorrectionType
     }
 
     public class Coordinator: NSObject, UITextViewDelegate {
