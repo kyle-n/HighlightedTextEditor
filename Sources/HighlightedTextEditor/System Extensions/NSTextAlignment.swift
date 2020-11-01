@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 #if os(macOS)
 import AppKit
-fileprivate typealias SystemView = NSView
+typealias LayoutDirection = NSUserInterfaceLayoutDirection
 #else
 import UIKit
-fileprivate typealias SystemView = UIView
+typealias LayoutDirection = UIUserInterfaceLayoutDirection
 #endif
 
 extension NSTextAlignment {
-    internal init(textAlignment: TextAlignment, userInterfaceLayoutDirection direction: NSUserInterfaceLayoutDirection) {
+    internal init(textAlignment: TextAlignment, userInterfaceLayoutDirection direction: LayoutDirection) {
         switch textAlignment {
         case .center:
             self.init(rawValue: NSTextAlignment.center.rawValue)!
