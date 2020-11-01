@@ -18,6 +18,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var autocapitalizationType: UITextAutocapitalizationType = .sentences
     private(set) var autocorrectionType    : UITextAutocorrectionType     = .default
     private(set) var backgroundColor       : UIColor?                     = nil
+    private(set) var color                 : UIColor?                     = nil
     private(set) var font                  : UIFont?                      = nil
     private(set) var keyboardType          : UIKeyboardType               = .default
     
@@ -52,7 +53,12 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.isScrollEnabled = false
         
-        let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules, font: font)
+        let highlightedText = HighlightedTextEditor.getHighlightedText(
+            text: text,
+            highlightRules: highlightRules,
+            font: font,
+            color: color
+        )
 
         uiView.attributedText = highlightedText
         updateTextViewModifiers(uiView)
@@ -122,6 +128,13 @@ extension HighlightedTextEditor {
     public func defaultFont(_ font: UIFont) -> Self {
         var new = self
         new.font = font
+        return new
+    }
+    
+    // Overwritten by font attributes in your HighlightRules
+    public func defaultColor(_ color: UIColor) -> Self {
+        var new = self
+        new.color = color
         return new
     }
 }

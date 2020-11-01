@@ -68,32 +68,28 @@ internal protocol HighlightingTextEditor {
 
 extension HighlightingTextEditor {
     
-    #if os(macOS)
-    var placeholderFont: NSFont {
-        get { NSFont() }
+    var placeholderFont: SystemColorAlias {
+        get { SystemColorAlias() }
     }
-    #else
-    var placeholderFont: UIFont {
-        get { UIFont() }
-    }
-    #endif
     
     #if os(macOS)
     public typealias SystemFontAlias = NSFont
+    public typealias SystemColorAlias = NSColor
     #else
     public typealias SystemFontAlias = UIFont
+    public typealias SystemColorAlias = UIColor
     #endif
     
-    static func getHighlightedText(text: String, highlightRules: [HighlightRule], font: SystemFontAlias?) -> NSMutableAttributedString {
+    static func getHighlightedText(text: String, highlightRules: [HighlightRule], font: SystemFontAlias?, color: SystemColorAlias?) -> NSMutableAttributedString {
         let highlightedString = NSMutableAttributedString(string: text)
         let all = NSRange(location: 0, length: text.count)
         
         #if os(macOS)
         let editorFont = font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
-        let editorTextColor = NSColor.labelColor
+        let editorTextColor = color ?? NSColor.labelColor
         #else
         let editorFont = font ?? UIFont.preferredFont(forTextStyle: .body)
-        let editorTextColor = UIColor.label
+        let editorTextColor = color ?? UIColor.label
         #endif
         
         highlightedString.addAttribute(.font, value: editorFont, range: all)

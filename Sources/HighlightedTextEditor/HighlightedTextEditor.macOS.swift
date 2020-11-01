@@ -65,7 +65,12 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     public func updateNSView(_ view: CustomTextView, context: Context) {
         view.text = text
         
-        let highlightedText = HighlightedTextEditor.getHighlightedText(text: text, highlightRules: highlightRules, font: font)
+        let highlightedText = HighlightedTextEditor.getHighlightedText(
+            text: text,
+            highlightRules: highlightRules,
+            font: font,
+            color: nil
+        )
         updateTextViewModifiers(view, isFirstRender: false)
         
         view.attributedText = highlightedText
