@@ -28,9 +28,9 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
     
+    private(set) var allowsDocumentBackgroundColorChange: Bool = true
     private(set) var backgroundColor: NSColor = .textBackgroundColor
     private(set) var drawsBackground: Bool = true
-    private(set) var allowsDocumentBackgroundColorChange: Bool = true
     
     public init(
         text: Binding<String>,
@@ -156,6 +156,11 @@ public final class CustomTextView: NSView {
         }
     }
     
+    var allowsDocumentBackgroundColorChange: Bool {
+        get { textView.allowsDocumentBackgroundColorChange }
+        set { textView.allowsDocumentBackgroundColorChange = newValue }
+    }
+    
     var backgroundColor: NSColor {
         get { textView.backgroundColor }
         set { textView.backgroundColor = newValue }
@@ -164,11 +169,6 @@ public final class CustomTextView: NSView {
     var drawsBackground: Bool {
         get { textView.drawsBackground }
         set { textView.drawsBackground = newValue }
-    }
-    
-    var allowsDocumentBackgroundColorChange: Bool {
-        get { textView.allowsDocumentBackgroundColorChange }
-        set { textView.allowsDocumentBackgroundColorChange = newValue }
     }
     
     private lazy var scrollView: NSScrollView = {
