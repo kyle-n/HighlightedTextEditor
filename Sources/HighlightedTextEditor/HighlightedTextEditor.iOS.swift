@@ -11,12 +11,12 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
     let highlightRules: [HighlightRule]
     
-    var onEditingChanged      : () -> Void                   = {}
-    var onCommit              : () -> Void                   = {}
-    var onTextChange          : (String) -> Void             = { _ in }
-    var keyboardType          : UIKeyboardType               = .default
-    var autocapitalizationType: UITextAutocapitalizationType = .sentences
-    var autocorrectionType    : UITextAutocorrectionType     = .default
+    var onEditingChanged                   : () -> Void                   = {}
+    var onCommit                           : () -> Void                   = {}
+    var onTextChange                       : (String) -> Void             = { _ in }
+    private(set) var keyboardType          : UIKeyboardType               = .default
+    private(set) var autocapitalizationType: UITextAutocapitalizationType = .sentences
+    private(set) var autocorrectionType    : UITextAutocorrectionType     = .default
     
     public init(
         text: Binding<String>,
