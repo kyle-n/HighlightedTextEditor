@@ -29,6 +29,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     
     private(set) var allowsDocumentBackgroundColorChange: Bool = true
     private(set) var backgroundColor: NSColor = .textBackgroundColor
+    private(set) var color: NSColor? = nil
     private(set) var drawsBackground: Bool = true
     private(set) var font: NSFont?    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
     
@@ -69,7 +70,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
             text: text,
             highlightRules: highlightRules,
             font: font,
-            color: nil
+            color: color
         )
         updateTextViewModifiers(view, isFirstRender: false)
         
@@ -288,6 +289,13 @@ extension HighlightedTextEditor {
     public func defaultFont(_ font: NSFont) -> Self {
         var editor = self
         editor.font = font
+        return editor
+    }
+    
+    // Overwritten by font attributes in your HighlightRules
+    public func defaultColor(_ color: NSColor) -> Self {
+        var editor = self
+        editor.color = color
         return editor
     }
 }
