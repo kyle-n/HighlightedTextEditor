@@ -279,7 +279,8 @@ extension HighlightedTextEditor {
         return editor
     }
     
-    public func editorFont(_ font: NSFont) -> Self {
+    // Overwritten by font attributes in your HighlightRules
+    public func defaultFont(_ font: NSFont) -> Self {
         var editor = self
         editor.font = font
         return editor
