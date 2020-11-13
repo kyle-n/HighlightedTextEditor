@@ -84,7 +84,7 @@ HighlightedTextEditor(text: $text, highlightRules: HighlightedTextEditor.markdow
 - `.autocorrectionType(_ type: UITextAutocorrectionType)`
 - `.backgroundColor(_ color: UIColor)`
 - `.defaultColor(_ color: UIColor)`
-- `.defaultColor(_ color: UIColor)`
+- `.defaultFont(_ font: UIFont)`
 - `.keyboardType(_ type: UIKeyboardType)`
 - `.insertionPointColor(_ color: UIColor)`
 - `.multilineTextAlignment(_ alignment: TextAlignment)`

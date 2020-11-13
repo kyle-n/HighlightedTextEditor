@@ -24,7 +24,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Environment**
-Please include the version of macOS / iOS where you saw the bug.
+Please include:
+- Exact version of iOS / iPadOS / macOS where you saw the bug
+- AppKit or UIKit
 
 **Additional context**
 Add any other context about the problem here.
