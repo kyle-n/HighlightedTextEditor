@@ -36,27 +36,35 @@ let lighterColor = UIColor.lightGray
 let textColor = UIColor.label
 #endif
 
+// HighlightedTextEditor.markdown will only be accessible via [HighlightRule].markdown in a future 2.0.0 breaking release
+// It does not really make any sense to have it here
 public extension HighlightedTextEditor {
-    static let markdown: Array<HighlightRule> = [
-        HighlightRule(pattern: inlineCodeRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
-        HighlightRule(pattern: codeBlockRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
-        HighlightRule(pattern: headingRegex, formattingRules: [
-            TextFormattingRule(fontTraits: headingTraits),
-            TextFormattingRule(key: .kern, value: 0.5)
-        ]),
-        HighlightRule(pattern: linkOrImageRegex, formattingRule: TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue)),
-        HighlightRule(pattern: boldRegex, formattingRule: TextFormattingRule(fontTraits: boldTraits)),
-        HighlightRule(pattern: asteriskEmphasisRegex, formattingRule: TextFormattingRule(fontTraits: emphasisTraits)),
-        HighlightRule(pattern: underscoreEmphasisRegex, formattingRule: TextFormattingRule(fontTraits: emphasisTraits)),
-        HighlightRule(pattern: boldEmphasisAsteriskRegex, formattingRule: TextFormattingRule(fontTraits: boldEmphasisTraits)),
-        HighlightRule(pattern: blockquoteRegex, formattingRule: TextFormattingRule(key: .backgroundColor, value: secondaryBackground)),
-        HighlightRule(pattern: horizontalRuleRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
-        HighlightRule(pattern: unorderedListRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
-        HighlightRule(pattern: orderedListRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
-        HighlightRule(pattern: buttonRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
-        HighlightRule(pattern: strikethroughRegex, formattingRules: [
-            TextFormattingRule(key: .strikethroughStyle, value: NSUnderlineStyle.single.rawValue),
-            TextFormattingRule(key: .strikethroughColor, value: textColor)
-        ])
-    ]
+    static let markdown: [HighlightRule] = [HighlightRule].markdown
+}
+
+public extension Sequence where Iterator.Element == HighlightRule {
+    static var markdown: [HighlightRule] {
+        [
+            HighlightRule(pattern: inlineCodeRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
+            HighlightRule(pattern: codeBlockRegex, formattingRule: TextFormattingRule(key: .font, value: codeFont)),
+            HighlightRule(pattern: headingRegex, formattingRules: [
+                TextFormattingRule(fontTraits: headingTraits),
+                TextFormattingRule(key: .kern, value: 0.5)
+            ]),
+            HighlightRule(pattern: linkOrImageRegex, formattingRule: TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue)),
+            HighlightRule(pattern: boldRegex, formattingRule: TextFormattingRule(fontTraits: boldTraits)),
+            HighlightRule(pattern: asteriskEmphasisRegex, formattingRule: TextFormattingRule(fontTraits: emphasisTraits)),
+            HighlightRule(pattern: underscoreEmphasisRegex, formattingRule: TextFormattingRule(fontTraits: emphasisTraits)),
+            HighlightRule(pattern: boldEmphasisAsteriskRegex, formattingRule: TextFormattingRule(fontTraits: boldEmphasisTraits)),
+            HighlightRule(pattern: blockquoteRegex, formattingRule: TextFormattingRule(key: .backgroundColor, value: secondaryBackground)),
+            HighlightRule(pattern: horizontalRuleRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+            HighlightRule(pattern: unorderedListRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+            HighlightRule(pattern: orderedListRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+            HighlightRule(pattern: buttonRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+            HighlightRule(pattern: strikethroughRegex, formattingRules: [
+                TextFormattingRule(key: .strikethroughStyle, value: NSUnderlineStyle.single.rawValue),
+                TextFormattingRule(key: .strikethroughColor, value: textColor)
+            ])
+        ]
+    }
 }
