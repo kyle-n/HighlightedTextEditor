@@ -63,7 +63,11 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             color: color
         )
 
-        uiView.attributedText = highlightedText
+        if let range = uiView.markedTextNSRange {
+            uiView.setAttributedMarkedText(highlightedText, selectedRange: range)
+        } else {
+            uiView.attributedText = highlightedText
+        }
         updateTextViewModifiers(uiView)
         uiView.isScrollEnabled = true
         uiView.selectedTextRange = context.coordinator.selectedTextRange
