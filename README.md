@@ -53,7 +53,7 @@ Notice the NSRegularExpression is instantiated **once**. It should not be recrea
 
 ## Presets
 
-I've included a few useful presets for syntax highlighting. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) with your preset code.
+I've included a few useful presets for syntax highlighting as static vars on `[HighlightRule]`. If you have ideas for other useful presets, please feel free to [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) with your preset code.
 
 Current presets include:
 
@@ -63,7 +63,7 @@ Current presets include:
 Example of using a preset:
 
 ```swift
-HighlightedTextEditor(text: $text, highlightRules: HighlightedTextEditor.markdown)
+HighlightedTextEditor(text: $text, highlightRules: .markdown)
 ```
 
 ## API
