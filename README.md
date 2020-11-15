@@ -10,11 +10,13 @@ Highlight what's important as your users type.
 
 Supports iOS 13.0+ and macOS 10.15+.
 
-Swift Package Manager: 
+### Swift Package Manager
 
-```
-https://github.com/kyle-n/HighlightedTextEditor
-```
+File -> Swift Packages -> Add Package Dependency and use the URL `https://github.com/kyle-n/HighlightedTextEditor`.
+
+### CocoaPods
+
+Add `pod 'HighlightedTextEditor'` to your `Podfile` and run `pod install`. 
 
 ## Usage
 
