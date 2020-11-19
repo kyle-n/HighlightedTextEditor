@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name = 'HighlightedTextEditor'
-  spec.version = '1.4.2'
+  spec.version = ENV['LIB_VERSION'] || '1.0.0'
   spec.summary = 'A SwiftUI view for dynamically highlighting user input'
 
   spec.description = <<-DESC
