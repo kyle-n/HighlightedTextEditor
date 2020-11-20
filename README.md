@@ -25,27 +25,26 @@ HighlightedTextEditor applies styles to text matching regex patterns you provide
 ```swift
 import HighlightedTextEditor
 
-// highlights text between underscores
-let boldItalics = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
+// matches text between underscores
+let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
 
 struct ContentView: View {
-    @State private var text: String = "here is _bold emphasis text_"
+    @State private var text: String = "here is _bold, italicized, red text_"
     
     private let rules: [HighlightRule] = [
-        HighlightRule(pattern: boldItalics, formattingRules: [
+        HighlightRule(pattern: betweenUnderscores, formattingRules: [
             TextFormattingRule(fontTraits: [.traitItalic, .traitBold]),
             TextFormattingRule(key: .foregroundColor, value: UIColor.red)
         ])
-        // optional modifiers
-        .autocapitalizationType(.words)
-        .keyboardType(.numberPad)
-        .autocorrectionType(.no)
     ]
     
     var body: some View {
         VStack {
-            Text("Text editing with highlights")
             HighlightedTextEditor(text: $text, highlightRules: rules)
+                // optional modifiers
+                .autocapitalizationType(.words)
+                .keyboardType(.numberPad)
+                .autocorrectionType(.no)
         }
     }
 }
@@ -74,7 +73,7 @@ HighlightedTextEditor(text: $text, highlightRules: .markdown)
 
 | Parameter | Type | Optional | Description |
 | --- | --- | --- | --- |
-| `text` | Binding<String> | No | Text content of the field |
+| `text` | Binding&lt;String\> | No | Text content of the field |
 | `highlightRules` | [HighlightRule] | No | Patterns and formatting for those patterns |
 | `onEditingChanged` | () -> Void | Yes | Called when the user begins editing |
 | `onCommit` | () -> Void | Yes | Called when the user stops editing |
@@ -138,7 +137,7 @@ If you are targeting iOS 14 / macOS 11, you can use a convenience initializer ta
 | `fontTraits` | [UIFontDescriptor.SymbolicTraits](3) or [NSFontDescriptor.SymbolicTraits](4) | Text formatting attributes (e.x. `[.traitBold]` in UIKit and `.bold` in AppKit) |
 
 Apple, in its wisdom, has not enabled these features for the XCode 12 GM. If you are using the XCode beta and want to enable this initializer, go to project_name -> Targets -> specified platform -> Build Settings -> Swift Compiler - Custom Flags and add flag `-DBETA`.
-
+&lt;
 ## Featured apps
 
 Are you using HighlightedTextEditor in your app? I would love to feature you here! Please [open a pull request](https://github.com/kyle-n/HighlightedTextEditor/pulls) that adds a new bullet to the list below with your app's name and a link to its TestFlight or App Store page.
