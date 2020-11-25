@@ -34,8 +34,10 @@ struct ContentView: View {
             switch currentEditor {
             case .markdown:
                 HighlightedTextEditor(text: $text, highlightRules: .markdown)
+                    .accessibility(identifier: "hlte")
             case .url:
                 HighlightedTextEditor(text: $text, highlightRules: .url)
+                    .accessibility(identifier: "hlte")
             }
         }
     }

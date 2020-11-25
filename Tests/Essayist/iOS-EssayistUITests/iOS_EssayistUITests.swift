@@ -36,6 +36,5 @@ class iOS_EssayistUITests: XCTestCase {
         selectEditor(.markdown)
 
         type("Testing **one** _two_ `three`")
-        sleep(5)
     }
 }
