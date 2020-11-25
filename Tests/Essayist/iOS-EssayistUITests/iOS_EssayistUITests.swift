@@ -30,16 +30,23 @@ class iOS_EssayistUITests: XCTestCase {
         sleep(1)
     }
 
-    func testMarkdownHighlight() throws {
-        let app = XCUIApplication()
-        app.launch()
+//    func testMarkdownHighlight() throws {
+//        let app = XCUIApplication()
+//        app.launch()
+//
+//        selectEditor(.markdown)
+//
+//        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
+//        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
+//        type(markdown)
+//
+//        assertSnapshot(matching: app, as: .description)
+//    }
+    
+    func testMarkdownEditor() {
+//        let wrapper = UIHostingController(rootView: MarkdownEditor())
+        print(markdownWrapper)
         
-        selectEditor(.markdown)
-
-        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
-        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
-        type(markdown)
-        
-        assertSnapshot(matching: app, as: .description)
+//        assertSnapshot(matching: wrapper.view, as: .image)
     }
 }
