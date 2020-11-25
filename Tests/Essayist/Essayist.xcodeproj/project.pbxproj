@@ -26,6 +26,7 @@
 		99F378F7256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F37902256F033700C5DF2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		99F3790D256F039A00C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
+		99F3792F256F071000C5DF2F /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 99F3792E256F071000C5DF2F /* HighlightedTextEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99F3792F256F071000C5DF2F /* HighlightedTextEditor in Frameworks */,
 				994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +96,7 @@
 				99095E1D256EE1AD0048EB2F /* macOS */,
 				994FB3C0256EE549008F0208 /* iOS-EssayistUITests */,
 				99095E15256EE1AD0048EB2F /* Products */,
+				99F3792D256F071000C5DF2F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,6 +155,13 @@
 			path = "System Extensions";
 			sourceTree = "<group>";
 		};
+		99F3792D256F071000C5DF2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -208,6 +218,7 @@
 			name = "iOS-EssayistUITests";
 			packageProductDependencies = (
 				994FB3E2256EF903008F0208 /* SnapshotTesting */,
+				99F3792E256F071000C5DF2F /* HighlightedTextEditor */,
 			);
 			productName = "iOS-EssayistUITests";
 			productReference = 994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */;
@@ -649,6 +660,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		99F3792E256F071000C5DF2F /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

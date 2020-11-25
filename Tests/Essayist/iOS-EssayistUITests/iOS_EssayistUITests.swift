@@ -7,11 +7,14 @@
 
 import XCTest
 import SnapshotTesting
+import SwiftUI
 
 class iOS_EssayistUITests: XCTestCase {
+    
+    private let device = Snapshotting<AnyView, UIImage>.image(layout: .device(config: .iPadPro12_9), traits: .init(userInterfaceStyle: .dark))
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
+        continueAfterFailure = true
     }
     
     private func selectEditor(_ editorType: EditorType) {
@@ -29,24 +32,10 @@ class iOS_EssayistUITests: XCTestCase {
         XCUIApplication().menuItems.element(boundBy: 0).tap()
         sleep(1)
     }
-
-//    func testMarkdownHighlight() throws {
-//        let app = XCUIApplication()
-//        app.launch()
-//
-//        selectEditor(.markdown)
-//
-//        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
-//        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
-//        type(markdown)
-//
-//        assertSnapshot(matching: app, as: .description)
-//    }
     
-    func testMarkdownEditor() {
-//        let wrapper = UIHostingController(rootView: MarkdownEditor())
-        print(markdownWrapper)
-        
-//        assertSnapshot(matching: wrapper.view, as: .image)
+    func testMarkdownPresetHighlighting() {
+        assertSnapshot(matching: AnyView(MarkdownEditorA()), as: device)
+        assertSnapshot(matching: AnyView(MarkdownEditorB()), as: device)
+        assertSnapshot(matching: AnyView(MarkdownEditorC()), as: device)
     }
 }
