@@ -6,11 +6,35 @@
 //
 
 import SwiftUI
+import HighlightedTextEditor
 
 struct ContentView: View {
+    @State private var currentEditor: EditorType = .markdown
+    @State private var text: String = ""
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            editorView
+            Picker("Select Editor", selection: $currentEditor) {
+                ForEach(EditorType.allCases, id: \.self) { editorType in
+                    Text(editorType.rawValue.uppercaseFirst())
+                        .tag(editorType)
+                }
+            }
+        }
+    }
+    
+    private var editorView: some View {
+        Group {
+            switch currentEditor {
+            case .markdown:
+                HighlightedTextEditor(text: $text, highlightRules: .markdown)
+            }
+        }
+    }
+    
+    private enum EditorType: String, CaseIterable {
+        case markdown
     }
 }
 

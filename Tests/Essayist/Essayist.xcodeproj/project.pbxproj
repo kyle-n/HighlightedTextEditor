@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,21 @@
 		99095E23256EE1AD0048EB2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99095E0E256EE1AB0048EB2F /* ContentView.swift */; };
 		99095E24256EE1AE0048EB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
 		99095E25256EE1AE0048EB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
+		99095E32256EE2E80048EB2F /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 99095E31256EE2E80048EB2F /* HighlightedTextEditor */; };
+		994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */; };
+		994FB3CE256EE80C008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
+		994FB3CF256EE80C008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		994FB3C4256EE54A008F0208 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 99095E08256EE1AB0048EB2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99095E13256EE1AD0048EB2F;
+			remoteInfo = "Essayist (iOS)";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		99095E0D256EE1AB0048EB2F /* EssayistApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssayistApp.swift; sourceTree = "<group>"; };
@@ -24,6 +38,10 @@
 		99095E1C256EE1AD0048EB2F /* Essayist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Essayist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99095E1E256EE1AD0048EB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99095E1F256EE1AD0048EB2F /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-EssayistUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_EssayistUITests.swift; sourceTree = "<group>"; };
+		994FB3C3256EE54A008F0208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		994FB3CD256EE80C008F0208 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,10 +49,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99095E32256EE2E80048EB2F /* HighlightedTextEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		99095E19256EE1AD0048EB2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		994FB3BC256EE549008F0208 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,9 +73,11 @@
 		99095E07256EE1AB0048EB2F = {
 			isa = PBXGroup;
 			children = (
+				994FB3CC256EE7FE008F0208 /* System Extensions */,
 				99095E0C256EE1AB0048EB2F /* Shared */,
 				99095E16256EE1AD0048EB2F /* iOS */,
 				99095E1D256EE1AD0048EB2F /* macOS */,
+				994FB3C0256EE549008F0208 /* iOS-EssayistUITests */,
 				99095E15256EE1AD0048EB2F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +97,7 @@
 			children = (
 				99095E14256EE1AD0048EB2F /* Essayist.app */,
 				99095E1C256EE1AD0048EB2F /* Essayist.app */,
+				994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,6 +119,23 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		994FB3C0256EE549008F0208 /* iOS-EssayistUITests */ = {
+			isa = PBXGroup;
+			children = (
+				994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */,
+				994FB3C3256EE54A008F0208 /* Info.plist */,
+			);
+			path = "iOS-EssayistUITests";
+			sourceTree = "<group>";
+		};
+		994FB3CC256EE7FE008F0208 /* System Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				994FB3CD256EE80C008F0208 /* String.swift */,
+			);
+			path = "System Extensions";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,6 +152,9 @@
 			dependencies = (
 			);
 			name = "Essayist (iOS)";
+			packageProductDependencies = (
+				99095E31256EE2E80048EB2F /* HighlightedTextEditor */,
+			);
 			productName = "Essayist (iOS)";
 			productReference = 99095E14256EE1AD0048EB2F /* Essayist.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +176,24 @@
 			productReference = 99095E1C256EE1AD0048EB2F /* Essayist.app */;
 			productType = "com.apple.product-type.application";
 		};
+		994FB3BE256EE549008F0208 /* iOS-EssayistUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 994FB3C8256EE54A008F0208 /* Build configuration list for PBXNativeTarget "iOS-EssayistUITests" */;
+			buildPhases = (
+				994FB3BB256EE549008F0208 /* Sources */,
+				994FB3BC256EE549008F0208 /* Frameworks */,
+				994FB3BD256EE549008F0208 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				994FB3C5256EE54A008F0208 /* PBXTargetDependency */,
+			);
+			name = "iOS-EssayistUITests";
+			productName = "iOS-EssayistUITests";
+			productReference = 994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -142,6 +209,10 @@
 					99095E1B256EE1AD0048EB2F = {
 						CreatedOnToolsVersion = 12.2;
 					};
+					994FB3BE256EE549008F0208 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 99095E13256EE1AD0048EB2F;
+					};
 				};
 			};
 			buildConfigurationList = 99095E0B256EE1AB0048EB2F /* Build configuration list for PBXProject "Essayist" */;
@@ -153,12 +224,16 @@
 				Base,
 			);
 			mainGroup = 99095E07256EE1AB0048EB2F;
+			packageReferences = (
+				99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
+			);
 			productRefGroup = 99095E15256EE1AD0048EB2F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				99095E13256EE1AD0048EB2F /* Essayist (iOS) */,
 				99095E1B256EE1AD0048EB2F /* Essayist (macOS) */,
+				994FB3BE256EE549008F0208 /* iOS-EssayistUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -180,6 +255,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		994FB3BD256EE549008F0208 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -187,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994FB3CE256EE80C008F0208 /* String.swift in Sources */,
 				99095E22256EE1AD0048EB2F /* ContentView.swift in Sources */,
 				99095E20256EE1AD0048EB2F /* EssayistApp.swift in Sources */,
 			);
@@ -196,12 +279,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994FB3CF256EE80C008F0208 /* String.swift in Sources */,
 				99095E23256EE1AD0048EB2F /* ContentView.swift in Sources */,
 				99095E21256EE1AD0048EB2F /* EssayistApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		994FB3BB256EE549008F0208 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		994FB3C5256EE54A008F0208 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99095E13256EE1AD0048EB2F /* Essayist (iOS) */;
+			targetProxy = 994FB3C4256EE54A008F0208 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		99095E26256EE1AE0048EB2F /* Debug */ = {
@@ -408,6 +508,49 @@
 			};
 			name = Release;
 		};
+		994FB3C6256EE54A008F0208 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JMG343Q6QB;
+				INFOPLIST_FILE = "iOS-EssayistUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kylenazario.iOS-EssayistUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Essayist (iOS)";
+			};
+			name = Debug;
+		};
+		994FB3C7256EE54A008F0208 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JMG343Q6QB;
+				INFOPLIST_FILE = "iOS-EssayistUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kylenazario.iOS-EssayistUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Essayist (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -438,7 +581,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		994FB3C8256EE54A008F0208 /* Build configuration list for PBXNativeTarget "iOS-EssayistUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				994FB3C6256EE54A008F0208 /* Debug */,
+				994FB3C7256EE54A008F0208 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "file:///Users/kylenazario/apps/HighlightedTextEditor";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		99095E31256EE2E80048EB2F /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 99095E08256EE1AB0048EB2F /* Project object */;
 }
