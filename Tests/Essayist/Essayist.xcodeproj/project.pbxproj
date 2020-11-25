@@ -21,6 +21,8 @@
 		994FB3D5256EEB3F008F0208 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		994FB3D6256EEB3F008F0208 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		994FB3DD256EF068008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
+		994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 994FB3E2256EF903008F0208 /* SnapshotTesting */; };
+		994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 		994FB3C3256EE54A008F0208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994FB3CD256EE80C008F0208 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		994FB3D3256EEB3F008F0208 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		994FB3E7256EF9B8008F0208 /* MarkdownSample.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MarkdownSample.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +134,7 @@
 			children = (
 				994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */,
 				994FB3C3256EE54A008F0208 /* Info.plist */,
+				994FB3E7256EF9B8008F0208 /* MarkdownSample.md */,
 			);
 			path = "iOS-EssayistUITests";
 			sourceTree = "<group>";
@@ -196,6 +201,9 @@
 				994FB3C5256EE54A008F0208 /* PBXTargetDependency */,
 			);
 			name = "iOS-EssayistUITests";
+			packageProductDependencies = (
+				994FB3E2256EF903008F0208 /* SnapshotTesting */,
+			);
 			productName = "iOS-EssayistUITests";
 			productReference = 994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -232,6 +240,7 @@
 			mainGroup = 99095E07256EE1AB0048EB2F;
 			packageReferences = (
 				99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
+				994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 99095E15256EE1AD0048EB2F /* Products */;
 			projectDirPath = "";
@@ -265,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +621,14 @@
 				kind = branch;
 			};
 		};
+		994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -618,6 +636,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
 			productName = HighlightedTextEditor;
+		};
+		994FB3E2256EF903008F0208 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

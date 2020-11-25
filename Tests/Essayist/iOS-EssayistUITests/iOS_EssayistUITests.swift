@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import SnapshotTesting
 
 class iOS_EssayistUITests: XCTestCase {
 
