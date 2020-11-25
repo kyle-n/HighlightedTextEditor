@@ -36,6 +36,10 @@ class iOS_EssayistUITests: XCTestCase {
         
         selectEditor(.markdown)
 
-        type("Testing **one** _two_ `three`")
+        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
+        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
+        type(markdown)
+        
+        assertSnapshot(matching: app, as: .description)
     }
 }
