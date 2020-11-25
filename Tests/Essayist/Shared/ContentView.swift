@@ -9,8 +9,8 @@ import SwiftUI
 import HighlightedTextEditor
 
 struct ContentView: View {
-    @State private var currentEditor: EditorType = .markdown
     @State private var text: String = ""
+    @State private var currentEditor: EditorType = .markdown
     
     var body: some View {
         VStack {
@@ -19,8 +19,13 @@ struct ContentView: View {
                 ForEach(EditorType.allCases, id: \.self) { editorType in
                     Text(editorType.rawValue.uppercaseFirst())
                         .tag(editorType)
+                        .accessibility(identifier: editorType.rawValue)
                 }
             }
+            .accessibility(identifier: "Select Editor")
+        }
+        .onChange(of: currentEditor) { _ in
+            text = ""
         }
     }
     
@@ -29,12 +34,10 @@ struct ContentView: View {
             switch currentEditor {
             case .markdown:
                 HighlightedTextEditor(text: $text, highlightRules: .markdown)
+            case .url:
+                HighlightedTextEditor(text: $text, highlightRules: .url)
             }
         }
-    }
-    
-    private enum EditorType: String, CaseIterable {
-        case markdown
     }
 }
 
