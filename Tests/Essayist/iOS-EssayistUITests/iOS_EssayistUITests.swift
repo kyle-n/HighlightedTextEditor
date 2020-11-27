@@ -17,22 +17,6 @@ class iOS_EssayistUITests: XCTestCase {
         continueAfterFailure = true
     }
     
-    private func selectEditor(_ editorType: EditorType) {
-        let app = XCUIApplication()
-        app.pickerWheels.firstMatch.adjust(toPickerWheelValue: editorType.rawValue.uppercaseFirst())
-        sleep(1)
-    }
-    
-    private func type(_ text: String) {
-        let textView = XCUIApplication().textViews.firstMatch
-        textView.tap()
-        sleep(1)
-        UIPasteboard.general.string = text
-        textView.doubleTap()
-        XCUIApplication().menuItems.element(boundBy: 0).tap()
-        sleep(1)
-    }
-    
     func testMarkdownPresetHighlighting() {
         assertSnapshot(matching: AnyView(MarkdownEditorA()), as: device)
         assertSnapshot(matching: AnyView(MarkdownEditorB()), as: device)
