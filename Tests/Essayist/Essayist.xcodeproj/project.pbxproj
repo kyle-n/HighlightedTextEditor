@@ -22,6 +22,12 @@
 		994FB3DD256EF068008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 		994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 994FB3E2256EF903008F0208 /* SnapshotTesting */; };
 		994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		9957D6042571DB4D004194BD /* macOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D6032571DB4D004194BD /* macOS_EssayistUITests.swift */; };
+		9957D60F2571DB66004194BD /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
+		9957D6142571DB6C004194BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
+		9957D61A2571DB78004194BD /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D6192571DB78004194BD /* HighlightedTextEditor */; };
+		9957D61C2571DB78004194BD /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D61B2571DB78004194BD /* SnapshotTesting */; };
+		996CB33B25717489008FC31B /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 996CB33A25717489008FC31B /* HighlightedTextEditor */; };
 		99F378F6256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F378F7256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F37902256F033700C5DF2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
@@ -36,6 +42,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 99095E13256EE1AD0048EB2F;
 			remoteInfo = "Essayist (iOS)";
+		};
+		9957D6062571DB4D004194BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 99095E08256EE1AB0048EB2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99095E1B256EE1AD0048EB2F;
+			remoteInfo = "Essayist (macOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -54,6 +67,9 @@
 		994FB3CD256EE80C008F0208 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		994FB3D3256EEB3F008F0208 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		994FB3E7256EF9B8008F0208 /* MarkdownSample.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MarkdownSample.md; sourceTree = "<group>"; };
+		9957D6012571DB4D004194BD /* macOS-EssayistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS-EssayistUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9957D6032571DB4D004194BD /* macOS_EssayistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOS_EssayistUITests.swift; sourceTree = "<group>"; };
+		9957D6052571DB4D004194BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99F378F5256F025000C5DF2F /* TestViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				996CB33B25717489008FC31B /* HighlightedTextEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +96,15 @@
 			files = (
 				99F3792F256F071000C5DF2F /* HighlightedTextEditor in Frameworks */,
 				994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9957D5FE2571DB4D004194BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9957D61A2571DB78004194BD /* HighlightedTextEditor in Frameworks */,
+				9957D61C2571DB78004194BD /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +121,7 @@
 				99095E16256EE1AD0048EB2F /* iOS */,
 				99095E1D256EE1AD0048EB2F /* macOS */,
 				994FB3C0256EE549008F0208 /* iOS-EssayistUITests */,
+				9957D6022571DB4D004194BD /* macOS-EssayistUITests */,
 				99095E15256EE1AD0048EB2F /* Products */,
 				99F3792D256F071000C5DF2F /* Frameworks */,
 			);
@@ -116,6 +143,7 @@
 				99095E14256EE1AD0048EB2F /* Essayist.app */,
 				99095E1C256EE1AD0048EB2F /* Essayist.app */,
 				994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */,
+				9957D6012571DB4D004194BD /* macOS-EssayistUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +181,15 @@
 				994FB3CD256EE80C008F0208 /* String.swift */,
 			);
 			path = "System Extensions";
+			sourceTree = "<group>";
+		};
+		9957D6022571DB4D004194BD /* macOS-EssayistUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9957D6032571DB4D004194BD /* macOS_EssayistUITests.swift */,
+				9957D6052571DB4D004194BD /* Info.plist */,
+			);
+			path = "macOS-EssayistUITests";
 			sourceTree = "<group>";
 		};
 		99F3792D256F071000C5DF2F /* Frameworks */ = {
@@ -198,6 +235,9 @@
 			dependencies = (
 			);
 			name = "Essayist (macOS)";
+			packageProductDependencies = (
+				996CB33A25717489008FC31B /* HighlightedTextEditor */,
+			);
 			productName = "Essayist (macOS)";
 			productReference = 99095E1C256EE1AD0048EB2F /* Essayist.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +264,28 @@
 			productReference = 994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9957D6002571DB4D004194BD /* macOS-EssayistUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9957D6082571DB4D004194BD /* Build configuration list for PBXNativeTarget "macOS-EssayistUITests" */;
+			buildPhases = (
+				9957D5FD2571DB4D004194BD /* Sources */,
+				9957D5FE2571DB4D004194BD /* Frameworks */,
+				9957D5FF2571DB4D004194BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9957D6072571DB4D004194BD /* PBXTargetDependency */,
+			);
+			name = "macOS-EssayistUITests";
+			packageProductDependencies = (
+				9957D6192571DB78004194BD /* HighlightedTextEditor */,
+				9957D61B2571DB78004194BD /* SnapshotTesting */,
+			);
+			productName = "macOS-EssayistUITests";
+			productReference = 9957D6012571DB4D004194BD /* macOS-EssayistUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -242,6 +304,10 @@
 					994FB3BE256EE549008F0208 = {
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = 99095E13256EE1AD0048EB2F;
+					};
+					9957D6002571DB4D004194BD = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 99095E1B256EE1AD0048EB2F;
 					};
 				};
 			};
@@ -265,6 +331,7 @@
 				99095E13256EE1AD0048EB2F /* Essayist (iOS) */,
 				99095E1B256EE1AD0048EB2F /* Essayist (macOS) */,
 				994FB3BE256EE549008F0208 /* iOS-EssayistUITests */,
+				9957D6002571DB4D004194BD /* macOS-EssayistUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -291,6 +358,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9957D5FF2571DB4D004194BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +406,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9957D5FD2571DB4D004194BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9957D6142571DB6C004194BD /* String.swift in Sources */,
+				9957D60F2571DB66004194BD /* TestViews.swift in Sources */,
+				9957D6042571DB4D004194BD /* macOS_EssayistUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -339,6 +423,11 @@
 			isa = PBXTargetDependency;
 			target = 99095E13256EE1AD0048EB2F /* Essayist (iOS) */;
 			targetProxy = 994FB3C4256EE54A008F0208 /* PBXContainerItemProxy */;
+		};
+		9957D6072571DB4D004194BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99095E1B256EE1AD0048EB2F /* Essayist (macOS) */;
+			targetProxy = 9957D6062571DB4D004194BD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -590,6 +679,49 @@
 			};
 			name = Release;
 		};
+		9957D6092571DB4D004194BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx11.0]" = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JMG343Q6QB;
+				INFOPLIST_FILE = "macOS-EssayistUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kylenazario.macOS-EssayistUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Essayist (macOS)";
+			};
+			name = Debug;
+		};
+		9957D60A2571DB4D004194BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JMG343Q6QB;
+				INFOPLIST_FILE = "macOS-EssayistUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kylenazario.macOS-EssayistUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Essayist (macOS)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -629,6 +761,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9957D6082571DB4D004194BD /* Build configuration list for PBXNativeTarget "macOS-EssayistUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9957D6092571DB4D004194BD /* Debug */,
+				9957D60A2571DB4D004194BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -660,6 +801,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		9957D6192571DB78004194BD /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
+		};
+		9957D61B2571DB78004194BD /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		996CB33A25717489008FC31B /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
 		};
 		99F3792E256F071000C5DF2F /* HighlightedTextEditor */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -66,6 +66,15 @@ struct URLEditor: View {
 }
 
 let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
+#if os(macOS)
+let fontTraits: NSFontDescriptor.SymbolicTraits = [.bold, .italic, .tightLeading]
+typealias NSUIColor = NSColor
+typealias NSUIFont = NSFont
+#else
+let fontTraits: UIFontDescriptor.SymbolicTraints = [.traitBold, .traitItalic, .traitTightLeading]
+typealias NSUIColor = UIColor
+typealias NSUIFont = UIFont
+#endif
 
 struct FontTraitEditor: View {
     @State private var text: String = "The text is _formatted_"
@@ -73,7 +82,7 @@ struct FontTraitEditor: View {
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [
             HighlightRule(pattern: betweenUnderscores, formattingRules: [
-                TextFormattingRule(fontTraits: [.traitBold, .traitItalic, .traitTightLeading])
+                TextFormattingRule(fontTraits: fontTraits)
             ])
         ])
     }
@@ -85,11 +94,11 @@ struct NSAttributedStringKeyEditor: View {
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [
             HighlightRule(pattern: betweenUnderscores, formattingRules: [
-                TextFormattingRule(key: .font, value: UIFont.systemFont(ofSize: 20)),
-                TextFormattingRule(key: .backgroundColor, value: UIColor.blue),
-                TextFormattingRule(key: .foregroundColor, value: UIColor.red),
+                TextFormattingRule(key: .font, value: NSUIFont.systemFont(ofSize: 20)),
+                TextFormattingRule(key: .backgroundColor, value: NSUIColor.blue),
+                TextFormattingRule(key: .foregroundColor, value: NSUIColor.red),
                 TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue),
-                TextFormattingRule(key: .underlineColor, value: UIColor.purple)
+                TextFormattingRule(key: .underlineColor, value: NSUIColor.purple)
             ])
         ])
     }
