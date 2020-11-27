@@ -56,3 +56,11 @@ struct MarkdownEditorC: View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
 }
+
+struct URLEditor: View {
+    @State private var text: String = "No formatting\n\nhttps://www.google.com/"
+    
+    var body: some View {
+        HighlightedTextEditor(text: $text, highlightRules: .url)
+    }
+}

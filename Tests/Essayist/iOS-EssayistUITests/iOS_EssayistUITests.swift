@@ -38,4 +38,8 @@ class iOS_EssayistUITests: XCTestCase {
         assertSnapshot(matching: AnyView(MarkdownEditorB()), as: device)
         assertSnapshot(matching: AnyView(MarkdownEditorC()), as: device)
     }
+    
+    func testURLPresetHighlighting() {
+        assertSnapshot(matching: AnyView(URLEditor()), as: device)
+    }
 }
