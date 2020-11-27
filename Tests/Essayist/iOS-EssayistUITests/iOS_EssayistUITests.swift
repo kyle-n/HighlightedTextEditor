@@ -42,4 +42,8 @@ class iOS_EssayistUITests: XCTestCase {
     func testURLPresetHighlighting() {
         assertSnapshot(matching: AnyView(URLEditor()), as: device)
     }
+    
+    func testCustomFontTraits() {
+        assertSnapshot(matching: AnyView(FontTraitEditor()), as: device)
+    }
 }

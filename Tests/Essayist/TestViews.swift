@@ -64,3 +64,17 @@ struct URLEditor: View {
         HighlightedTextEditor(text: $text, highlightRules: .url)
     }
 }
+
+let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
+
+struct FontTraitEditor: View {
+    @State private var text: String = "The text is _formatted_"
+    
+    var body: some View {
+        HighlightedTextEditor(text: $text, highlightRules: [
+            HighlightRule(pattern: betweenUnderscores, formattingRules: [
+                TextFormattingRule(fontTraits: [.traitBold, .traitItalic, .traitTightLeading])
+            ])
+        ])
+    }
+}
