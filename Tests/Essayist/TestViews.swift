@@ -78,3 +78,19 @@ struct FontTraitEditor: View {
         ])
     }
 }
+
+struct NSAttributedStringKeyEditor: View {
+    @State private var text: String = "The text is _formatted_"
+    
+    var body: some View {
+        HighlightedTextEditor(text: $text, highlightRules: [
+            HighlightRule(pattern: betweenUnderscores, formattingRules: [
+                TextFormattingRule(key: .font, value: UIFont.systemFont(ofSize: 20)),
+                TextFormattingRule(key: .backgroundColor, value: UIColor.blue),
+                TextFormattingRule(key: .foregroundColor, value: UIColor.red),
+                TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue),
+                TextFormattingRule(key: .underlineColor, value: UIColor.purple)
+            ])
+        ])
+    }
+}

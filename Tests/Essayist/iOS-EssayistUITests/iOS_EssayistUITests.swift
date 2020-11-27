@@ -46,4 +46,8 @@ class iOS_EssayistUITests: XCTestCase {
     func testCustomFontTraits() {
         assertSnapshot(matching: AnyView(FontTraitEditor()), as: device)
     }
+    
+    func testCustomNSAttributedStringKeyValues() {
+        assertSnapshot(matching: AnyView(NSAttributedStringKeyEditor()), as: device)
+    }
 }
