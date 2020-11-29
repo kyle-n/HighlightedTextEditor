@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-test_project_path='./Tests/Essayist/Essayist.xcodeproj'
+test_project_path='./Essayist/Essayist.xcodeproj'
 test_project_name='Essayist'
+
+# Make script able to run from any directory
+script_dirname=$(dirname "$0")
+cd $script_dirname
 
 killall Simulator
 defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false
