@@ -45,8 +45,7 @@ class macOS_EssayistUITests: XCTestCase {
 
         let editor = app.textViews.firstMatch
         editor.click()
-        editor.typeText("Regular line\n\nhttps://www.google.com - link")
-        sleep(5)
+        editor.typeText(URLEditor().text)
 
         let screenshot = app.windows.firstMatch.screenshot()
         assertSnapshot(matching: screenshot.image, as: .image)

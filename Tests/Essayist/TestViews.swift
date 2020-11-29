@@ -9,7 +9,7 @@ import SwiftUI
 import HighlightedTextEditor
 
 struct MarkdownEditorA: View {
-    @State private var text: String
+    @State var text: String
     
     init() {
         let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
@@ -25,7 +25,7 @@ struct MarkdownEditorA: View {
 }
 
 struct MarkdownEditorB: View {
-    @State private var text: String
+    @State var text: String
     
     init() {
         let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
@@ -42,7 +42,7 @@ struct MarkdownEditorB: View {
 }
 
 struct MarkdownEditorC: View {
-    @State private var text: String
+    @State var text: String
     
     init() {
         let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
@@ -58,7 +58,7 @@ struct MarkdownEditorC: View {
 }
 
 struct URLEditor: View {
-    @State private var text: String = "No formatting\n\nhttps://www.google.com/"
+    @State var text: String = "No formatting\n\nhttps://www.google.com/"
     
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .url)
