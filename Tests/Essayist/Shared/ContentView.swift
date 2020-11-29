@@ -53,6 +53,9 @@ struct ContentView: View {
         case .key:
             return NSAttributedStringKeyEditor()
                 .eraseToAnyView()
+        case .fontModifiers:
+            return FontModifiersEditor()
+                .eraseToAnyView()
         }
     }
 }

@@ -103,3 +103,15 @@ struct NSAttributedStringKeyEditor: View {
         ])
     }
 }
+
+struct FontModifiersEditor: View {
+    @State private var text: String = "The text is _formatted_"
+    
+    var body: some View {
+        HighlightedTextEditor(text: $text, highlightRules: [])
+            .defaultColor(.red)
+            .defaultFont(.systemFont(ofSize: 30))
+            .insertionPointColor(.green)
+            .multilineTextAlignment(.trailing)
+    }
+}

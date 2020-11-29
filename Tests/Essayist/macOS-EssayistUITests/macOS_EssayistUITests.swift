@@ -83,4 +83,13 @@ class macOS_EssayistUITests: XCTestCase {
         assertSnapshot(matching: screenshot(), as: .image)
     }
     
+    func testFontModifiers() {
+        let app = XCUIApplication()
+        app.activate()
+        
+        selectEditor(.fontModifiers)
+        
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+    
 }
