@@ -29,79 +29,79 @@ class macOS_EssayistUITests: XCTestCase {
         XCUIApplication().windows.firstMatch.screenshot().image
     }
     
-//    func testTypingInMiddle() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        let editor = app.textViews.firstMatch
-//        editor.click()
-//        editor.typeText("1 3")
-//
-//        editor.typeKey(.leftArrow, modifierFlags: [])
-//        editor.typeKey(.leftArrow, modifierFlags: [])
-//        editor.typeKey(.space, modifierFlags: [])
-//        editor.typeText("two")
-//
-//        XCTAssertEqual(editor.value as! String, "1 two 3")
-//    }
-//
-//    func testURLPreset() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        selectEditor(.url)
-//
-//        assertSnapshot(matching: screenshot(), as: .image)
-//    }
-//
-//    func testMarkdownPreset() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        let markdownEditors: [EditorType] = [.markdownA, .markdownB, .markdownC]
-//        markdownEditors.forEach { markdownEditor in
-//            selectEditor(markdownEditor)
-//            assertSnapshot(matching: screenshot(), as: .image)
-//        }
-//    }
-//
-//    func testCustomFontTraits() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        selectEditor(.font)
-//
-//        assertSnapshot(matching: screenshot(), as: .image)
-//    }
-//
-//    func testCustomNSAttributedStringKeyValues() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        selectEditor(.key)
-//
-//        assertSnapshot(matching: screenshot(), as: .image)
-//    }
-//
-//    func testFontModifiers() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        selectEditor(.fontModifiers)
-//
-//        assertSnapshot(matching: screenshot(), as: .image)
-//    }
-//
-//    func testDrawsBackgroundAndBackgroundColor() {
-//        let app = XCUIApplication()
-//        app.activate()
-//
-//        selectEditor(.drawsBackground)
-//        assertSnapshot(matching: screenshot(), as: .image)
-//
-//        app.buttons["Toggle drawsBackground"].click()
-//        assertSnapshot(matching: screenshot(), as: .image)
-//    }
+    func testTypingInMiddle() {
+        let app = XCUIApplication()
+        app.activate()
+
+        let editor = app.textViews.firstMatch
+        editor.click()
+        editor.typeText("1 3")
+
+        editor.typeKey(.leftArrow, modifierFlags: [])
+        editor.typeKey(.leftArrow, modifierFlags: [])
+        editor.typeKey(.space, modifierFlags: [])
+        editor.typeText("two")
+
+        XCTAssertEqual(editor.value as! String, "1 two 3")
+    }
+
+    func testURLPreset() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.url)
+
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+
+    func testMarkdownPreset() {
+        let app = XCUIApplication()
+        app.activate()
+
+        let markdownEditors: [EditorType] = [.markdownA, .markdownB, .markdownC]
+        markdownEditors.forEach { markdownEditor in
+            selectEditor(markdownEditor)
+            assertSnapshot(matching: screenshot(), as: .image)
+        }
+    }
+
+    func testCustomFontTraits() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.font)
+
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+
+    func testCustomNSAttributedStringKeyValues() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.key)
+
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+
+    func testFontModifiers() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.fontModifiers)
+
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+
+    func testDrawsBackgroundAndBackgroundColor() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.drawsBackground)
+        assertSnapshot(matching: screenshot(), as: .image)
+
+        app.buttons["Toggle drawsBackground"].click()
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
     
     func testBackgroundColorChanges() {
         let app = XCUIApplication()
