@@ -71,7 +71,7 @@ let fontTraits: NSFontDescriptor.SymbolicTraits = [.bold, .italic, .tightLeading
 typealias NSUIColor = NSColor
 typealias NSUIFont = NSFont
 #else
-let fontTraits: UIFontDescriptor.SymbolicTraints = [.traitBold, .traitItalic, .traitTightLeading]
+let fontTraits: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic, .traitTightLeading]
 typealias NSUIColor = UIColor
 typealias NSUIFont = UIFont
 #endif

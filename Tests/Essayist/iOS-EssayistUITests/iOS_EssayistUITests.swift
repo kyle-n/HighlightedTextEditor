@@ -70,6 +70,6 @@ class iOS_EssayistUITests: XCTestCase {
         sleep(4)
         app.keys["s"].tap()
         
-        XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD")
+        XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD\n\n")
     }
 }
