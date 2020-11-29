@@ -15,6 +15,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             editorView
+                .accessibility(identifier: "hlte")
             Picker("Select Editor", selection: $currentEditor) {
                 ForEach(EditorType.allCases, id: \.self) { editorType in
                     Text(editorType.rawValue.uppercaseFirst())
@@ -33,23 +34,24 @@ struct ContentView: View {
         switch currentEditor {
         case .blank:
             return HighlightedTextEditor(text: $text, highlightRules: [])
-                .accessibility(identifier: "hlte")
                 .eraseToAnyView()
         case .markdownA:
             return MarkdownEditorA()
-                .accessibility(identifier: "hlte")
                 .eraseToAnyView()
         case .markdownB:
             return MarkdownEditorB()
-                .accessibility(identifier: "hlte")
                 .eraseToAnyView()
         case .markdownC:
             return MarkdownEditorC()
-                .accessibility(identifier: "hlte")
                 .eraseToAnyView()
         case .url:
             return URLEditor()
-                .accessibility(identifier: "hlte")
+                .eraseToAnyView()
+        case .font:
+            return FontTraitEditor()
+                .eraseToAnyView()
+        case .key:
+            return NSAttributedStringKeyEditor()
                 .eraseToAnyView()
         }
     }

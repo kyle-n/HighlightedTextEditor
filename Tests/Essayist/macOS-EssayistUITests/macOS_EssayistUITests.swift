@@ -65,4 +65,22 @@ class macOS_EssayistUITests: XCTestCase {
         }
     }
     
+    func testCustomFontTraits() {
+        let app = XCUIApplication()
+        app.activate()
+        
+        selectEditor(.font)
+        
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+    
+    func testCustomNSAttributedStringKeyValues() {
+        let app = XCUIApplication()
+        app.activate()
+        
+        selectEditor(.key)
+        
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+    
 }

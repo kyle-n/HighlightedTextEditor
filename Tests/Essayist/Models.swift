@@ -13,4 +13,6 @@ enum EditorType: String, CaseIterable, Equatable {
     case markdownB
     case markdownC
     case url
+    case font
+    case key
 }
