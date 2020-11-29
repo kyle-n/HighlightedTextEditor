@@ -19,6 +19,12 @@ class macOS_EssayistUITests: XCTestCase {
         app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow].click()
     }
     
+    private func selectEditor(_ editorType: EditorType) {
+        let window = XCUIApplication().windows.firstMatch
+        window.popUpButtons["Select Editor"].click()
+        window.menuItems[editorType.rawValue.uppercaseFirst()].click()
+    }
+    
     func testTypingInMiddle() {
         let app = XCUIApplication()
         app.activate()
@@ -38,14 +44,8 @@ class macOS_EssayistUITests: XCTestCase {
     func testURLPreset() {
         let app = XCUIApplication()
         app.activate()
-        let window = app.windows.firstMatch
         
-        window.popUpButtons["Select Editor"].click()
-        window.menuItems["Url"].click()
-
-        let editor = app.textViews.firstMatch
-        editor.click()
-        editor.typeText(URLEditor().text)
+        selectEditor(.url)
 
         let screenshot = app.windows.firstMatch.screenshot()
         assertSnapshot(matching: screenshot.image, as: .image)
