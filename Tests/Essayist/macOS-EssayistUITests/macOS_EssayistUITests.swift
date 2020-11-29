@@ -25,6 +25,10 @@ class macOS_EssayistUITests: XCTestCase {
         window.menuItems[editorType.rawValue.uppercaseFirst()].click()
     }
     
+    private func screenshot() -> NSImage {
+        XCUIApplication().windows.firstMatch.screenshot().image
+    }
+    
     func testTypingInMiddle() {
         let app = XCUIApplication()
         app.activate()
@@ -47,8 +51,18 @@ class macOS_EssayistUITests: XCTestCase {
         
         selectEditor(.url)
 
-        let screenshot = app.windows.firstMatch.screenshot()
-        assertSnapshot(matching: screenshot.image, as: .image)
+        assertSnapshot(matching: screenshot(), as: .image)
+    }
+    
+    func testMarkdownPreset() {
+        let app = XCUIApplication()
+        app.activate()
+        
+        let markdownEditors: [EditorType] = [.markdownA, .markdownB, .markdownC]
+        markdownEditors.forEach { markdownEditor in
+            selectEditor(markdownEditor)
+            assertSnapshot(matching: screenshot(), as: .image)
+        }
     }
     
 }
