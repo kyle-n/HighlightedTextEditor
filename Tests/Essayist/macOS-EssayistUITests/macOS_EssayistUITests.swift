@@ -91,15 +91,33 @@ class macOS_EssayistUITests: XCTestCase {
 //
 //        assertSnapshot(matching: screenshot(), as: .image)
 //    }
+//
+//    func testDrawsBackgroundAndBackgroundColor() {
+//        let app = XCUIApplication()
+//        app.activate()
+//
+//        selectEditor(.drawsBackground)
+//        assertSnapshot(matching: screenshot(), as: .image)
+//
+//        app.buttons["Toggle drawsBackground"].click()
+//        assertSnapshot(matching: screenshot(), as: .image)
+//    }
     
-    func testDrawsBackgroundAndBackgroundColor() {
+    func testBackgroundColorChanges() {
         let app = XCUIApplication()
         app.activate()
         
-        selectEditor(.drawsBackground)
-        assertSnapshot(matching: screenshot(), as: .image)
+        selectEditor(.backgroundChanges)
         
-        app.buttons["Toggle drawsBackground"].click()
+        let toggleBackgroundColorButton = app.buttons["Toggle backgroundColor"]
+        let toggleChangesButton = app.buttons["Toggle allowsDocumentBackgroundColorChange"]
+        
+        toggleBackgroundColorButton.click()
+        assertSnapshot(matching: screenshot(), as: .image)
+        toggleBackgroundColorButton.click()
+        
+        toggleChangesButton.click()
+        toggleBackgroundColorButton.click()
         assertSnapshot(matching: screenshot(), as: .image)
     }
     

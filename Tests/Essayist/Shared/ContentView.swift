@@ -59,6 +59,9 @@ struct ContentView: View {
         case .drawsBackground:
             return DrawsBackgroundEditor()
                 .eraseToAnyView()
+        case .backgroundChanges:
+            return BackgroundChangesEditor()
+                .eraseToAnyView()
         }
     }
 }
