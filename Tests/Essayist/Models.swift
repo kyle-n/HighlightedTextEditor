@@ -16,4 +16,5 @@ enum EditorType: String, CaseIterable, Equatable {
     case font
     case key
     case fontModifiers
+    case drawsBackground
 }

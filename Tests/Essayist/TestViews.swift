@@ -115,3 +115,17 @@ struct FontModifiersEditor: View {
             .multilineTextAlignment(.trailing)
     }
 }
+
+struct DrawsBackgroundEditor: View {
+    @State private var text: String = "The text is _formatted_"
+    @State private var drawsBackground: Bool = false
+    
+    var body: some View {
+        HStack {
+            HighlightedTextEditor(text: $text, highlightRules: [])
+                .drawsBackground(drawsBackground)
+                .backgroundColor(.red)
+            Button("Toggle drawsBackground") { drawsBackground.toggle() }
+        }
+    }
+}

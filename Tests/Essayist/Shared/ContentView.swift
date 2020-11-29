@@ -56,6 +56,9 @@ struct ContentView: View {
         case .fontModifiers:
             return FontModifiersEditor()
                 .eraseToAnyView()
+        case .drawsBackground:
+            return DrawsBackgroundEditor()
+                .eraseToAnyView()
         }
     }
 }
