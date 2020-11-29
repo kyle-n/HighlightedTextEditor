@@ -27,6 +27,7 @@
 		9957D6142571DB6C004194BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 		9957D61A2571DB78004194BD /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D6192571DB78004194BD /* HighlightedTextEditor */; };
 		9957D61C2571DB78004194BD /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D61B2571DB78004194BD /* SnapshotTesting */; };
+		9957D64D2574152A004194BD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		996CB33B25717489008FC31B /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 996CB33A25717489008FC31B /* HighlightedTextEditor */; };
 		99F378F6256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F378F7256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
@@ -413,6 +414,7 @@
 				9957D6142571DB6C004194BD /* String.swift in Sources */,
 				9957D60F2571DB66004194BD /* TestViews.swift in Sources */,
 				9957D6042571DB4D004194BD /* macOS_EssayistUITests.swift in Sources */,
+				9957D64D2574152A004194BD /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
