@@ -28,6 +28,10 @@
 		9957D61A2571DB78004194BD /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D6192571DB78004194BD /* HighlightedTextEditor */; };
 		9957D61C2571DB78004194BD /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D61B2571DB78004194BD /* SnapshotTesting */; };
 		9957D64D2574152A004194BD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
+		9957D65325741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
+		9957D65425741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
+		9957D65525741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
+		9957D65625741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		996CB33B25717489008FC31B /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 996CB33A25717489008FC31B /* HighlightedTextEditor */; };
 		99F378F6256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F378F7256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
@@ -71,6 +75,7 @@
 		9957D6012571DB4D004194BD /* macOS-EssayistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS-EssayistUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9957D6032571DB4D004194BD /* macOS_EssayistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOS_EssayistUITests.swift; sourceTree = "<group>"; };
 		9957D6052571DB4D004194BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9957D65225741DD7004194BD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		99F378F5256F025000C5DF2F /* TestViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				994FB3CD256EE80C008F0208 /* String.swift */,
+				9957D65225741DD7004194BD /* View.swift */,
 			);
 			path = "System Extensions";
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 			files = (
 				994FB3CE256EE80C008F0208 /* String.swift in Sources */,
 				99095E22256EE1AD0048EB2F /* ContentView.swift in Sources */,
+				9957D65325741DD7004194BD /* View.swift in Sources */,
 				99095E20256EE1AD0048EB2F /* EssayistApp.swift in Sources */,
 				994FB3D4256EEB3F008F0208 /* Models.swift in Sources */,
 				99F378F6256F025000C5DF2F /* TestViews.swift in Sources */,
@@ -390,6 +397,7 @@
 			files = (
 				994FB3CF256EE80C008F0208 /* String.swift in Sources */,
 				99095E23256EE1AD0048EB2F /* ContentView.swift in Sources */,
+				9957D65425741DD7004194BD /* View.swift in Sources */,
 				99095E21256EE1AD0048EB2F /* EssayistApp.swift in Sources */,
 				994FB3D5256EEB3F008F0208 /* Models.swift in Sources */,
 				99F378F7256F025000C5DF2F /* TestViews.swift in Sources */,
@@ -402,6 +410,7 @@
 			files = (
 				99F3790D256F039A00C5DF2F /* TestViews.swift in Sources */,
 				99F37902256F033700C5DF2F /* Models.swift in Sources */,
+				9957D65525741DD7004194BD /* View.swift in Sources */,
 				994FB3DD256EF068008F0208 /* String.swift in Sources */,
 				994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */,
 			);
@@ -413,6 +422,7 @@
 			files = (
 				9957D6142571DB6C004194BD /* String.swift in Sources */,
 				9957D60F2571DB66004194BD /* TestViews.swift in Sources */,
+				9957D65625741DD7004194BD /* View.swift in Sources */,
 				9957D6042571DB4D004194BD /* macOS_EssayistUITests.swift in Sources */,
 				9957D64D2574152A004194BD /* Models.swift in Sources */,
 			);

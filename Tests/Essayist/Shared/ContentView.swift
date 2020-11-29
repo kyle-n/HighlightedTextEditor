@@ -10,7 +10,7 @@ import HighlightedTextEditor
 
 struct ContentView: View {
     @State private var text: String = ""
-    @State private var currentEditor: EditorType = .markdown
+    @State private var currentEditor: EditorType = .blank
     
     var body: some View {
         VStack {
@@ -30,14 +30,27 @@ struct ContentView: View {
     }
     
     private var editorView: some View {
-        Group {
-            switch currentEditor {
-            case .markdown:
-                HighlightedTextEditor(text: $text, highlightRules: .markdown)
-                    .accessibility(identifier: "hlte")
-            case .url:
-                URLEditor()
-            }
+        switch currentEditor {
+        case .blank:
+            return HighlightedTextEditor(text: $text, highlightRules: [])
+                .accessibility(identifier: "hlte")
+                .eraseToAnyView()
+        case .markdownA:
+            return MarkdownEditorA()
+                .accessibility(identifier: "hlte")
+                .eraseToAnyView()
+        case .markdownB:
+            return MarkdownEditorB()
+                .accessibility(identifier: "hlte")
+                .eraseToAnyView()
+        case .markdownC:
+            return MarkdownEditorC()
+                .accessibility(identifier: "hlte")
+                .eraseToAnyView()
+        case .url:
+            return URLEditor()
+                .accessibility(identifier: "hlte")
+                .eraseToAnyView()
         }
     }
 }

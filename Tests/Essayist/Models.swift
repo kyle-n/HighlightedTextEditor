@@ -8,6 +8,9 @@
 import Foundation
 
 enum EditorType: String, CaseIterable, Equatable {
-    case markdown
+    case blank
+    case markdownA
+    case markdownB
+    case markdownC
     case url
 }
