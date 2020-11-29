@@ -13,11 +13,15 @@ class macOS_EssayistUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = true
+        
+        let app = XCUIApplication()
+        app.launch()
+        app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow].click()
     }
     
     func testTypingInMiddle() {
         let app = XCUIApplication()
-        app.launch()
+        app.activate()
         
         let editor = app.textViews.firstMatch
         editor.click()
@@ -33,7 +37,7 @@ class macOS_EssayistUITests: XCTestCase {
     
     func testURLPreset() {
         let app = XCUIApplication()
-        app.launch()
+        app.activate()
         let window = app.windows.firstMatch
         
         window.popUpButtons["Select Editor"].click()
