@@ -116,6 +116,7 @@ struct FontModifiersEditor: View {
     }
 }
 
+#if os(macOS)
 struct DrawsBackgroundEditor: View {
     @State private var text: String = "The text is _formatted_"
     @State private var drawsBackground: Bool = false
@@ -129,19 +130,36 @@ struct DrawsBackgroundEditor: View {
         }
     }
 }
+#else
+struct DrawsBackgroundEditor: View {
+    var body: some View {
+        EmptyView()
+    }
+}
+#endif
 
-#if os(macOS)
 struct BackgroundChangesEditor: View {
     @State private var text: String = "The text is _formatted_"
     @State private var allowsDocumentBackgroundColorChange: Bool = false
-    @State private var backgroundColor: NSColor = .red
+    
+    #if os(macOS)
+    @State var backgroundColor: NSColor = .red
+    private var editor: some View {
+        HighlightedTextEditor(text: $text, highlightRules: [])
+            .backgroundColor(backgroundColor)
+            .allowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange)
+    }
+    #else
+    @State var backgroundColor: UIColor = .red
+    private var editor: some View {
+        HighlightedTextEditor(text: $text, highlightRules: [])
+            .backgroundColor(backgroundColor)
+    }
+    #endif
     
     var body: some View {
         HStack {
-            HighlightedTextEditor(text: $text, highlightRules: [])
-                .backgroundColor(backgroundColor)
-                .allowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange)
-            
+            editor
             VStack {
                 Button("Toggle backgroundColor") {
                     if backgroundColor == .red {
@@ -155,10 +173,3 @@ struct BackgroundChangesEditor: View {
         }
     }
 }
-#else
-struct BackgroundChangesEditor: View {
-    var body: some View {
-        EmptyView()
-    }
-}
-#endif

@@ -72,4 +72,16 @@ class iOS_EssayistUITests: XCTestCase {
         
         XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD\n\n")
     }
+    
+    func testFontModifiers() {
+        assertSnapshot(matching: FontModifiersEditor().eraseToAnyView(), as: device)
+    }
+    
+    func testBackgroundColor() {
+        let backgroundChangesEditor = BackgroundChangesEditor()
+        assertSnapshot(matching: backgroundChangesEditor.eraseToAnyView(), as: device)
+        
+        backgroundChangesEditor.backgroundColor = .blue
+        assertSnapshot(matching: backgroundChangesEditor.eraseToAnyView(), as: device)
+    }
 }
