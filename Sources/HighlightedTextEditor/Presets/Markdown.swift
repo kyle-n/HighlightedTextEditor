@@ -18,6 +18,8 @@ fileprivate let buttonRegex = try! NSRegularExpression(pattern: "<\\s*button[^>]
 fileprivate let strikethroughRegex = try! NSRegularExpression(pattern: "(~)((?!\\1).)+\\1", options: [])
 fileprivate let tagRegex = try! NSRegularExpression(pattern: "^\\[([^\\[\\]]*)\\]:", options: [.anchorsMatchLines])
 fileprivate let footnoteRegex = try! NSRegularExpression(pattern: "\\[\\^(.*?)\\]", options: [])
+// courtesy https://www.regular-expressions.info/examples.html
+fileprivate let htmlRegex = try! NSRegularExpression(pattern: "<([A-Z][A-Z0-9]*)\\b[^>]*>(.*?)</\\1>", options: [.dotMatchesLineSeparators, .caseInsensitive])
 
 #if os(macOS)
 let codeFont = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .thin)
@@ -70,7 +72,11 @@ public extension Sequence where Iterator.Element == HighlightRule {
                 TextFormattingRule(key: .strikethroughColor, value: textColor)
             ]),
             HighlightRule(pattern: tagRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
-            HighlightRule(pattern: footnoteRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor))
+            HighlightRule(pattern: footnoteRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+            HighlightRule(pattern: htmlRegex, formattingRules: [
+                TextFormattingRule(key: .font, value: codeFont),
+                TextFormattingRule(key: .foregroundColor, value: lighterColor)
+            ])
         ]
     }
 }
