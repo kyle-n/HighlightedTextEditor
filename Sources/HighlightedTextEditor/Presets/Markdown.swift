@@ -17,6 +17,7 @@ fileprivate let orderedListRegex = try! NSRegularExpression(pattern: "^\\d*\\.\\
 fileprivate let buttonRegex = try! NSRegularExpression(pattern: "<\\s*button[^>]*>(.*?)<\\s*/\\s*button>", options: [])
 fileprivate let strikethroughRegex = try! NSRegularExpression(pattern: "(~)((?!\\1).)+\\1", options: [])
 fileprivate let tagRegex = try! NSRegularExpression(pattern: "^\\[([^\\[\\]]*)\\]:", options: [.anchorsMatchLines])
+fileprivate let footnoteRegex = try! NSRegularExpression(pattern: "\\[\\^(.*?)\\]", options: [])
 
 #if os(macOS)
 let codeFont = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .thin)
@@ -68,7 +69,8 @@ public extension Sequence where Iterator.Element == HighlightRule {
                 TextFormattingRule(key: .strikethroughStyle, value: NSUnderlineStyle.single.rawValue),
                 TextFormattingRule(key: .strikethroughColor, value: textColor)
             ]),
-            HighlightRule(pattern: tagRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor))
+            HighlightRule(pattern: tagRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor)),
+            HighlightRule(pattern: footnoteRegex, formattingRule: TextFormattingRule(key: .foregroundColor, value: lighterColor))
         ]
     }
 }
