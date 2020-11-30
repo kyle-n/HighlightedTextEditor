@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var text: String = ""
     @State private var currentEditor: EditorType = .blank
     
-    var body: some View {
+    var layout: some View {
         VStack {
             editorView
                 .accessibility(identifier: "hlte")
@@ -29,6 +29,15 @@ struct ContentView: View {
         .onChange(of: currentEditor) { _ in
             text = ""
         }
+    }
+    
+    var body: some View {
+        #if os(macOS)
+        layout
+        #else
+        layout
+            .statusBar(hidden: true)
+        #endif
     }
     
     private var editorView: some View {
