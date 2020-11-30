@@ -789,7 +789,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "file:///Users/kylenazario/apps/HighlightedTextEditor";
 			requirement = {
-				branch = main;
+				branch = develop;
 				kind = branch;
 			};
 		};
