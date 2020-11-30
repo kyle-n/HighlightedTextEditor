@@ -8,7 +8,7 @@ cd $script_dirname
 passing_test_suites=$(grep -c "\*\* TEST SUCCEEDED \*\*" output.txt)
 rm output.txt
 if (($passing_test_suites==2)); then
-  #git tag $1
+  git tag $1
   echo "Set version $1"
 else
   echo ERROR: Not all tests passed, aborting version update
