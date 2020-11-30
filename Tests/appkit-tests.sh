@@ -7,4 +7,5 @@ test_project_name='Essayist'
 script_dirname=$(dirname "$0")
 cd $script_dirname
 
+xcodebuild -resolvePackageDependencies
 xcodebuild test -sdk macosx11.0 -destination 'platform=OS X,arch=x86_64' -scheme "$test_project_name (macOS)" -project $test_project_path

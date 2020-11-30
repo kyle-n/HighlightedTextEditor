@@ -75,9 +75,7 @@ class iOS_EssayistUITests: XCTestCase {
         returnButton.tap()
         app.keys["C"].tap()
         app.keys["a"].tap()
-        sleep(2)
         app.keys["r"].tap()
-        sleep(4)
         app.keys["s"].tap()
 
         XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD\n\n")

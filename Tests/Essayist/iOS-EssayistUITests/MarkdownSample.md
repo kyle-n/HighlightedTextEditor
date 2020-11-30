@@ -28,6 +28,12 @@ _This is italic text_
 
 ~~Strikethrough~~
 
+<aside>html tag</aside>
+
+This is a footnote [^1].
+
+[1]: Footnote content
+
 ## Blockquotes
 
 > Blockquotes can also be nested...
