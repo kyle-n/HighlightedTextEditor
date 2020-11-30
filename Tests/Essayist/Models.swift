@@ -20,6 +20,7 @@ enum EditorType: String, CaseIterable, Equatable {
     case backgroundChanges
     case autocapitalizationType
     case autocorrectionType
+    case keyboardType
 }
 
 #if !os(macOS)

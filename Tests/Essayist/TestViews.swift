@@ -219,3 +219,16 @@ struct AutocorrectionTypeEditor: View {
         #endif
     }
 }
+
+struct KeyboardTypeEditor: View {
+    @State private var text: String = ""
+    
+    var body: some View {
+        #if os(macOS)
+        return EmptyView()
+        #else
+        return HighlightedTextEditor(text: $text, highlightRules: [])
+            .keyboardType(.phonePad)
+        #endif
+    }
+}

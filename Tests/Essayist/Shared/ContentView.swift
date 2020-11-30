@@ -69,6 +69,9 @@ struct ContentView: View {
         case .autocorrectionType:
             return AutocorrectionTypeEditor()
                 .eraseToAnyView()
+        case .keyboardType:
+            return KeyboardTypeEditor()
+                .eraseToAnyView()
         }
     }
 }

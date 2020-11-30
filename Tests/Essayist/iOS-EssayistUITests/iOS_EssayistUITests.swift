@@ -134,14 +134,14 @@ class iOS_EssayistUITests: XCTestCase {
 
         // If it gets here without crashing because it can't find a key, the test has passed
     }
-    
+
     // Tests screenshots for grey bar above keyboard with autocorrect suggestions
     func testAutocorrectionTypeModifier() {
         let app = XCUIApplication()
         app.launch()
-        
+
         selectEditor(.autocorrectionType)
-        
+
         app.textViews.firstMatch.tap()
         sleep(1)
         assertSnapshot(matching: screenshot, as: .image)
@@ -149,5 +149,18 @@ class iOS_EssayistUITests: XCTestCase {
         app.textViews.firstMatch.tap()
         sleep(1)
         assertSnapshot(matching: screenshot, as: .image)
+    }
+    
+    func testKeyboardTypeModifier() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        selectEditor(.keyboardType)
+        
+        app.textViews.firstMatch.tap()
+        sleep(1)
+        (0...9).forEach { num in
+            XCTAssertTrue(app.keys[String(num)].exists)
+        }
     }
 }
