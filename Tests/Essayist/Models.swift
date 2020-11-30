@@ -18,4 +18,12 @@ enum EditorType: String, CaseIterable, Equatable {
     case fontModifiers
     case drawsBackground
     case backgroundChanges
+    case autocapitalizationType
 }
+
+#if !os(macOS)
+import UIKit
+
+let autocapitalizationTypes: [UITextAutocapitalizationType] = [.allCharacters, .none, .sentences, .words]
+
+#endif

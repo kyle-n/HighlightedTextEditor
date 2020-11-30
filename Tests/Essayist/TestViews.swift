@@ -173,3 +173,27 @@ struct BackgroundChangesEditor: View {
         }
     }
 }
+
+struct AutocapitalizationTypeEditor: View {
+    @State private var text1: String = ""
+    @State private var text2: String = ""
+    @State private var text3: String = ""
+    @State private var text4: String = ""
+    
+    var body: some View {
+        #if os(macOS)
+        return EmptyView()
+        #else
+        let bindings = [$text1, $text2, $text3, $text4]
+        return ForEach(0..<autocapitalizationTypes.count, id: \.self) { i -> AnyView in
+            let type = autocapitalizationTypes[i]
+            let binding = bindings[i]
+            
+            return HighlightedTextEditor(text: binding, highlightRules: [])
+                .autocapitalizationType(type)
+                .border(Color.black)
+                .eraseToAnyView()
+        }
+        #endif
+    }
+}

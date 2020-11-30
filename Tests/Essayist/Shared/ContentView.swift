@@ -23,6 +23,7 @@ struct ContentView: View {
                         .accessibility(identifier: editorType.rawValue)
                 }
             }
+            .pickerStyle(MenuPickerStyle())
             .accessibility(identifier: "Select Editor")
         }
         .onChange(of: currentEditor) { _ in
@@ -61,6 +62,9 @@ struct ContentView: View {
                 .eraseToAnyView()
         case .backgroundChanges:
             return BackgroundChangesEditor()
+                .eraseToAnyView()
+        case .autocapitalizationType:
+            return AutocapitalizationTypeEditor()
                 .eraseToAnyView()
         }
     }
