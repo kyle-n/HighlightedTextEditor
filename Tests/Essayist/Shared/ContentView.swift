@@ -66,6 +66,9 @@ struct ContentView: View {
         case .autocapitalizationType:
             return AutocapitalizationTypeEditor()
                 .eraseToAnyView()
+        case .autocorrectionType:
+            return AutocorrectionTypeEditor()
+                .eraseToAnyView()
         }
     }
 }

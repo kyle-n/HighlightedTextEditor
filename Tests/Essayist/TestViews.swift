@@ -197,3 +197,25 @@ struct AutocapitalizationTypeEditor: View {
         #endif
     }
 }
+
+struct AutocorrectionTypeEditor: View {
+    @State private var text: String = ""
+    @State private var autocorrect: Bool = true
+    
+    var body: some View {
+        #if os(macOS)
+        return EmptyView()
+        #else
+        return VStack {
+            Button("Toggle Autocorrect") { autocorrect.toggle() }
+            if autocorrect {
+                HighlightedTextEditor(text: $text, highlightRules: [])
+                    .autocorrectionType(.yes)
+            } else {
+                HighlightedTextEditor(text: $text, highlightRules: [])
+                    .autocorrectionType(.no)
+            }
+        }
+        #endif
+    }
+}

@@ -12,6 +12,10 @@ import SwiftUI
 class iOS_EssayistUITests: XCTestCase {
     
     private let device = Snapshotting<AnyView, UIImage>.image(layout: .device(config: .iPadPro12_9), traits: .init(userInterfaceStyle: .dark))
+    
+    private var screenshot: UIImage {
+        XCUIApplication().screenshot().image
+    }
 
     override func setUpWithError() throws {
         continueAfterFailure = true
@@ -90,13 +94,13 @@ class iOS_EssayistUITests: XCTestCase {
         backgroundChangesEditor.backgroundColor = .blue
         assertSnapshot(matching: backgroundChangesEditor.eraseToAnyView(), as: device)
     }
-    
+
     func testAutocapitalizationModifier() {
         let app = XCUIApplication()
         app.launch()
-        
+
         selectEditor(.autocapitalizationType)
-        
+
         let keySets = autocapitalizationTypes.map { type -> String in
             switch type {
             case .allCharacters:
@@ -111,11 +115,11 @@ class iOS_EssayistUITests: XCTestCase {
                 return ""
             }
         }
-        
+
         (0..<autocapitalizationTypes.count).forEach { i in
             let editor = app.textViews.element(boundBy: i)
             let keySet = keySets[i]
-            
+
             editor.tap()
             for char in keySet {
                 if char == " " {
@@ -127,7 +131,23 @@ class iOS_EssayistUITests: XCTestCase {
                 }
             }
         }
-        
+
         // If it gets here without crashing because it can't find a key, the test has passed
+    }
+    
+    // Tests screenshots for grey bar above keyboard with autocorrect suggestions
+    func testAutocorrectionTypeModifier() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        selectEditor(.autocorrectionType)
+        
+        app.textViews.firstMatch.tap()
+        sleep(1)
+        assertSnapshot(matching: screenshot, as: .image)
+        app.buttons["Toggle Autocorrect"].tap()
+        app.textViews.firstMatch.tap()
+        sleep(1)
+        assertSnapshot(matching: screenshot, as: .image)
     }
 }
