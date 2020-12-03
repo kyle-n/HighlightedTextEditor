@@ -94,6 +94,13 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         }
         
         public func textViewDidChange(_ textView: UITextView) {
+
+            // For Multistage Text Input(Chinese, Japanese)
+            guard  textView.markedTextRange == nil else {
+                // Marked.
+                return
+            }
+            
             self.parent.text = textView.text
             selectedTextRange = textView.selectedTextRange
         }
