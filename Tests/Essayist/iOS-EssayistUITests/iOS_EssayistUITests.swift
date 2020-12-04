@@ -27,6 +27,22 @@ class iOS_EssayistUITests: XCTestCase {
         app.buttons[editorType.rawValue.uppercaseFirst()].tap()
     }
     
+    private enum SimulatorKeyboards: String {
+        case englishUS = "English (US)"
+        case pinyin10Key = "简体拼音"
+    }
+    
+    private func selectKeyboard(_ keyboardType: SimulatorKeyboards) {
+        let app = XCUIApplication()
+        let nextKeyboardButton = app.buttons["Next keyboard"]
+        
+        if !nextKeyboardButton.exists {
+            app.textViews.firstMatch.tap()
+        }
+        nextKeyboardButton.press(forDuration: 0.9);
+        app.tables["InputSwitcherTable"].staticTexts[keyboardType.rawValue].tap()
+    }
+    
     func testMarkdownPresetHighlighting() {
         assertSnapshot(matching: AnyView(MarkdownEditorA()), as: device)
         assertSnapshot(matching: AnyView(MarkdownEditorB()), as: device)
@@ -148,17 +164,69 @@ class iOS_EssayistUITests: XCTestCase {
         sleep(1)
         assertSnapshot(matching: screenshot, as: .image)
     }
-    
+
     func testKeyboardTypeModifier() {
         let app = XCUIApplication()
         app.launch()
-        
+
         selectEditor(.keyboardType)
-        
+
         app.textViews.firstMatch.tap()
         sleep(1)
         (0...9).forEach { num in
             XCTAssertTrue(app.keys[String(num)].exists)
         }
+    }
+    
+    func testTwoStageInput() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        selectEditor(.blank)
+        
+        let hlteTextView = app.textViews["hlte"]
+        hlteTextView.tap()
+        
+        let moreKey = app.keys["more"]
+        let space = app.keys["space"]
+        let returnButton = app.buttons["Return"]
+        
+        moreKey.tap()
+        app.keys["1"].tap()
+        app.keys["."].tap()
+        space.tap()
+        app.keys["A"].tap()
+        returnButton.tap()
+        moreKey.tap()
+        app.keys["2"].tap()
+        app.keys["."].tap()
+        space.tap()
+        app.keys["B"].tap()
+        returnButton.doubleTap()
+        
+        app.keys["T"].tap()
+        app.keys["e"].tap()
+        app.keys["s"].tap()
+        app.keys["t"].tap()
+        space.tap()
+        
+        selectKeyboard(.pinyin10Key)
+        
+        app.keys["拼音"].tap()
+        app.keys["A B C "].tap()
+        app.keys["D E F "].tap()
+        app.keys["M N O "].tap()
+        app.collectionViews.staticTexts["笨"].tap()
+        
+        let targetText = """
+        1. A
+        2. B
+
+        Test 笨
+        """
+        
+        XCTAssertEqual(hlteTextView.value as! String, targetText)
+        
+        selectKeyboard(.englishUS)
     }
 }
