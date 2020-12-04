@@ -1,0 +1,52 @@
+# For a detailed guide to building and testing on iOS, read the docs:
+# https://circleci.com/docs/2.0/testing-ios/
+
+version: 2.1
+
+jobs:
+  build:
+
+    macos:
+      xcode: 12.2.0 # Specify the Xcode version to use
+
+    environment: 
+          IOS_SIM_NAME: iPhone 11
+          BUNDLE_IDENTIFIER: com.kylenazario.Essayist
+          TEST_PROJECT_PATH: ./Tests/Essayist/Essayist.xcodeproj
+          TEST_PROJECT_NAME: Essayist
+
+    steps:
+      - checkout
+      - run:
+          name: Test UIKit
+          command: |
+            export APP_PATH=$PWD/Tests/Essayist/Build/Debug-iphonesimulator/Essayist.app
+            IOS_SIM_UDID=`xcrun simctl list | grep -w "$IOS_SIM_NAME" | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' | head -1`
+            SIMULATOR_PATH='/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
+            echo "Running sim for $APP_NAME - $BUNDLE_IDENTIFIER"
+            open -a "$SIMULATOR_PATH" --args -CurrentDeviceUDID $IOS_SIM_UDID
+            echo "sim open cmd"
+
+            # Wait until there is a device booted
+
+            function booted_sim_ct() {
+              echo `xcrun simctl list | grep Booted | wc -l | sed -e 's/ //g'`
+            }
+
+            while [ `booted_sim_ct` -lt 1 ]
+            do
+              sleep 1
+            done
+
+            echo "Building"
+            xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
+            xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
+            killall Simulator
+
+      # Collect XML test results data to show in the UI, and save the same XML
+      # files under test-results folder in the Artifacts tab
+      - store_test_results:
+          path: test_output
+      - store_artifacts:
+          path: test_output
+          destination: scan-output
