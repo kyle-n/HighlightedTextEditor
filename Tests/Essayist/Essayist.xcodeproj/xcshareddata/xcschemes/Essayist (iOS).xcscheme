@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99095E1B256EE1AD0048EB2F"
+               BlueprintIdentifier = "99095E13256EE1AD0048EB2F"
                BuildableName = "Essayist.app"
-               BlueprintName = "Essayist (macOS)"
+               BlueprintName = "Essayist (iOS)"
                ReferencedContainer = "container:Essayist.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9957D6002571DB4D004194BD"
-               BuildableName = "macOS-EssayistUITests.xctest"
-               BlueprintName = "macOS-EssayistUITests"
+               BlueprintIdentifier = "994FB3BE256EE549008F0208"
+               BuildableName = "iOS-EssayistUITests.xctest"
+               BlueprintName = "iOS-EssayistUITests"
                ReferencedContainer = "container:Essayist.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -54,9 +54,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "99095E1B256EE1AD0048EB2F"
+            BlueprintIdentifier = "99095E13256EE1AD0048EB2F"
             BuildableName = "Essayist.app"
-            BlueprintName = "Essayist (macOS)"
+            BlueprintName = "Essayist (iOS)"
             ReferencedContainer = "container:Essayist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -65,16 +65,15 @@
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
-      useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/kylenazario/Downloads"
+      useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "99095E1B256EE1AD0048EB2F"
+            BlueprintIdentifier = "99095E13256EE1AD0048EB2F"
             BuildableName = "Essayist.app"
-            BlueprintName = "Essayist (macOS)"
+            BlueprintName = "Essayist (iOS)"
             ReferencedContainer = "container:Essayist.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
