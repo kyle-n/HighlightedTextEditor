@@ -24,6 +24,10 @@ jobs:
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
           xcodebuild test -sdk macosx11.0 -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
+      - uses: actions/upload-artifact@v2
+          with:
+            name: macOS-snapshots
+            path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/macOS_EssayistUITests
 
 
   # build:
