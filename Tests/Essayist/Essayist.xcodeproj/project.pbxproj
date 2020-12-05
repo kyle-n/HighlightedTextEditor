@@ -697,7 +697,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx11.0]" = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JMG343Q6QB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "macOS-EssayistUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -718,7 +718,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JMG343Q6QB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "macOS-EssayistUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
