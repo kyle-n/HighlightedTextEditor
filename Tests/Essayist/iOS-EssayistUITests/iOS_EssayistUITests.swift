@@ -18,7 +18,7 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
+        continueAfterFailure = true
     }
     
     func selectEditor(_ editorType: EditorType) {
