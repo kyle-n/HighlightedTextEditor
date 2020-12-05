@@ -25,6 +25,9 @@
 		994FF6EA257B343800B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6E9257B343800B9858A /* HighlightedTextEditor */; };
 		994FF6EC257B344300B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6EB257B344300B9858A /* HighlightedTextEditor */; };
 		994FF6EE257B344800B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6ED257B344800B9858A /* HighlightedTextEditor */; };
+		994FF6FC257BD18800B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		994FF701257BD18D00B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		994FF706257BD18E00B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
 		9957D6042571DB4D004194BD /* macOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D6032571DB4D004194BD /* macOS_EssayistUITests.swift */; };
 		9957D60F2571DB66004194BD /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		9957D6142571DB6C004194BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
@@ -349,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99095E24256EE1AE0048EB2F /* Assets.xcassets in Resources */,
+				994FF701257BD18D00B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99095E25256EE1AE0048EB2F /* Assets.xcassets in Resources */,
+				994FF706257BD18E00B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994FF6FC257BD18800B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
