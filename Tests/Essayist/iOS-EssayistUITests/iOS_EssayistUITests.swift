@@ -16,6 +16,22 @@ class iOS_EssayistUITests: XCTestCase {
     private var screenshot: UIImage {
         XCUIApplication().screenshot().image
     }
+    
+    override class func setUp() {
+        // enable Chinese-language keyboard
+        let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
+        settings.launch()
+        
+        settings.tables.firstMatch.staticTexts["General"].tap()
+        settings.tables.firstMatch.staticTexts["Keyboard"].tap()
+        settings.tables.firstMatch.staticTexts["Keyboards"].tap()
+        settings.tables.firstMatch.staticTexts["Add New Keyboard..."].tap()
+        settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
+        settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
+        settings.buttons["Done"].tap()
+        
+        XCUIDevice.shared.press(.home)
+    }
 
     override func setUpWithError() throws {
         continueAfterFailure = true
@@ -26,23 +42,23 @@ class iOS_EssayistUITests: XCTestCase {
         app.buttons["Select Editor"].tap()
         app.buttons[editorType.rawValue.uppercaseFirst()].tap()
     }
-    
+
     private enum SimulatorKeyboards: String {
         case englishUS = "English (US)"
         case pinyin10Key = "简体拼音"
     }
-    
+
     private func selectKeyboard(_ keyboardType: SimulatorKeyboards) {
         let app = XCUIApplication()
         let nextKeyboardButton = app.buttons["Next keyboard"]
-        
+
         if !nextKeyboardButton.exists {
             app.textViews.firstMatch.tap()
         }
         nextKeyboardButton.press(forDuration: 0.9);
         app.tables["InputSwitcherTable"].staticTexts[keyboardType.rawValue].tap()
     }
-    
+
     func testMarkdownPresetHighlighting() {
         assertSnapshot(matching: AnyView(MarkdownEditorA()), as: device)
         assertSnapshot(matching: AnyView(MarkdownEditorB()), as: device)
@@ -177,20 +193,20 @@ class iOS_EssayistUITests: XCTestCase {
             XCTAssertTrue(app.keys[String(num)].exists)
         }
     }
-    
+
     func testTwoStageInput() {
         let app = XCUIApplication()
         app.launch()
-        
+
         selectEditor(.blank)
-        
+
         let hlteTextView = app.textViews["hlte"]
         hlteTextView.tap()
-        
+
         let moreKey = app.keys["more"]
         let space = app.keys["space"]
         let returnButton = app.buttons["Return"]
-        
+
         moreKey.tap()
         app.keys["1"].tap()
         app.keys["."].tap()
@@ -203,30 +219,30 @@ class iOS_EssayistUITests: XCTestCase {
         space.tap()
         app.keys["B"].tap()
         returnButton.doubleTap()
-        
+
         app.keys["T"].tap()
         app.keys["e"].tap()
         app.keys["s"].tap()
         app.keys["t"].tap()
         space.tap()
-        
+
         selectKeyboard(.pinyin10Key)
-        
+
         app.keys["拼音"].tap()
         app.keys["A B C "].tap()
         app.keys["D E F "].tap()
         app.keys["M N O "].tap()
         app.collectionViews.staticTexts["笨"].tap()
-        
+
         let targetText = """
         1. A
         2. B
 
         Test 笨
         """
-        
+
         XCTAssertEqual(hlteTextView.value as! String, targetText)
-        
+
         selectKeyboard(.englishUS)
     }
 }
