@@ -6,11 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  BUNDLE_IDENTIFIER: com.kylenazario.Essayist
+  TEST_PROJECT_PATH: ./Tests/Essayist/Essayist.xcodeproj
+  TEST_PROJECT_NAME: Essayist
+
 jobs:
-  env:
-    BUNDLE_IDENTIFIER: com.kylenazario.Essayist
-    TEST_PROJECT_PATH: ./Tests/Essayist/Essayist.xcodeproj
-    TEST_PROJECT_NAME: Essayist
 
   build:
     name: AppKit Tests
