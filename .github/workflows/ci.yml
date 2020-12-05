@@ -13,7 +13,7 @@ env:
 
 jobs:
 
-  build:
+  appkit:
     name: AppKit Tests
     runs-on: macos-11.0
 
@@ -39,7 +39,7 @@ jobs:
 
 
 
-  build:
+  uikit:
     name: UIKit Tests
     runs-on: macos-11.0
 
