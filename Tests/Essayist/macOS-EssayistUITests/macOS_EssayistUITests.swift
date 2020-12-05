@@ -59,9 +59,10 @@ class macOS_EssayistUITests: XCTestCase {
         app.activate()
 
         let markdownEditors: [EditorType] = [.markdownA, .markdownB, .markdownC]
+        let window = app.windows.firstMatch
         markdownEditors.forEach { markdownEditor in
             selectEditor(markdownEditor)
-            assertSnapshot(matching: screenshot(), as: .image)
+            assertSnapshot(matching: window.screenshot().image, as: .image)
         }
     }
 

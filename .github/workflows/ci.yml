@@ -1,0 +1,88 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  BUNDLE_IDENTIFIER: com.kylenazario.Essayist
+  TEST_PROJECT_PATH: ./Tests/Essayist/Essayist.xcodeproj
+  TEST_PROJECT_NAME: Essayist
+
+jobs:
+
+  appkit:
+    name: AppKit Tests
+    runs-on: macos-11.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run AppKit tests
+        run: |
+          xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
+          xcodebuild test -sdk macosx11.0 -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
+      - name: Save non-matching macOS snapshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: macOS-failing-snapshots
+          path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/macOS_EssayistUITests
+          if-no-files-found: ignore
+      - name: Save new macOS snapshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: macOS-new-snapshots
+          path: /Users/runner/work/HighlightedTextEditor/HighlightedTextEditor/Tests/Essayist/macOS-EssayistUITests/__Snapshots__
+          if-no-files-found: ignore
+
+
+
+  uikit:
+    name: UIKit Tests
+    runs-on: macos-11.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run UIKit tests
+        env:
+          IOS_SIM_NAME: iPhone 11
+        run: |
+          IOS_SIM_UDID=`xcrun simctl list | grep -w "$IOS_SIM_NAME" | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' | head -1`
+          SIMULATOR_PATH='/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
+          echo "Running sim for $APP_NAME - $BUNDLE_IDENTIFIER"
+          open -a "$SIMULATOR_PATH" --args -CurrentDeviceUDID $IOS_SIM_UDID
+
+          # Wait until there is a device booted
+
+          function booted_sim_ct() {
+            echo `xcrun simctl list | grep Booted | wc -l | sed -e 's/ //g'`
+          }
+
+          while [ `booted_sim_ct` -lt 1 ]
+          do
+            sleep 1
+          done
+
+          echo "Building"
+          xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
+          xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
+          killall Simulator
+      - name: Save non-matching iOS snapshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: iOS-failing-snapshots
+          path: /Users/runner/Library/Developer/CoreSimulator/Devices/527B991D-4F94-4BF6-864B-89DE5078A0BC/data/Containers/Data/Application/**/*.png
+          if-no-files-found: ignore
+      - name: Save new iOS snapshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: iOS-new-snapshots
+          path: /Users/runner/work/HighlightedTextEditor/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/__Snapshots__
+          if-no-files-found: ignore

@@ -13,7 +13,6 @@
 		99095E23256EE1AD0048EB2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99095E0E256EE1AB0048EB2F /* ContentView.swift */; };
 		99095E24256EE1AE0048EB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
 		99095E25256EE1AE0048EB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
-		99095E32256EE2E80048EB2F /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 99095E31256EE2E80048EB2F /* HighlightedTextEditor */; };
 		994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */; };
 		994FB3CE256EE80C008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 		994FB3CF256EE80C008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
@@ -22,22 +21,26 @@
 		994FB3DD256EF068008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 		994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 994FB3E2256EF903008F0208 /* SnapshotTesting */; };
 		994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		994FF6E4257B342E00B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6E3257B342E00B9858A /* HighlightedTextEditor */; };
+		994FF6EA257B343800B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6E9257B343800B9858A /* HighlightedTextEditor */; };
+		994FF6EC257B344300B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6EB257B344300B9858A /* HighlightedTextEditor */; };
+		994FF6EE257B344800B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6ED257B344800B9858A /* HighlightedTextEditor */; };
+		994FF6FC257BD18800B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		994FF701257BD18D00B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		994FF706257BD18E00B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
 		9957D6042571DB4D004194BD /* macOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D6032571DB4D004194BD /* macOS_EssayistUITests.swift */; };
 		9957D60F2571DB66004194BD /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		9957D6142571DB6C004194BD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
-		9957D61A2571DB78004194BD /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D6192571DB78004194BD /* HighlightedTextEditor */; };
 		9957D61C2571DB78004194BD /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 9957D61B2571DB78004194BD /* SnapshotTesting */; };
 		9957D64D2574152A004194BD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		9957D65325741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		9957D65425741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		9957D65525741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		9957D65625741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
-		996CB33B25717489008FC31B /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 996CB33A25717489008FC31B /* HighlightedTextEditor */; };
 		99F378F6256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F378F7256F025000C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		99F37902256F033700C5DF2F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		99F3790D256F039A00C5DF2F /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
-		99F3792F256F071000C5DF2F /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 99F3792E256F071000C5DF2F /* HighlightedTextEditor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99095E32256EE2E80048EB2F /* HighlightedTextEditor in Frameworks */,
+				994FF6E4257B342E00B9858A /* HighlightedTextEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				996CB33B25717489008FC31B /* HighlightedTextEditor in Frameworks */,
+				994FF6EA257B343800B9858A /* HighlightedTextEditor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99F3792F256F071000C5DF2F /* HighlightedTextEditor in Frameworks */,
+				994FF6EC257B344300B9858A /* HighlightedTextEditor in Frameworks */,
 				994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9957D61A2571DB78004194BD /* HighlightedTextEditor in Frameworks */,
+				994FF6EE257B344800B9858A /* HighlightedTextEditor in Frameworks */,
 				9957D61C2571DB78004194BD /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,7 +226,7 @@
 			);
 			name = "Essayist (iOS)";
 			packageProductDependencies = (
-				99095E31256EE2E80048EB2F /* HighlightedTextEditor */,
+				994FF6E3257B342E00B9858A /* HighlightedTextEditor */,
 			);
 			productName = "Essayist (iOS)";
 			productReference = 99095E14256EE1AD0048EB2F /* Essayist.app */;
@@ -243,7 +246,7 @@
 			);
 			name = "Essayist (macOS)";
 			packageProductDependencies = (
-				996CB33A25717489008FC31B /* HighlightedTextEditor */,
+				994FF6E9257B343800B9858A /* HighlightedTextEditor */,
 			);
 			productName = "Essayist (macOS)";
 			productReference = 99095E1C256EE1AD0048EB2F /* Essayist.app */;
@@ -265,7 +268,7 @@
 			name = "iOS-EssayistUITests";
 			packageProductDependencies = (
 				994FB3E2256EF903008F0208 /* SnapshotTesting */,
-				99F3792E256F071000C5DF2F /* HighlightedTextEditor */,
+				994FF6EB257B344300B9858A /* HighlightedTextEditor */,
 			);
 			productName = "iOS-EssayistUITests";
 			productReference = 994FB3BF256EE549008F0208 /* iOS-EssayistUITests.xctest */;
@@ -286,8 +289,8 @@
 			);
 			name = "macOS-EssayistUITests";
 			packageProductDependencies = (
-				9957D6192571DB78004194BD /* HighlightedTextEditor */,
 				9957D61B2571DB78004194BD /* SnapshotTesting */,
+				994FF6ED257B344800B9858A /* HighlightedTextEditor */,
 			);
 			productName = "macOS-EssayistUITests";
 			productReference = 9957D6012571DB4D004194BD /* macOS-EssayistUITests.xctest */;
@@ -328,8 +331,8 @@
 			);
 			mainGroup = 99095E07256EE1AB0048EB2F;
 			packageReferences = (
-				99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 				994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				994FF6E2257B342E00B9858A /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 			);
 			productRefGroup = 99095E15256EE1AD0048EB2F /* Products */;
 			projectDirPath = "";
@@ -349,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99095E24256EE1AE0048EB2F /* Assets.xcassets in Resources */,
+				994FF701257BD18D00B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99095E25256EE1AE0048EB2F /* Assets.xcassets in Resources */,
+				994FF706257BD18E00B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994FF6FC257BD18800B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +614,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JMG343Q6QB;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
@@ -632,7 +638,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JMG343Q6QB;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
@@ -697,7 +703,7 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx11.0]" = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JMG343Q6QB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "macOS-EssayistUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -718,7 +724,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JMG343Q6QB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "macOS-EssayistUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -785,14 +791,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/kylenazario/apps/HighlightedTextEditor";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
-		};
 		994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
@@ -801,38 +799,46 @@
 				minimumVersion = 1.8.2;
 			};
 		};
+		994FF6E2257B342E00B9858A /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kyle-n/HighlightedTextEditor";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		99095E31256EE2E80048EB2F /* HighlightedTextEditor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
-			productName = HighlightedTextEditor;
-		};
 		994FB3E2256EF903008F0208 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
 		};
-		9957D6192571DB78004194BD /* HighlightedTextEditor */ = {
+		994FF6E3257B342E00B9858A /* HighlightedTextEditor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			package = 994FF6E2257B342E00B9858A /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
+		};
+		994FF6E9257B343800B9858A /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 994FF6E2257B342E00B9858A /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
+		};
+		994FF6EB257B344300B9858A /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 994FF6E2257B342E00B9858A /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
+		};
+		994FF6ED257B344800B9858A /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 994FF6E2257B342E00B9858A /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
 			productName = HighlightedTextEditor;
 		};
 		9957D61B2571DB78004194BD /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 994FB3E1256EF903008F0208 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
-		};
-		996CB33A25717489008FC31B /* HighlightedTextEditor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
-			productName = HighlightedTextEditor;
-		};
-		99F3792E256F071000C5DF2F /* HighlightedTextEditor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 99095E30256EE2E80048EB2F /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
-			productName = HighlightedTextEditor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

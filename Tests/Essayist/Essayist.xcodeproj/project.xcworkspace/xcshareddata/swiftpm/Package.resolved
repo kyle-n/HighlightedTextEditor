@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "HighlightedTextEditor",
-        "repositoryURL": "/Users/kylenazario/apps/HighlightedTextEditor",
+        "repositoryURL": "https://github.com/kyle-n/HighlightedTextEditor",
         "state": {
-          "branch": "develop",
-          "revision": "62e4bcc69839e1276f5082b75fe8d8b218095d2c",
+          "branch": "main",
+          "revision": "d87ace2c0848ae58bfd9bf9cc804d2d2bb5ad515",
           "version": null
         }
       },
