@@ -1,4 +1,4 @@
-name: iOS Continuous Integration
+name: Continuous Integration
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
           xcodebuild test -sdk macosx11.0 -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
       - name: Upload artifacts
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: macOS-snapshots
