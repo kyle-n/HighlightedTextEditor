@@ -8,12 +8,13 @@
 import SwiftUI
 import HighlightedTextEditor
 
+let markdownFileURL = URL(string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
+let markdown = try! String(contentsOf: markdownFileURL, encoding: .utf8)
+
 struct MarkdownEditorA: View {
     @State var text: String
     
     init() {
-        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
-        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
         let end = markdown.index(of: "## Blockquotes")!
         let firstPart = String(markdown.prefix(upTo: end))
         _text = State<String>(initialValue: firstPart)
@@ -28,8 +29,6 @@ struct MarkdownEditorB: View {
     @State var text: String
     
     init() {
-        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
-        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
         let endOfFirstPart = markdown.index(of: "## Blockquotes")!
         let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
         let secondPart = String(markdown[endOfFirstPart..<endOfSecondPart])
@@ -45,8 +44,6 @@ struct MarkdownEditorC: View {
     @State var text: String
     
     init() {
-        let fileURL = URL(string: "file:///Users/kylenazario/apps/HighlightedTextEditor/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
-        let markdown = try! String(contentsOf: fileURL, encoding: .utf8)
         let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
         let thirdPart = String(markdown[endOfSecondPart..<markdown.endIndex])
         _text = State<String>(initialValue: thirdPart)
