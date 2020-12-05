@@ -77,8 +77,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: iOS-failing-snapshots
-          path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/iOS_EssayistUITests
-          if-no-files-found: ignore
+          path: /Users/runner/Library/Developer/CoreSimulator/Devices/527B991D-4F94-4BF6-864B-89DE5078A0BC/data/Containers/Data/Application/AF06048F-5831-46A0-9CEE-B12753507B89/tmp/iOS_EssayistUITests
+          # if-no-files-found: ignore
       - name: Save new iOS snapshots
         if: failure()
         uses: actions/upload-artifact@v2
