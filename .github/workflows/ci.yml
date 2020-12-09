@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main, ci-branches ]
+    branches: [ main ]
 
 env:
   BUNDLE_IDENTIFIER: com.kylenazario.Essayist
@@ -20,16 +20,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install dependencies
-        run: brew install jq
       - name: Change to testing branch
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
         run: |
-          sed -i '' "s/main;/${GITHUB_HEAD_REF};/g" $XCODEPROJ
+          sed -i '' "s/main;/$GITHUB_HEAD_REF;/g" $XCODEPROJ
           sed -i '' "s/kyle-n/$GITHUB_ACTOR/g" $XCODEPROJ
-          cat $XCODEPROJ | grep 'branch ='
-          cat $XCODEPROJ | grep 'repositoryURL'
       - name: Run AppKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
@@ -58,6 +54,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Change to testing branch
+        env:
+          XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
+        run: |
+          sed -i '' "s/main;/$GITHUB_HEAD_REF;/g" $XCODEPROJ
+          sed -i '' "s/kyle-n/$GITHUB_ACTOR/g" $XCODEPROJ
       - name: Run UIKit tests
         env:
           IOS_SIM_NAME: iPhone 11
