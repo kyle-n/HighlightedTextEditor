@@ -24,17 +24,12 @@ jobs:
         run: brew install jq
       - name: Change to testing branch
         env:
-          BASE_REPO_URL: https://github.com/kyle-n/HighlightedTextEditor
-          ALL: ${{ toJson(github) }}
+          XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
         run: |
-          echo "$ALL"
-          ESCAPED_BRANCH="${GITHUB_ACTOR}\/${GITHUB_HEAD_REF}"
-          BRANCH="${GITHUB_ACTOR}/${GITHUB_HEAD_REF}"
-          echo "$BRANCH"
-          sed -i '' "s/main;/${GITHUB_HEAD_REF};/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
-          sed -i '' "s/kyle-n\/HighlightedTextEditor/$ESCAPED_BRANCH/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
-          cat Tests/Essayist/Essayist.xcodeproj/project.pbxproj | grep 'branch ='
-          cat Tests/Essayist/Essayist.xcodeproj/project.pbxproj | grep 'repositoryURL'
+          sed -i '' "s/main;/${GITHUB_HEAD_REF};/g" $XCODEPROJ
+          sed -i '' "s/kyle-n/$GITHUB_ACTOR/g" $XCODEPROJ
+          cat $XCODEPROJ | grep 'branch ='
+          cat $XCODEPROJ | grep 'repositoryURL'
       - name: Run AppKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
