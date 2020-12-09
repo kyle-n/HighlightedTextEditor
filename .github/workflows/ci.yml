@@ -28,11 +28,12 @@ jobs:
           ALL: ${{ toJson(github) }}
         run: |
           echo "$ALL"
-          BRANCH_NAME=${GITHUB_REF##*/}
-          BRANCH_URL=$(echo "https://github.com/${GITHUB_REPOSITORY}")
-          echo "$BRANCH_URL"
-          sed -i '' "s/main;/${BRANCH_NAME};/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
+          BRANCH=$(echo "${GITHUB_ACTOR}/${GITHUB_HEAD_REF}")
+          echo "$BRANCH"
+          sed -i '' "s/main;/${GITHUB_HEAD_REF};/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
+          sed -i '' "s/kyle-n\/HighlightedTextEditor/${BRANCH}/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
           cat Tests/Essayist/Essayist.xcodeproj/project.pbxproj | grep 'branch ='
+          cat Tests/Essayist/Essayist.xcodeproj/project.pbxproj | grep 'repositoryURL'
       - name: Run AppKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
