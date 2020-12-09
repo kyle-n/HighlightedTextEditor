@@ -2,7 +2,7 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ main, ci-branches ]
+    branches: [ main ]
   pull_request:
     branches: [ main, ci-branches ]
 
@@ -28,10 +28,11 @@ jobs:
           ALL: ${{ toJson(github) }}
         run: |
           echo "$ALL"
-          BRANCH=$(echo "${GITHUB_ACTOR}/${GITHUB_HEAD_REF}")
+          ESCAPED_BRANCH="${GITHUB_ACTOR}\/${GITHUB_HEAD_REF}"
+          BRANCH="${GITHUB_ACTOR}/${GITHUB_HEAD_REF}"
           echo "$BRANCH"
           sed -i '' "s/main;/${GITHUB_HEAD_REF};/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
-          sed -i '' "s/kyle-n\/HighlightedTextEditor/${BRANCH}/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
+          sed -i '' "s/kyle-n\/HighlightedTextEditor/$ESCAPED_BRANCH/g" Tests/Essayist/Essayist.xcodeproj/project.pbxproj
           cat Tests/Essayist/Essayist.xcodeproj/project.pbxproj | grep 'branch ='
           cat Tests/Essayist/Essayist.xcodeproj/project.pbxproj | grep 'repositoryURL'
       - name: Run AppKit tests
