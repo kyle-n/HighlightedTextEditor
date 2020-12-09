@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, ci-branches ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, ci-branches ]
 
 env:
   BUNDLE_IDENTIFIER: com.kylenazario.Essayist
