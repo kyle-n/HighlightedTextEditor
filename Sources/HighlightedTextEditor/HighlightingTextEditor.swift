@@ -6,18 +6,30 @@
 //
 
 import SwiftUI
+
 #if os(macOS)
 import AppKit
+
+public typealias SystemFontAlias = NSFont
+public typealias SystemColorAlias = NSColor
+public typealias SymbolicTraits = NSFontDescriptor.SymbolicTraits
+
+let defaultEditorFont = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+let defaultEditorTextColor = NSColor.labelColor
+
 #else
 import UIKit
+
+public typealias SystemFontAlias = UIFont
+public typealias SystemColorAlias = UIColor
+public typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
+
+let defaultEditorFont = UIFont.preferredFont(forTextStyle: .body)
+let defaultEditorTextColor = UIColor.label
+
 #endif
 
 public struct TextFormattingRule {
-    #if os(macOS)
-    public typealias SymbolicTraits = NSFontDescriptor.SymbolicTraits
-    #else
-    public typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
-    #endif
     
     let key: NSAttributedString.Key?
     let value: Any?
@@ -66,31 +78,20 @@ internal protocol HighlightingTextEditor {
     var highlightRules: [HighlightRule] { get }
 }
 
+
+
 extension HighlightingTextEditor {
     
     var placeholderFont: SystemColorAlias {
         get { SystemColorAlias() }
     }
     
-    #if os(macOS)
-    public typealias SystemFontAlias = NSFont
-    public typealias SystemColorAlias = NSColor
-    #else
-    public typealias SystemFontAlias = UIFont
-    public typealias SystemColorAlias = UIColor
-    #endif
-    
     static func getHighlightedText(text: String, highlightRules: [HighlightRule], font: SystemFontAlias?, color: SystemColorAlias?) -> NSMutableAttributedString {
         let highlightedString = NSMutableAttributedString(string: text)
         let all = NSRange(location: 0, length: text.count)
         
-        #if os(macOS)
-        let editorFont = font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
-        let editorTextColor = color ?? NSColor.labelColor
-        #else
-        let editorFont = font ?? UIFont.preferredFont(forTextStyle: .body)
-        let editorTextColor = color ?? UIColor.label
-        #endif
+        let editorFont = font ?? defaultEditorFont
+        let editorTextColor = color ?? defaultEditorTextColor
         
         highlightedString.addAttribute(.font, value: editorFont, range: all)
         highlightedString.addAttribute(.foregroundColor, value: editorTextColor, range: all)
@@ -100,18 +101,10 @@ extension HighlightingTextEditor {
             matches.forEach { match in
                 rule.formattingRules.forEach { formattingRule in
                     
-                    #if os(macOS)
-                    var font = NSFont()
-                    #else
-                    var font = UIFont()
-                    #endif
+                    var font = SystemFontAlias()
                     highlightedString.enumerateAttributes(in: match.range, options: []) { attributes, range, stop in
                         let fontAttribute = attributes.first { $0.key == .font }!
-                        #if os(macOS)
-                        let previousFont = fontAttribute.value as! NSFont
-                        #else
-                        let previousFont = fontAttribute.value as! UIFont
-                        #endif
+                        let previousFont = fontAttribute.value as! SystemFontAlias
                         font = previousFont.with(formattingRule.fontTraits)
                     }
                     highlightedString.addAttribute(.font, value: font, range: match.range)
