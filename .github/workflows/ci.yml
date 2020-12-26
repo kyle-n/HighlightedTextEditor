@@ -92,7 +92,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: iOS-failing-snapshots
-          path: /Users/runner/Library/Developer/CoreSimulator/Devices/{{ IOS_SIM_UDID }}/data/Containers/Data/Application/**/*.png
+          path: /Users/runner/Library/Developer/CoreSimulator/Devices/**/test*.png
           if-no-files-found: ignore
       - name: Save new iOS snapshots
         if: failure()
