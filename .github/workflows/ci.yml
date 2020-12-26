@@ -60,14 +60,11 @@ jobs:
         run: |
           sed -i '' "s/main;/${GITHUB_HEAD_REF//\//\\/};/g" $XCODEPROJ
           sed -i '' "s/kyle-n/${GITHUB_ACTOR//\//\\/}/g" $XCODEPROJ
-      - name: Find Simulator UDID
+      - name: Boot Simulator
         env:
           IOS_SIM_NAME: iPhone 11
         run: |
           IOS_SIM_UDID=`xcrun simctl list | grep -w "$IOS_SIM_NAME" | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' | head -1`
-          echo "::set-env name=IOS_SIM_UDID::$IOS_SIM_UDID"
-      - name: Boot Simulator
-        run: |
           SIMULATOR_PATH='/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
           echo "Running sim for $APP_NAME - $BUNDLE_IDENTIFIER"
           open -a "$SIMULATOR_PATH" --args -CurrentDeviceUDID $IOS_SIM_UDID
