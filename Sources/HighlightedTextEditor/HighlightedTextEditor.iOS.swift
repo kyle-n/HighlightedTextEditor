@@ -48,6 +48,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isScrollEnabled = true
+        textView.font = font
         updateTextViewModifiers(textView)
 
         return textView
