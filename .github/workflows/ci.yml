@@ -24,8 +24,8 @@ jobs:
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
         run: |
-          sed -i '' "s/main;/$GITHUB_HEAD_REF;/g" $XCODEPROJ
-          sed -i '' "s/kyle-n/$GITHUB_ACTOR/g" $XCODEPROJ
+          sed -i '' "s/main;/${GITHUB_HEAD_REF//\//\\/};/g" $XCODEPROJ
+          sed -i '' "s/kyle-n/${GITHUB_ACTOR//\//\\/}/g" $XCODEPROJ
       - name: Run AppKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
@@ -58,9 +58,9 @@ jobs:
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
         run: |
-          sed -i '' "s/main;/$GITHUB_HEAD_REF;/g" $XCODEPROJ
-          sed -i '' "s/kyle-n/$GITHUB_ACTOR/g" $XCODEPROJ
-      - name: Run UIKit tests
+          sed -i '' "s/main;/${GITHUB_HEAD_REF//\//\\/};/g" $XCODEPROJ
+          sed -i '' "s/kyle-n/${GITHUB_ACTOR//\//\\/}/g" $XCODEPROJ
+      - name: Boot Simulator
         env:
           IOS_SIM_NAME: iPhone 11
         run: |
@@ -79,8 +79,8 @@ jobs:
           do
             sleep 1
           done
-
-          echo "Building"
+      - name: Run UIKit tests
+        run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
           xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
           killall Simulator
@@ -89,7 +89,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: iOS-failing-snapshots
-          path: /Users/runner/Library/Developer/CoreSimulator/Devices/527B991D-4F94-4BF6-864B-89DE5078A0BC/data/Containers/Data/Application/**/*.png
+          path: /Users/runner/Library/Developer/CoreSimulator/Devices/**/test*.png
           if-no-files-found: ignore
       - name: Save new iOS snapshots
         if: failure()
