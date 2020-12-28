@@ -85,10 +85,8 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.tintColor = insertionPointColor ?? textView.tintColor
     
         // BUGFIX #19: https://stackoverflow.com/questions/60537039/change-prompt-color-for-uitextfield-on-mac-catalyst
-        #if targetEnvironment(macCatalyst)
         let textInputTraits = textView.value(forKey: "textInputTraits") as? NSObject
         textInputTraits?.setValue(textView.tintColor, forKey: "insertionPointColor")
-        #endif
     }
 
     public class Coordinator: NSObject, UITextViewDelegate {
