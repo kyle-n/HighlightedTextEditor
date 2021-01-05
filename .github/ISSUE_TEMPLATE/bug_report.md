@@ -25,8 +25,8 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment**
 Please include:
-- Exact version of iOS / iPadOS / macOS where you saw the bug
-- AppKit or UIKit
+- Exact version of iOS / iPadOS / macOS where your app was running when you saw the bug
+- Is your app using AppKit or UIKit? If your app is for iOS or Mac Catalyst, it is UIKit. If it is for macOS natively, it is using AppKit.
 
 **Additional context**
 Add any other context about the problem here.
