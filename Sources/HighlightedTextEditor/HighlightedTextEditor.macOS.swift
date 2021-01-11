@@ -34,6 +34,11 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     private(set) var font                               :  NSFont?         = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
     private(set) var insertionPointColor                :  NSColor?        = nil
     private(set) var textAlignment                      :  TextAlignment   = .leading
+    private(set) var selectedRanges: [NSValue] = [] {
+        didSet {
+            self.onTextChange(text)
+        }
+    }
     
     public init(
         text: Binding<String>,
@@ -97,7 +102,11 @@ extension HighlightedTextEditor {
     public class Coordinator: NSObject, NSTextViewDelegate {
 
         var parent: HighlightedTextEditor
-        var selectedRanges: [NSValue] = []
+        var selectedRanges: [NSValue] = [] {
+            didSet {
+                self.parent.selectedRanges = selectedRanges
+            }
+        }
         
         init(_ parent: HighlightedTextEditor) {
             self.parent = parent
