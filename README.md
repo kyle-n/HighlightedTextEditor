@@ -34,7 +34,11 @@ struct ContentView: View {
     private let rules: [HighlightRule] = [
         HighlightRule(pattern: betweenUnderscores, formattingRules: [
             TextFormattingRule(fontTraits: [.traitItalic, .traitBold]),
-            TextFormattingRule(key: .foregroundColor, value: UIColor.red)
+            TextFormattingRule(key: .foregroundColor, value: UIColor.red),
+            TextFormattingRule(key: .underlineStyle) { content, range in
+                if content.count > 10 { return NSUnderlineStyle.double.rawValue }
+                else { return NSUnderlineStyle.single.rawValue }
+            }
         ])
     ]
     
@@ -110,12 +114,17 @@ HighlightedTextEditor(text: $text, highlightRules: .markdown)
 
 ### TextFormattingRule
 
-TextFormattingRule uses two different initializers that each set one style.
+TextFormattingRule offers three different initializers that each set one style. To set multiple styles, use multiple TextFormattingRules.
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `key` | [NSAttributedString.Key](2) | The style to set (e.x. `.foregroundColor`, `.underlineStyle`) |
 | `value` | Any | The actual style applied to the `key` (e.x. for `key = .foregroundColor`, `value` is `UIColor.red` or `NSColor.red`) |
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `key` | [NSAttributedString.Key](2) | The style to set (e.x. `.foregroundColor`, `.underlineStyle`) |
+| `calculateValue` | (String, Range<String.Index>) -> Any | A callback that calculates the value for `key`. First parameter is the text content matched by the regex, second is the match's range in the overall string. |
 
 `value` uses an older, untyped API so you'll have to check the [documentation](2) for what type can be passed in for a given `key`.
 
