@@ -31,25 +31,31 @@ let defaultEditorTextColor = UIColor.label
 
 public struct TextFormattingRule {
     
+    public typealias AttributedKeyCallback = (String, Range<String.Index>) -> Any
+    
     let key: NSAttributedString.Key?
-    let value: Any?
+    let calculateValue: AttributedKeyCallback?
     let fontTraits: SymbolicTraits
     
     // ------------------- convenience ------------------------
     
     public init(key: NSAttributedString.Key, value: Any) {
-        self.init(key: key, value: value, fontTraits: [])
+        self.init(key: key, calculateValue: { _, _ in value }, fontTraits: [])
+    }
+    
+    public init(key: NSAttributedString.Key, calculateValue: @escaping AttributedKeyCallback) {
+        self.init(key: key, calculateValue: calculateValue, fontTraits: [])
     }
     
     public init(fontTraits: SymbolicTraits) {
-        self.init(key: nil, value: nil, fontTraits: fontTraits)
+        self.init(key: nil, fontTraits: fontTraits)
     }
     
     // ------------------ most powerful initializer ------------------
     
-    init(key: NSAttributedString.Key? = nil, value: Any? = nil, fontTraits: SymbolicTraits = []) {
+    init(key: NSAttributedString.Key? = nil, calculateValue: AttributedKeyCallback? = nil, fontTraits: SymbolicTraits = []) {
         self.key = key
-        self.value = value
+        self.calculateValue = calculateValue
         self.fontTraits = fontTraits
     }
 }
@@ -109,8 +115,10 @@ extension HighlightingTextEditor {
                     }
                     highlightedString.addAttribute(.font, value: font, range: match.range)
                     
-                    guard let key = formattingRule.key, let value = formattingRule.value else { return }
-                    highlightedString.addAttribute(key, value: value, range: match.range)
+                    let matchRange = Range<String.Index>(match.range, in: text)!
+                    let matchContent = String(text[matchRange])
+                    guard let key = formattingRule.key, let calculateValue = formattingRule.calculateValue else { return }
+                    highlightedString.addAttribute(key, value: calculateValue(matchContent, matchRange), range: match.range)
                 }
             }
         }
