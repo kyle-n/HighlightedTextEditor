@@ -15,7 +15,6 @@ fileprivate let _urlRegex = try! NSRegularExpression(pattern: urlRegexPattern, o
 // It does not really make any sense to have it here
 public extension HighlightedTextEditor {
     static let url: [HighlightRule] = [HighlightRule].url
-    
 }
 
 public extension Sequence where Iterator.Element == HighlightRule {
