@@ -16,7 +16,11 @@ class macOS_EssayistUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.launch()
-        app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow].click()
+        let fullScreenButton = app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow]
+        let _ = fullScreenButton.waitForExistence(timeout: 1)
+        if fullScreenButton.exists {
+            fullScreenButton.click()
+        }
     }
     
     private func selectEditor(_ editorType: EditorType) {
