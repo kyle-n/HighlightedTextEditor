@@ -16,13 +16,20 @@ class macOS_EssayistUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.launch()
-        app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow].click()
     }
     
     private func selectEditor(_ editorType: EditorType) {
         let window = XCUIApplication().windows.firstMatch
         window.popUpButtons["Select Editor"].click()
         window.menuItems[editorType.rawValue.uppercaseFirst()].click()
+        
+        if (editorType == .blank) {
+            let textView = window.textViews.firstMatch
+            let _ = textView.waitForExistence(timeout: 3)
+            textView.click()
+            textView.typeKey("a", modifierFlags: .command)
+            textView.typeKey(.delete, modifierFlags: [])
+        }
     }
     
     private func screenshot() -> NSImage {
