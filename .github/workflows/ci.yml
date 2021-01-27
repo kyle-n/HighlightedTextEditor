@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: macOS-failing-snapshots
-          path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/macOS_EssayistUITests
+          path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/com.kylenazario.macOS-EssayistUITests.xctrunner/macOS_EssayistUITests
           if-no-files-found: ignore
       - name: Save new macOS snapshots
         if: failure()
