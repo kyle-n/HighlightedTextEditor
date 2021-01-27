@@ -16,6 +16,7 @@ class macOS_EssayistUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.launch()
+        app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow].click()
     }
     
     private func selectEditor(_ editorType: EditorType) {
