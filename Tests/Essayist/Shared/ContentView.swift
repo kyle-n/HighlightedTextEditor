@@ -10,13 +10,7 @@ import HighlightedTextEditor
 
 struct ContentView: View {
     @State private var text: String = ""
-    @State private var currentEditor: EditorType {
-        didSet { text = "" }
-    }
-    
-    init() {
-        _currentEditor = State<EditorType>(initialValue: .blank)
-    }
+    @State private var currentEditor: EditorType = .blank
     
     var layout: some View {
         VStack {
