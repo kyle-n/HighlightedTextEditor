@@ -29,7 +29,7 @@ jobs:
       - name: Run AppKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
-          xcodebuild test -sdk macosx11.0 -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
+          xcodebuild test -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
       - name: Save non-matching macOS snapshots
         if: failure()
         uses: actions/upload-artifact@v2
