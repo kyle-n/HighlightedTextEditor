@@ -20,6 +20,8 @@
 		993CE98925C1E93200497085 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 993CE98825C1E93200497085 /* SnapshotTesting */; };
 		993CE98B25C1E93200497085 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 993CE98A25C1E93200497085 /* HighlightedTextEditor */; };
 		993CE98C25C1E96800497085 /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
+		993CE99D25C2063200497085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
+		993CE9A225C2063400497085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
 		994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */; };
 		994FB3CE256EE80C008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 		994FB3CF256EE80C008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
@@ -375,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993CE9A225C2063400497085 /* Assets.xcassets in Resources */,
 				993CE98C25C1E96800497085 /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993CE99D25C2063200497085 /* Assets.xcassets in Resources */,
 				994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
