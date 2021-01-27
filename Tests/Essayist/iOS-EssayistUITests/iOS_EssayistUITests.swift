@@ -39,7 +39,9 @@ class iOS_EssayistUITests: XCTestCase {
     
     func selectEditor(_ editorType: EditorType) {
         let app = XCUIApplication()
-        app.buttons["Select Editor"].tap()
+        let selectEditorMenu = app.buttons["Select Editor"]
+        let _ = selectEditorMenu.waitForExistence(timeout: 5)
+        selectEditorMenu.tap()
         app.buttons[editorType.rawValue.uppercaseFirst()].tap()
     }
 
