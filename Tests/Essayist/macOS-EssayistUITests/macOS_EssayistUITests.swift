@@ -32,7 +32,7 @@ class macOS_EssayistUITests: XCTestCase {
         }
     }
     
-    private func screenshot() -> NSImage {
+    private var screenshot: NSImage {
         XCUIApplication().windows.firstMatch.screenshot().image
     }
     
@@ -58,7 +58,7 @@ class macOS_EssayistUITests: XCTestCase {
 
         selectEditor(.url)
 
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
     }
 
     func testMarkdownPreset() {
@@ -79,7 +79,7 @@ class macOS_EssayistUITests: XCTestCase {
 
         selectEditor(.font)
 
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
     }
 
     func testCustomNSAttributedStringKeyValues() {
@@ -88,7 +88,7 @@ class macOS_EssayistUITests: XCTestCase {
 
         selectEditor(.key)
 
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
     }
 
     func testFontModifiers() {
@@ -97,7 +97,7 @@ class macOS_EssayistUITests: XCTestCase {
 
         selectEditor(.fontModifiers)
 
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
     }
 
     func testDrawsBackgroundAndBackgroundColor() {
@@ -105,10 +105,10 @@ class macOS_EssayistUITests: XCTestCase {
         app.activate()
 
         selectEditor(.drawsBackground)
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
 
         app.buttons["Toggle drawsBackground"].click()
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
     }
     
     func testBackgroundColorChanges() {
@@ -121,12 +121,12 @@ class macOS_EssayistUITests: XCTestCase {
         let toggleChangesButton = app.buttons["Toggle allowsDocumentBackgroundColorChange"]
         
         toggleBackgroundColorButton.click()
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
         toggleBackgroundColorButton.click()
         
         toggleChangesButton.click()
         toggleBackgroundColorButton.click()
-        assertSnapshot(matching: screenshot(), as: .image)
+        assertSnapshot(matching: screenshot, as: .image)
     }
     
 }
