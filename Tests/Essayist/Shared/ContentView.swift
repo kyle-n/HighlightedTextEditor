@@ -10,7 +10,13 @@ import HighlightedTextEditor
 
 struct ContentView: View {
     @State private var text: String = ""
-    @State private var currentEditor: EditorType = .blank
+    @State private var currentEditor: EditorType {
+        didSet { text = "" }
+    }
+    
+    init() {
+        _currentEditor = State<EditorType>(initialValue: .blank)
+    }
     
     var layout: some View {
         VStack {
@@ -23,11 +29,7 @@ struct ContentView: View {
                         .accessibility(identifier: editorType.rawValue)
                 }
             }
-            .pickerStyle(MenuPickerStyle())
             .accessibility(identifier: "Select Editor")
-        }
-        .onChange(of: currentEditor) { _ in
-            text = ""
         }
     }
     
