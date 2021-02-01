@@ -92,41 +92,41 @@ class iOS_EssayistUITests: XCTestCase {
 //        assertSnapshot(matching: AnyView(NSAttributedStringKeyEditor()), as: device)
 //    }
 //
-//    func testTypingInMiddle() {
-//        let app = XCUIApplication()
-//        app.launch()
-//
-//        let hlteTextView = app.textViews["hlte"]
-//        hlteTextView.tap()
-//
-//        app.keys["A"].tap()
-//
-//        let returnButton = app.buttons["Return"]
-//        returnButton.tap()
-//        returnButton.tap()
-//
-//        app.keys["B"].tap()
-//        returnButton.tap()
-//        returnButton.tap()
-//
-//        app.keys["D"].tap()
-//        returnButton.tap()
-//        returnButton.tap()
-//
-//        // Move selection to after "B"
-//        hlteTextView
-//            .coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-//            .withOffset(CGVector(dx: 30, dy: 60))
-//            .tap()
-//        returnButton.tap()
-//        returnButton.tap()
-//        app.keys["C"].tap()
-//        app.keys["a"].tap()
-//        app.keys["r"].tap()
-//        app.keys["s"].tap()
-//
-//        XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD\n\n")
-//    }
+    func testTypingInMiddle() {
+        let app = XCUIApplication()
+        app.launch()
+
+        let hlteTextView = app.textViews["hlte"]
+        hlteTextView.tap()
+
+        app.keys["A"].tap()
+
+        let returnButton = app.buttons["Return"]
+        returnButton.tap()
+        returnButton.tap()
+
+        app.keys["B"].tap()
+        returnButton.tap()
+        returnButton.tap()
+
+        app.keys["D"].tap()
+        returnButton.tap()
+        returnButton.tap()
+
+        // Move selection to after "B"
+        hlteTextView
+            .coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+            .withOffset(CGVector(dx: 30, dy: 60))
+            .tap()
+        returnButton.tap()
+        returnButton.tap()
+        app.keys["C"].tap()
+        app.keys["a"].tap()
+        app.keys["r"].tap()
+        app.keys["s"].tap()
+
+        XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD\n\n")
+    }
 //
 //    func testFontModifiers() {
 //        assertSnapshot(matching: FontModifiersEditor().eraseToAnyView(), as: device)
