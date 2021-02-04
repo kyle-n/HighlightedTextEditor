@@ -293,7 +293,7 @@ class iOS_EssayistUITests: XCTestCase {
         app.launch()
         
         selectEditor(.url)
-        app.textViews["hlte"].links["https://www.google.com/"].tap()
+        app.textViews["hlte"].links.firstMatch.tap()
         
         let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
         let safariLaunched = safari.wait(for: .runningForeground, timeout: 5)
