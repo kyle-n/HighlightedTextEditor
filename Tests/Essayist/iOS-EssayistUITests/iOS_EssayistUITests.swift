@@ -141,8 +141,8 @@ class iOS_EssayistUITests: XCTestCase {
 //    }
 
     func testAutocapitalizationModifier() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.autocapitalizationType)
 
