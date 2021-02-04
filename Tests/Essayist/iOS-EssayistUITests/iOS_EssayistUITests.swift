@@ -201,7 +201,7 @@ class iOS_EssayistUITests: XCTestCase {
         space.tap()
         
         var textViewValue = textView.value as! String
-        XCTAssertEqual(textViewValue, "I'm ")
+        XCTAssertEqual(textViewValue, "I’m ")
         
         // -------------------------------------------- //
         
