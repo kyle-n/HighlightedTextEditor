@@ -16,19 +16,24 @@ struct ContentView: View {
         VStack {
             editorView
                 .accessibility(identifier: "hlte")
-            Picker("Select Editor", selection: $currentEditor) {
-                ForEach(EditorType.allCases, id: \.self) { editorType in
-                    Text(editorType.rawValue.uppercaseFirst())
-                        .tag(editorType)
-                        .accessibility(identifier: editorType.rawValue)
-                }
+            #if os(macOS)
+            picker
+            #else
+            picker
+                .pickerStyle(MenuPickerStyle())
+            #endif
+        }
+    }
+    
+    var picker: some View {
+        Picker("Select Editor", selection: $currentEditor) {
+            ForEach(EditorType.allCases, id: \.self) { editorType in
+                Text(editorType.rawValue.uppercaseFirst())
+                    .tag(editorType)
+                    .accessibility(identifier: editorType.rawValue)
             }
-            .pickerStyle(MenuPickerStyle())
-            .accessibility(identifier: "Select Editor")
         }
-        .onChange(of: currentEditor) { _ in
-            text = ""
-        }
+        .accessibility(identifier: "Select Editor")
     }
     
     var body: some View {

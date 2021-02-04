@@ -15,7 +15,7 @@ jobs:
 
   appkit:
     name: AppKit Tests
-    runs-on: macos-11.0
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -29,13 +29,13 @@ jobs:
       - name: Run AppKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
-          xcodebuild test -sdk macosx11.0 -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
+          xcodebuild test -destination 'platform=OS X,arch=x86_64' -scheme "$TEST_PROJECT_NAME (macOS)" -project $TEST_PROJECT_PATH
       - name: Save non-matching macOS snapshots
         if: failure()
         uses: actions/upload-artifact@v2
         with:
           name: macOS-failing-snapshots
-          path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/macOS_EssayistUITests
+          path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/com.kylenazario.macOS-EssayistUITests.xctrunner/macOS_EssayistUITests
           if-no-files-found: ignore
       - name: Save existing/new macOS snapshots
         if: failure()
@@ -49,7 +49,7 @@ jobs:
 
   uikit:
     name: UIKit Tests
-    runs-on: macos-11.0
+    runs-on: macos-latest
 
     steps:
       - name: Checkout

@@ -37,9 +37,24 @@ class iOS_EssayistUITests: XCTestCase {
         continueAfterFailure = true
     }
     
+    func tryLaunch(_ counter: Int = 10) {
+        sleep(3)
+        XCUIApplication().terminate()
+        sleep(3)
+
+        let app = XCUIApplication()
+        app.launch()
+        sleep(3)
+        if !app.exists && counter > 0 {
+            tryLaunch(counter - 1)
+        }
+    }
+    
     func selectEditor(_ editorType: EditorType) {
         let app = XCUIApplication()
-        app.buttons["Select Editor"].tap()
+        let selectEditorMenu = app.buttons["Select Editor"]
+        let _ = selectEditorMenu.waitForExistence(timeout: 5)
+        selectEditorMenu.tap()
         app.buttons[editorType.rawValue.uppercaseFirst()].tap()
     }
 
@@ -78,8 +93,8 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     func testTypingInMiddle() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         let hlteTextView = app.textViews["hlte"]
         hlteTextView.tap()
@@ -126,8 +141,8 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     func testAutocapitalizationModifier() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.autocapitalizationType)
 
@@ -167,23 +182,50 @@ class iOS_EssayistUITests: XCTestCase {
 
     // Tests screenshots for grey bar above keyboard with autocorrect suggestions
     func testAutocorrectionTypeModifier() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.autocorrectionType)
 
-        app.textViews.firstMatch.tap()
-        sleep(1)
-        assertSnapshot(matching: screenshot, as: .image)
+        let textView = app.textViews.firstMatch
+        textView.tap()
+        
+        let IKey = app.keys["I"]
+        let mKey = app.keys["m"]
+        let space = app.keys["space"]
+        let delete = app.keys["delete"]
+        
+        let _ = IKey.waitForExistence(timeout: 2)
+        IKey.tap()
+        mKey.tap()
+        space.tap()
+        
+        var textViewValue = textView.value as! String
+        XCTAssertEqual(textViewValue, "I’m ")
+        
+        // -------------------------------------------- //
+        
+        (0..<textViewValue.count).forEach { _ in
+            delete.tap()
+        }
+        
         app.buttons["Toggle Autocorrect"].tap()
-        app.textViews.firstMatch.tap()
-        sleep(1)
-        assertSnapshot(matching: screenshot, as: .image)
+        
+        // -------------------------------------------- //
+        
+        textView.tap()
+        let _ = IKey.waitForExistence(timeout: 2)
+        IKey.tap()
+        mKey.tap()
+        space.tap()
+        
+        textViewValue = textView.value as! String
+        XCTAssertEqual(textViewValue, "Im ")
     }
 
     func testKeyboardTypeModifier() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.keyboardType)
 
@@ -195,8 +237,8 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     func testTwoStageInput() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.blank)
 
