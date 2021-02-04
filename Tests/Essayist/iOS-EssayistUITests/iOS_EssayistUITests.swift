@@ -287,4 +287,17 @@ class iOS_EssayistUITests: XCTestCase {
 
         selectKeyboard(.englishUS)
     }
+    
+    func testURLPresetLinkTaps() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        selectEditor(.url)
+        app.textViews["hlte"].links.firstMatch.tap()
+        
+        let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+        let safariLaunched = safari.wait(for: .runningForeground, timeout: 5)
+        
+        XCTAssertTrue(safariLaunched)
+    }
 }

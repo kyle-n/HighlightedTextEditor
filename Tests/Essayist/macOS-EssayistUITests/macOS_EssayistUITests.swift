@@ -16,7 +16,11 @@ class macOS_EssayistUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.launch()
-        app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow].click()
+        let fullScreenButton = app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow]
+        let _ = fullScreenButton.waitForExistence(timeout: 1)
+        if fullScreenButton.exists {
+            fullScreenButton.click()
+        }
     }
     
     private func selectEditor(_ editorType: EditorType) {
@@ -111,23 +115,38 @@ class macOS_EssayistUITests: XCTestCase {
         app.buttons["Toggle drawsBackground"].click()
         assertSnapshot(matching: screenshot, as: .image)
     }
-    
+
     func testBackgroundColorChanges() {
         let app = XCUIApplication()
         app.activate()
-        
+
         selectEditor(.backgroundChanges)
-        
+
         let toggleBackgroundColorButton = app.buttons["Toggle backgroundColor"]
         let toggleChangesButton = app.buttons["Toggle allowsDocumentBackgroundColorChange"]
-        
+
         toggleBackgroundColorButton.click()
         assertSnapshot(matching: screenshot, as: .image)
         toggleBackgroundColorButton.click()
-        
+
         toggleChangesButton.click()
         toggleBackgroundColorButton.click()
         assertSnapshot(matching: screenshot, as: .image)
+    }
+    
+    func testURLPresetLinkClicks() {
+        let app = XCUIApplication()
+        app.launch()
+        
+        selectEditor(.url)
+        
+        let window = XCUIApplication().windows.firstMatch
+        window.textViews.links["https://www.google.com/"].click()
+
+        let safari = XCUIApplication(bundleIdentifier: "com.apple.Safari")
+        let safariLaunched = safari.wait(for: .runningForeground, timeout: 5)
+
+        XCTAssertTrue(safariLaunched)
     }
     
 }
