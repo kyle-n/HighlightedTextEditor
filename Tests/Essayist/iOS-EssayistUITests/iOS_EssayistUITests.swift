@@ -93,8 +93,8 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     func testTypingInMiddle() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         let hlteTextView = app.textViews["hlte"]
         hlteTextView.tap()
@@ -182,8 +182,8 @@ class iOS_EssayistUITests: XCTestCase {
 
     // Tests screenshots for grey bar above keyboard with autocorrect suggestions
     func testAutocorrectionTypeModifier() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.autocorrectionType)
 
@@ -197,8 +197,8 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     func testKeyboardTypeModifier() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.keyboardType)
 
@@ -210,8 +210,8 @@ class iOS_EssayistUITests: XCTestCase {
     }
 
     func testTwoStageInput() {
+        tryLaunch()
         let app = XCUIApplication()
-        app.launch()
 
         selectEditor(.blank)
 
