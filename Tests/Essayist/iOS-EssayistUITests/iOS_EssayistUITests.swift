@@ -187,13 +187,40 @@ class iOS_EssayistUITests: XCTestCase {
 
         selectEditor(.autocorrectionType)
 
-        app.textViews.firstMatch.tap()
-        sleep(1)
-        assertSnapshot(matching: screenshot, as: .image)
+        let textView = app.textViews.firstMatch
+        textView.tap()
+        
+        let IKey = app.keys["I"]
+        let mKey = app.keys["m"]
+        let space = app.keys["space"]
+        let delete = app.keys["delete"]
+        
+        let _ = IKey.waitForExistence(timeout: 2)
+        IKey.tap()
+        mKey.tap()
+        space.tap()
+        
+        var textViewValue = textView.value as! String
+        XCTAssertEqual(textViewValue, "I'm ")
+        
+        // -------------------------------------------- //
+        
+        (0..<textViewValue.count).forEach { _ in
+            delete.tap()
+        }
+        
         app.buttons["Toggle Autocorrect"].tap()
-        app.textViews.firstMatch.tap()
-        sleep(1)
-        assertSnapshot(matching: screenshot, as: .image)
+        
+        // -------------------------------------------- //
+        
+        textView.tap()
+        let _ = IKey.waitForExistence(timeout: 2)
+        IKey.tap()
+        mKey.tap()
+        space.tap()
+        
+        textViewValue = textView.value as! String
+        XCTAssertEqual(textViewValue, "Im ")
     }
 
     func testKeyboardTypeModifier() {
