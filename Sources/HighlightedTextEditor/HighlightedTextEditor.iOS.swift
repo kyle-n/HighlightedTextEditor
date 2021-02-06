@@ -23,6 +23,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var font                  : UIFont?                      = nil
     private(set) var insertionPointColor   : UIColor?                     = nil
                  var keyboardType          : UIKeyboardType               = .default
+    private(set) var onSelectionChange     : OnSelectionChangeCallback?   = nil
     private(set) var textAlignment         : TextAlignment                = .leading
     
     public init(
@@ -107,6 +108,13 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             selectedTextRange = textView.selectedTextRange
         }
         
+        public func textViewDidChangeSelection(_ textView: UITextView) {
+            guard let onSelectionChange = parent.onSelectionChange else { return }
+            DispatchQueue.main.async {
+                onSelectionChange([textView.selectedRange])
+            }
+        }
+        
         public func textViewDidBeginEditing(_ textView: UITextView) {
             parent.onEditingChanged()
         }
@@ -166,6 +174,21 @@ extension HighlightedTextEditor {
     public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
         var new = self
         new.textAlignment = alignment
+        return new
+    }
+    
+    public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
+        var new = self
+        new.onSelectionChange = callback
+        return new
+    }
+    
+    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
+        var new = self
+        new.onSelectionChange = { ranges in
+            guard let range = ranges.first else { return }
+            callback(range)
+        }
         return new
     }
 }
