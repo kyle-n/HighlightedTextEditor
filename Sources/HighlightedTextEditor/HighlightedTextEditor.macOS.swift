@@ -27,13 +27,14 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
     
-    private(set) var allowsDocumentBackgroundColorChange: Bool             = true
-    private(set) var backgroundColor                    :  NSColor         = .textBackgroundColor
-    private(set) var color                              :  NSColor?        = nil
-    private(set) var drawsBackground                    :  Bool            = true
-    private(set) var font                               :  NSFont?         = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    private(set) var insertionPointColor                :  NSColor?        = nil
-    private(set) var textAlignment                      :  TextAlignment   = .leading
+    private(set) var allowsDocumentBackgroundColorChange: Bool                       = true
+    private(set) var backgroundColor                    : NSColor                    = .textBackgroundColor
+    private(set) var color                              : NSColor?                   = nil
+    private(set) var drawsBackground                    : Bool                       = true
+    private(set) var font                               : NSFont?                    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    private(set) var insertionPointColor                : NSColor?                   = nil
+    private(set) var onSelectionChange                  : OnSelectionChangeCallback? = nil
+    private(set) var textAlignment                      : TextAlignment              = .leading
     
     public init(
         text: Binding<String>,
@@ -98,6 +99,7 @@ extension HighlightedTextEditor {
 
         var parent: HighlightedTextEditor
         var selectedRanges: [NSValue] = []
+        var lastSelectedRanges: [NSRange] = []
         
         init(_ parent: HighlightedTextEditor) {
             self.parent = parent
@@ -117,13 +119,23 @@ extension HighlightedTextEditor {
         }
         
         public func textDidChange(_ notification: Notification) {
-            guard let textView = notification.object as? NSTextView else {
-                return
-            }
+            guard let textView = notification.object as? NSTextView else { return }
             let content: String = String(textView.textStorage?.string ?? "")
             
             self.parent.text = content
             selectedRanges = textView.selectedRanges
+        }
+        
+        public func textViewDidChangeSelection(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextView,
+                  let onSelectionChange = parent.onSelectionChange,
+                  let ranges = textView.selectedRanges as? [NSRange],
+                  ranges.elementsEqual(lastSelectedRanges) == false
+            else { return }
+            self.lastSelectedRanges = ranges
+            DispatchQueue.main.async {
+                onSelectionChange(ranges)
+            }
         }
         
         public func textDidEndEditing(_ notification: Notification) {
@@ -322,6 +334,21 @@ extension HighlightedTextEditor {
     public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
         var editor = self
         editor.textAlignment = alignment
+        return editor
+    }
+    
+    public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
+        var editor = self
+        editor.onSelectionChange = callback
+        return editor
+    }
+    
+    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
+        var editor = self
+        editor.onSelectionChange = { ranges in
+            guard let range = ranges.first else { return }
+            callback(range)
+        }
         return editor
     }
 }
