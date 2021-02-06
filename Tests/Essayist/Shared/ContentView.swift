@@ -86,6 +86,9 @@ struct ContentView: View {
         case .keyboardType:
             return KeyboardTypeEditor()
                 .eraseToAnyView()
+        case .onSelectionChange:
+            return OnSelectionChangeEditor()
+                .eraseToAnyView()
         }
     }
 }

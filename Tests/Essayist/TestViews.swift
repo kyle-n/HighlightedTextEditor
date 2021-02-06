@@ -229,3 +229,30 @@ struct KeyboardTypeEditor: View {
         #endif
     }
 }
+
+struct OnSelectionChangeEditor: View {
+    @State private var text: String = ""
+    @State private var selectionChanges: Int = 0
+    @State private var selectedRange: NSRange? = nil
+    
+    var body: some View {
+        VStack {
+            HighlightedTextEditor(text: $text, highlightRules: [])
+                .onSelectionChange { (range: NSRange) in
+                    selectionChanges += 1
+                    selectedRange = range
+                }
+            HStack {
+                Text(String(selectionChanges))
+                    .accessibility(identifier: "selectionChanges")
+                Text(selectedRangeString)
+                    .accessibility(identifier: "selectedRange")
+            }
+        }
+    }
+    
+    private var selectedRangeString: String {
+        guard let selectedRange = selectedRange else { return "" }
+        return "\(selectedRange.location) \(selectedRange.length)"
+    }
+}
