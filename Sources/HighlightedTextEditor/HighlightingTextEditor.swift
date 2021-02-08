@@ -84,7 +84,7 @@ internal protocol HighlightingTextEditor {
     var highlightRules: [HighlightRule] { get }
 }
 
-
+public typealias OnSelectionChangeCallback = ([NSRange]) -> Void
 
 extension HighlightingTextEditor {
     

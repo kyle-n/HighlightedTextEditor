@@ -133,20 +133,42 @@ class macOS_EssayistUITests: XCTestCase {
         toggleBackgroundColorButton.click()
         assertSnapshot(matching: screenshot, as: .image)
     }
-    
+
     func testURLPresetLinkClicks() {
         let app = XCUIApplication()
         app.launch()
-        
+
         selectEditor(.url)
-        
+
         let window = XCUIApplication().windows.firstMatch
-        window.textViews.links["https://www.google.com/"].click()
+        window.textViews.links.firstMatch.click()
 
         let safari = XCUIApplication(bundleIdentifier: "com.apple.Safari")
         let safariLaunched = safari.wait(for: .runningForeground, timeout: 5)
 
         XCTAssertTrue(safariLaunched)
+    }
+    
+    func testOnSelectionChange() {
+        let app = XCUIApplication()
+        app.activate()
+        
+        selectEditor(.onSelectionChange)
+        
+        let window = app.windows.firstMatch
+        let textView = window.textViews.firstMatch
+        
+        textView.click()
+        textView.typeText("Cat")
+        textView.doubleClick()
+        
+        let selectedRangeDisplay = app.staticTexts["6"]
+        let selectionChangesDisplay = app.staticTexts["0 3"]
+        let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
+        let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
+        
+        XCTAssertTrue(selectedRangeExists)
+        XCTAssertTrue(selectionChangesExists)
     }
     
 }

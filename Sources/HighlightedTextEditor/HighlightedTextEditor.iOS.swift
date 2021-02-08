@@ -23,6 +23,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var font                  : UIFont?                      = nil
     private(set) var insertionPointColor   : UIColor?                     = nil
                  var keyboardType          : UIKeyboardType               = .default
+    private(set) var onSelectionChange     : OnSelectionChangeCallback?   = nil
     private(set) var textAlignment         : TextAlignment                = .leading
     
     public init(
@@ -56,6 +57,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
     public func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.isScrollEnabled = false
+        context.coordinator.updatingUIView = true
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
             text: text,
@@ -72,6 +74,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         updateTextViewModifiers(uiView)
         uiView.isScrollEnabled = true
         uiView.selectedTextRange = context.coordinator.selectedTextRange
+        context.coordinator.updatingUIView = false
     }
     
     private func updateTextViewModifiers(_ textView: UITextView) {
@@ -93,6 +96,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public class Coordinator: NSObject, UITextViewDelegate {
         var parent: HighlightedTextEditor
         var selectedTextRange: UITextRange? = nil
+        var updatingUIView = false
 
         init(_ markdownEditorView: HighlightedTextEditor) {
             self.parent = markdownEditorView
@@ -105,6 +109,14 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             
             self.parent.text = textView.text
             selectedTextRange = textView.selectedTextRange
+        }
+        
+        public func textViewDidChangeSelection(_ textView: UITextView) {
+            guard let onSelectionChange = parent.onSelectionChange,
+                  !updatingUIView
+            else { return }
+            selectedTextRange = textView.selectedTextRange
+            onSelectionChange([textView.selectedRange])
         }
         
         public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -166,6 +178,21 @@ extension HighlightedTextEditor {
     public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
         var new = self
         new.textAlignment = alignment
+        return new
+    }
+    
+    public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
+        var new = self
+        new.onSelectionChange = callback
+        return new
+    }
+    
+    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
+        var new = self
+        new.onSelectionChange = { ranges in
+            guard let range = ranges.first else { return }
+            callback(range)
+        }
         return new
     }
 }

@@ -189,36 +189,36 @@ class iOS_EssayistUITests: XCTestCase {
 
         let textView = app.textViews.firstMatch
         textView.tap()
-        
+
         let IKey = app.keys["I"]
         let mKey = app.keys["m"]
         let space = app.keys["space"]
         let delete = app.keys["delete"]
-        
+
         let _ = IKey.waitForExistence(timeout: 2)
         IKey.tap()
         mKey.tap()
         space.tap()
-        
+
         var textViewValue = textView.value as! String
         XCTAssertEqual(textViewValue, "I’m ")
-        
+
         // -------------------------------------------- //
-        
+
         (0..<textViewValue.count).forEach { _ in
             delete.tap()
         }
-        
+
         app.buttons["Toggle Autocorrect"].tap()
-        
+
         // -------------------------------------------- //
-        
+
         textView.tap()
         let _ = IKey.waitForExistence(timeout: 2)
         IKey.tap()
         mKey.tap()
         space.tap()
-        
+
         textViewValue = textView.value as! String
         XCTAssertEqual(textViewValue, "Im ")
     }
@@ -287,17 +287,40 @@ class iOS_EssayistUITests: XCTestCase {
 
         selectKeyboard(.englishUS)
     }
-    
+
     func testURLPresetLinkTaps() {
         let app = XCUIApplication()
         app.launch()
-        
+
         selectEditor(.url)
         app.textViews["hlte"].links.firstMatch.tap()
-        
+
         let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
         let safariLaunched = safari.wait(for: .runningForeground, timeout: 5)
-        
+
         XCTAssertTrue(safariLaunched)
+    }
+    
+    func testOnSelectionChange() {
+        let app = XCUIApplication()
+        tryLaunch()
+        
+        selectEditor(.onSelectionChange)
+        let textView = app.textViews.firstMatch
+        let _ = textView.waitForExistence(timeout: 2)
+        
+        textView.tap()
+        app.keys["C"].tap()
+        app.keys["a"].tap()
+        app.keys["t"].tap()
+        textView.doubleTap()
+        
+        let selectedRangeDisplay = app.staticTexts["5"]
+        let selectionChangesDisplay = app.staticTexts["0 3"]
+        let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
+        let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
+        
+        XCTAssertTrue(selectedRangeExists)
+        XCTAssertTrue(selectionChangesExists)
     }
 }
