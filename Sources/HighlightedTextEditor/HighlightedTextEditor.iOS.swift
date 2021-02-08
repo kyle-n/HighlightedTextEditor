@@ -56,6 +56,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
 
     public func updateUIView(_ uiView: UITextView, context: Context) {
+        print("updateUIView", context.coordinator.selectedTextRange)
         uiView.isScrollEnabled = false
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
@@ -94,6 +95,15 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public class Coordinator: NSObject, UITextViewDelegate {
         var parent: HighlightedTextEditor
         var selectedTextRange: UITextRange? = nil
+        private var selectedRange: NSRange? = nil {
+            didSet {
+                guard let onSelectionChange = parent.onSelectionChange,
+                      let selectedRange = selectedRange
+                else { return }
+                
+                onSelectionChange([selectedRange])
+            }
+        }
 
         init(_ markdownEditorView: HighlightedTextEditor) {
             self.parent = markdownEditorView
@@ -106,14 +116,25 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             
             self.parent.text = textView.text
             selectedTextRange = textView.selectedTextRange
+            selectedRange = textView.selectedRange
         }
         
-        public func textViewDidChangeSelection(_ textView: UITextView) {
-            guard let onSelectionChange = parent.onSelectionChange else { return }
-            DispatchQueue.main.async {
-                onSelectionChange([textView.selectedRange])
-            }
-        }
+//        public func textViewDidChangeSelection(_ textView: UITextView) {
+//
+////            guard let onSelectionChange = parent.onSelectionChange,
+////                  let selectedRange =
+////                  selectedTextRange?.isEqual(lastSelectedRange) == false
+////            else { return }
+//            let currentSelectedRange = textView.selectedRange
+//            guard !currentSelectedRange.equals(lastSelectedRange),
+//                  let onSelectionChange = parent.onSelectionChange
+//            else { return }
+//            print("didChangeSelection", selectedTextRange)
+//            lastSelectedRange = currentSelectedRange
+//            DispatchQueue.main.async {
+//                onSelectionChange([currentSelectedRange])
+//            }
+//        }
         
         public func textViewDidBeginEditing(_ textView: UITextView) {
             parent.onEditingChanged()
