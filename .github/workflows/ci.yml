@@ -55,6 +55,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Turn on Do Not Disturb
+        run: |
+          npm i -g do-not-disturb-cli
+          do-not-disturb on
+          do-not-disturb status
       - name: Change to testing branch
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
