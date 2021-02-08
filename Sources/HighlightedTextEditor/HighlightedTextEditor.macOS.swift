@@ -67,6 +67,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
     
     public func updateNSView(_ view: CustomTextView, context: Context) {
+        context.coordinator.updatingNSView = true
         view.text = text
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
@@ -79,6 +80,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         
         view.attributedText = highlightedText
         view.selectedRanges = context.coordinator.selectedRanges
+        context.coordinator.updatingNSView = false
     }
     
     private func updateTextViewModifiers(_ textView: CustomTextView, isFirstRender: Bool) {
@@ -99,7 +101,7 @@ extension HighlightedTextEditor {
 
         var parent: HighlightedTextEditor
         var selectedRanges: [NSValue] = []
-        var lastSelectedRanges: [NSRange] = []
+        var updatingNSView = false
         
         init(_ parent: HighlightedTextEditor) {
             self.parent = parent
@@ -129,10 +131,10 @@ extension HighlightedTextEditor {
         public func textViewDidChangeSelection(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView,
                   let onSelectionChange = parent.onSelectionChange,
-                  let ranges = textView.selectedRanges as? [NSRange],
-                  ranges.elementsEqual(lastSelectedRanges) == false
+                  !updatingNSView,
+                  let ranges = textView.selectedRanges as? [NSRange]
             else { return }
-            self.lastSelectedRanges = ranges
+            selectedRanges = textView.selectedRanges
             DispatchQueue.main.async {
                 onSelectionChange(ranges)
             }
