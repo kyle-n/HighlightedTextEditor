@@ -141,7 +141,7 @@ class macOS_EssayistUITests: XCTestCase {
         selectEditor(.url)
         
         let window = XCUIApplication().windows.firstMatch
-        window.textViews.links["https://www.google.com/"].click()
+        window.textViews.links.firstMatch.click()
 
         let safari = XCUIApplication(bundleIdentifier: "com.apple.Safari")
         let safariLaunched = safari.wait(for: .runningForeground, timeout: 5)
