@@ -244,9 +244,7 @@ struct OnSelectionChangeEditor: View {
                 }
             HStack {
                 Text(String(selectionChanges))
-                    .accessibility(identifier: "selectionChanges")
                 Text(selectedRangeString)
-                    .accessibility(identifier: "selectedRange")
             }
         }
     }

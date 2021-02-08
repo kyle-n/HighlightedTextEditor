@@ -19,18 +19,18 @@ class iOS_EssayistUITests: XCTestCase {
     
     override class func setUp() {
         // enable Chinese-language keyboard
-        let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
-        settings.launch()
-        
-        settings.tables.firstMatch.staticTexts["General"].tap()
-        settings.tables.firstMatch.staticTexts["Keyboard"].tap()
-        settings.tables.firstMatch.staticTexts["Keyboards"].tap()
-        settings.tables.firstMatch.staticTexts["Add New Keyboard..."].tap()
-        settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
-        settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
-        settings.buttons["Done"].tap()
-        
-        XCUIDevice.shared.press(.home)
+//        let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
+//        settings.launch()
+//        
+//        settings.tables.firstMatch.staticTexts["General"].tap()
+//        settings.tables.firstMatch.staticTexts["Keyboard"].tap()
+//        settings.tables.firstMatch.staticTexts["Keyboards"].tap()
+//        settings.tables.firstMatch.staticTexts["Add New Keyboard..."].tap()
+//        settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
+//        settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
+//        settings.buttons["Done"].tap()
+//        
+//        XCUIDevice.shared.press(.home)
     }
 
     override func setUpWithError() throws {
@@ -313,11 +313,14 @@ class iOS_EssayistUITests: XCTestCase {
         app.keys["C"].tap()
         app.keys["a"].tap()
         app.keys["t"].tap()
+        textView.doubleTap()
         
-        let selectedRange = app.staticTexts["selectedRange"].value as! String
-        let selectionChanges = app.staticTexts["selectionChanges"].value as! String
+        let selectedRangeDisplay = app.staticTexts["5"]
+        let selectionChangesDisplay = app.staticTexts["0 3"]
+        let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
+        let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
         
-        XCTAssertEqual(selectedRange, "3 0")
-        XCTAssertEqual(selectionChanges, "3")
+        XCTAssertTrue(selectedRangeExists)
+        XCTAssertTrue(selectionChangesExists)
     }
 }
