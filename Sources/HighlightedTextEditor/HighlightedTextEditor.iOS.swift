@@ -56,7 +56,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
 
     public func updateUIView(_ uiView: UITextView, context: Context) {
-        print("updateUIView", context.coordinator.selectedTextRange)
         uiView.isScrollEnabled = false
         context.coordinator.updatingUIView = true
         
@@ -76,7 +75,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         uiView.isScrollEnabled = true
         uiView.selectedTextRange = context.coordinator.selectedTextRange
         context.coordinator.updatingUIView = false
-        print("end updateUIView")
     }
     
     private func updateTextViewModifiers(_ textView: UITextView) {
@@ -117,7 +115,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             guard let onSelectionChange = parent.onSelectionChange,
                   !updatingUIView
             else { return }
-            print("didChangeSelection", textView.selectedRange)
             selectedTextRange = textView.selectedTextRange
             onSelectionChange([textView.selectedRange])
         }
