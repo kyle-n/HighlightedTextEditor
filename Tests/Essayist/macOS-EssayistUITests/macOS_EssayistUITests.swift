@@ -148,27 +148,47 @@ class macOS_EssayistUITests: XCTestCase {
 
         XCTAssertTrue(safariLaunched)
     }
-    
+
     func testOnSelectionChange() {
         let app = XCUIApplication()
         app.activate()
-        
+
         selectEditor(.onSelectionChange)
-        
+
         let window = app.windows.firstMatch
         let textView = window.textViews.firstMatch
-        
+
         textView.click()
         textView.typeText("Cat")
         textView.doubleClick()
-        
+
         let selectedRangeDisplay = app.staticTexts["6"]
         let selectionChangesDisplay = app.staticTexts["0 3"]
         let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
         let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
-        
+
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
+    }
+    
+    func testTypingEmoji() {
+        let app = XCUIApplication()
+        app.activate()
+        
+        selectEditor(.blank)
+        
+        let window = app.windows.firstMatch
+        let textView = window.textViews.firstMatch
+        
+        NSPasteboard.general.setString("💩", forType: .string)
+        
+        textView.click()
+        textView.typeKey("a", modifierFlags: .command)
+        textView.typeKey(.delete, modifierFlags: [])
+        textView.typeKey("v", modifierFlags: .command)
+        
+        let textViewContent = textView.value as! String
+        XCTAssertEqual(textViewContent, "💩")
     }
     
 }
