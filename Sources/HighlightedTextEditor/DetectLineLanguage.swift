@@ -1,3 +1,7 @@
+
+import NaturalLanguage
+import SwiftUI
+
 final class DetectLineLanguage {
     let rtlList: Array = ["Hebrew", "Arabic", "Aramaic", "Azeri", "Divehi", "Persian", "Hausa", "Khowar", "Kashmiri", "Kurdish", "Pashto", "Urdu", "Yiddish"]
     
