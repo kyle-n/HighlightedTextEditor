@@ -172,7 +172,7 @@ public final class CustomTextView: NSView {
     
     var selectedRanges: [NSValue] = [] {
         didSet {
-            guard selectedRanges.count > 0 else {
+            guard selectedRanges.utf16.count > 0 else {
                 return
             }
             
