@@ -49,7 +49,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         let textView = UITextView()
         textView.delegate = context.coordinator
         textView.isEditable = true
-        textView.isScrollEnabled = true
+        textView.isScrollEnabled = !isScrollingDisabled
         textView.font = font
         updateTextViewModifiers(textView)
 
@@ -57,7 +57,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
 
     public func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.isScrollEnabled = false
+        uiView.isScrollEnabled = !isScrollingDisabled
         context.coordinator.updatingUIView = true
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
