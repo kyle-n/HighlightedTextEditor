@@ -25,6 +25,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
                  var keyboardType          : UIKeyboardType               = .default
     private(set) var onSelectionChange     : OnSelectionChangeCallback?   = nil
     private(set) var textAlignment         : TextAlignment                = .leading
+    private(set) var isScrollingDisabled   : Bool                         = false
     
     public init(
         text: Binding<String>,
@@ -193,6 +194,12 @@ extension HighlightedTextEditor {
             guard let range = ranges.first else { return }
             callback(range)
         }
+        return new
+    }
+    
+    public func disableScrolling(_ isDisabled: Bool = true) -> Self {
+        var new = self
+        new.isScrollingDisabled = isDisabled
         return new
     }
 }
