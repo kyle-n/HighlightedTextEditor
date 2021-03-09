@@ -93,6 +93,7 @@ HighlightedTextEditor(text: $text, highlightRules: .markdown)
 - `.keyboardType(_ type: UIKeyboardType)`
 - `.insertionPointColor(_ color: UIColor)`
 - `.multilineTextAlignment(_ alignment: TextAlignment)`
+- `.disableScrolling(_ isDisabled: Bool)`
 
 #### Modifiers (AppKit)
 
