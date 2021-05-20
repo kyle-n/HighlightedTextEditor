@@ -16,29 +16,23 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     
     @Binding var text: String {
         didSet {
-            self.onTextChange(text)
+            self.onTextChange?(text)
         }
     }
     let highlightRules: [HighlightRule]
     
-    var onEditingChanged: () -> Void       = {}
-    var onCommit        : () -> Void       = {}
-    var onTextChange    : (String) -> Void = { _ in }
+    var onEditingChanged: (() -> Void)?       = nil
+    var onCommit        : (() -> Void)?       = nil
+    var onTextChange    : ((String) -> Void)? = nil
     
     private(set) var onSelectionChange: (([NSRange]) -> Void)? = nil
     
     public init(
         text: Binding<String>,
-        highlightRules: [HighlightRule],
-        onEditingChanged: @escaping () -> Void = {},
-        onCommit: @escaping () -> Void = {},
-        onTextChange: @escaping (String) -> Void = { _ in }
+        highlightRules: [HighlightRule]
     ) {
         _text = text
         self.highlightRules = highlightRules
-        self.onEditingChanged = onEditingChanged
-        self.onCommit = onCommit
-        self.onTextChange = onTextChange
     }
     
     public func makeCoordinator() -> Coordinator {
@@ -92,7 +86,7 @@ extension HighlightedTextEditor {
             }
             
             self.parent.text = textView.string
-            self.parent.onEditingChanged()
+            self.parent.onEditingChanged?()
         }
         
         public func textDidChange(_ notification: Notification) {
@@ -121,7 +115,7 @@ extension HighlightedTextEditor {
             }
             
             self.parent.text = textView.string
-            self.parent.onCommit()
+            self.parent.onCommit?()
         }
     }
 }
@@ -266,6 +260,24 @@ public final class CustomTextView: NSView {
 }
 
 extension HighlightedTextEditor {
+    
+    public func onCommit(_ callback: @escaping () -> Void) -> Self {
+        var editor = self
+        editor.onCommit = callback
+        return editor
+    }
+    
+    public func onEditingChanged(_ callback: @escaping () -> Void) -> Self {
+        var editor = self
+        editor.onEditingChanged = callback
+        return editor
+    }
+    
+    public func onTextChange(_ callback: @escaping (String) -> Void) -> Self {
+        var editor = self
+        editor.onTextChange = callback
+        return editor
+    }
 
     public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
         var editor = self
