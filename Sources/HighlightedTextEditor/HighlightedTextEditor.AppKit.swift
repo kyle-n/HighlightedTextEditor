@@ -128,8 +128,6 @@ extension HighlightedTextEditor {
 
 // MARK: - CustomTextView
 public final class CustomTextView: NSView {
-    private var isEditable: Bool
-    private var font: NSFont?
     
     weak var delegate: NSTextViewDelegate?
     
@@ -216,8 +214,8 @@ public final class CustomTextView: NSView {
         textView.backgroundColor         = NSColor.textBackgroundColor
         textView.delegate                = self.delegate
         textView.drawsBackground         = true
-        textView.font                    = self.font
-        textView.isEditable              = self.isEditable
+//        textView.font                    = self.font
+//        textView.isEditable              = self.isEditable
         textView.isHorizontallyResizable = false
         textView.isVerticallyResizable   = true
         textView.maxSize                 = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
@@ -228,9 +226,7 @@ public final class CustomTextView: NSView {
     }()
     
     // MARK: - Init
-    init(text: String, isEditable: Bool, font: NSFont?) {
-        self.font       = font
-        self.isEditable = isEditable
+    init(text: String) {
         self.text       = text
         self.attributedText = NSMutableAttributedString()
         
