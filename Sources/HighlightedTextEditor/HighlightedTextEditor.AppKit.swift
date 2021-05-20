@@ -20,7 +20,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         }
     }
     let highlightRules: [HighlightRule]
-    private let textView: CustomTextView
+    public let textView: CustomTextView
     
     private(set) var onEditingChanged: (() -> Void)?       = nil
     private(set) var onCommit        : (() -> Void)?       = nil
@@ -42,9 +42,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
     
     public func makeNSView(context: Context) -> CustomTextView {
-        let textView = CustomTextView(
-            text: text
-        )
+        let textView = self.textView
         textView.delegate = context.coordinator
         
         return textView
@@ -174,7 +172,7 @@ public final class CustomTextView: NSView {
         set { textView.insertionPointColor = newValue ?? textView.insertionPointColor }
     }
     
-    private lazy var scrollView: NSScrollView = {
+    public lazy var scrollView: NSScrollView = {
         let scrollView = NSScrollView()
         scrollView.drawsBackground = true
         scrollView.borderType = .noBorder
@@ -186,7 +184,7 @@ public final class CustomTextView: NSView {
         return scrollView
     }()
     
-    private lazy var textView: NSTextView = {
+    public lazy var textView: NSTextView = {
         let contentSize = scrollView.contentSize
         let textStorage = NSTextStorage()
         
