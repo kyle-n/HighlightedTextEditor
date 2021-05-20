@@ -92,12 +92,12 @@ extension HighlightingTextEditor {
         get { SystemColorAlias() }
     }
     
-    static func getHighlightedText(text: String, highlightRules: [HighlightRule], font: SystemFontAlias?, color: SystemColorAlias?) -> NSMutableAttributedString {
+    static func getHighlightedText(text: String, highlightRules: [HighlightRule]) -> NSMutableAttributedString {
         let highlightedString = NSMutableAttributedString(string: text)
         let all = NSRange(location: 0, length: text.count)
         
-        let editorFont = font ?? defaultEditorFont
-        let editorTextColor = color ?? defaultEditorTextColor
+        let editorFont = defaultEditorFont
+        let editorTextColor = defaultEditorTextColor
         
         highlightedString.addAttribute(.font, value: editorFont, range: all)
         highlightedString.addAttribute(.foregroundColor, value: editorTextColor, range: all)

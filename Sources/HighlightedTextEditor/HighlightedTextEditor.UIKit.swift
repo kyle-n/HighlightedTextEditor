@@ -15,17 +15,8 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     var onEditingChanged                   : () -> Void                   = {}
     var onCommit                           : () -> Void                   = {}
     var onTextChange                       : (String) -> Void             = { _ in }
-    
-    // autocapitalizationType, autocorrectionType and keyboardType will be private(set) in a future 2.0.0 breaking release
-                 var autocapitalizationType: UITextAutocapitalizationType = .sentences
-                 var autocorrectionType    : UITextAutocorrectionType     = .default
-    private(set) var backgroundColor       : UIColor?                     = nil
-    private(set) var color                 : UIColor?                     = nil
-    private(set) var font                  : UIFont?                      = nil
-    private(set) var insertionPointColor   : UIColor?                     = nil
-                 var keyboardType          : UIKeyboardType               = .default
+
     private(set) var onSelectionChange     : OnSelectionChangeCallback?   = nil
-    private(set) var textAlignment         : TextAlignment                = .leading
     
     public init(
         text: Binding<String>,
@@ -50,7 +41,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isScrollEnabled = true
-        textView.font = font
         updateTextViewModifiers(textView)
 
         return textView
@@ -62,9 +52,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
             text: text,
-            highlightRules: highlightRules,
-            font: font,
-            color: color
+            highlightRules: highlightRules
         )
 
         if let range = uiView.markedTextNSRange {
@@ -79,16 +67,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
     
     private func updateTextViewModifiers(_ textView: UITextView) {
-        // Keyboard properties are changed only if user closes the on-screen keyboard and reopens it (system behavior)
-        textView.keyboardType = keyboardType
-        textView.autocapitalizationType = autocapitalizationType
-        textView.autocorrectionType = autocorrectionType
-        
-        textView.backgroundColor = backgroundColor
-        let layoutDirection = UIView.userInterfaceLayoutDirection(for: textView.semanticContentAttribute)
-        textView.textAlignment = NSTextAlignment(textAlignment: textAlignment, userInterfaceLayoutDirection: layoutDirection)
-        textView.tintColor = insertionPointColor ?? textView.tintColor
-    
         // BUGFIX #19: https://stackoverflow.com/questions/60537039/change-prompt-color-for-uitextfield-on-mac-catalyst
         let textInputTraits = textView.value(forKey: "textInputTraits") as? NSObject
         textInputTraits?.setValue(textView.tintColor, forKey: "insertionPointColor")
