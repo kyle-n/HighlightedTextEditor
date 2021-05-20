@@ -30,12 +30,14 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public init(
         text: Binding<String>,
         highlightRules: [HighlightRule],
+        editMode: Bool,
         onEditingChanged: @escaping () -> Void = {},
         onCommit: @escaping () -> Void = {},
         onTextChange: @escaping (String) -> Void = { _ in }
     ) {
         _text = text
         self.highlightRules = highlightRules
+        self.editMode = editMode
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
         self.onTextChange = onTextChange
