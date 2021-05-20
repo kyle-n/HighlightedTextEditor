@@ -41,12 +41,6 @@ let lighterColor = UIColor.lightGray
 let textColor = UIColor.label
 #endif
 
-// HighlightedTextEditor.markdown will only be accessible via [HighlightRule].markdown in a future 2.0.0 breaking release
-// It does not really make any sense to have it here
-public extension HighlightedTextEditor {
-    static let markdown: [HighlightRule] = [HighlightRule].markdown
-}
-
 public extension Sequence where Iterator.Element == HighlightRule {
     static var markdown: [HighlightRule] {
         [
