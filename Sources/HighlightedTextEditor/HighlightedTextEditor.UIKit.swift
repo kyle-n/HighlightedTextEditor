@@ -110,8 +110,18 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
 extension HighlightedTextEditor {
     
-    public func introspect(callback: (UITextView) -> Void) {
+    public func introspect(callback: (UITextView) -> Void) -> Self {
         callback(self.textView)
+        return self
+    }
+    
+    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
+        var new = self
+        new.onSelectionChange = { ranges in
+            guard let range = ranges.first else { return }
+            callback(range)
+        }
+        return new
     }
 }
 #endif
