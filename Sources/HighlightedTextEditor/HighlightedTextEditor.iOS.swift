@@ -30,7 +30,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public init(
         text: Binding<String>,
         highlightRules: [HighlightRule],
-        editMode: Bool,
+        editMode: Bool = true,
         onEditingChanged: @escaping () -> Void = {},
         onCommit: @escaping () -> Void = {},
         onTextChange: @escaping (String) -> Void = { _ in }
