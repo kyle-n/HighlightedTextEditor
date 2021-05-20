@@ -20,8 +20,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         }
     }
     let highlightRules: [HighlightRule]
-    
-    var isEditable: Bool = true
+    let editMode: Bool
     
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
@@ -39,12 +38,14 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     public init(
         text: Binding<String>,
         highlightRules: [HighlightRule],
+        editMode: Bool,
         onEditingChanged: @escaping () -> Void = {},
         onCommit: @escaping () -> Void = {},
         onTextChange: @escaping (String) -> Void = { _ in }
     ) {
         _text = text
         self.highlightRules = highlightRules
+        self.editMode = editMode
         self.onEditingChanged = onEditingChanged
         self.onCommit = onCommit
         self.onTextChange = onTextChange
@@ -57,7 +58,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     public func makeNSView(context: Context) -> CustomTextView {
         let textView = CustomTextView(
             text: text,
-            isEditable: isEditable,
+            isEditable: editMode,
             font: font
         )
         textView.delegate = context.coordinator

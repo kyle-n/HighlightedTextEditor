@@ -10,6 +10,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         }
     }
     let highlightRules: [HighlightRule]
+    let editMode: Bool
     
     var onEditingChanged                   : () -> Void                   = {}
     var onCommit                           : () -> Void                   = {}
@@ -47,7 +48,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.delegate = context.coordinator
-        textView.isEditable = true
+        textView.isEditable =  editMode
         textView.isScrollEnabled = true
         textView.font = font
         updateTextViewModifiers(textView)

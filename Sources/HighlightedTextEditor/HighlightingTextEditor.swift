@@ -82,6 +82,7 @@ public struct HighlightRule {
 internal protocol HighlightingTextEditor {
     var text: String { get set }
     var highlightRules: [HighlightRule] { get }
+    var editMode: Bool { get }
 }
 
 public typealias OnSelectionChangeCallback = ([NSRange]) -> Void
