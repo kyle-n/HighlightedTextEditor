@@ -10,6 +10,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         }
     }
     let highlightRules: [HighlightRule]
+    let textView = UITextView()
     
     var onEditingChanged                   : () -> Void                   = {}
     var onCommit                           : () -> Void                   = {}
@@ -45,7 +46,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
     
     public func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
+        let textView = self.textView
         textView.delegate = context.coordinator
         textView.isEditable = true
         textView.isScrollEnabled = true
@@ -131,69 +132,8 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
 extension HighlightedTextEditor {
     
-    public func autocapitalizationType(_ type: UITextAutocapitalizationType) -> Self {
-        var new = self
-        new.autocapitalizationType = type
-        return new
-    }
-    
-    public func autocorrectionType(_ type: UITextAutocorrectionType) -> Self {
-        var new = self
-        new.autocorrectionType = type
-        return new
-    }
-    
-    public func backgroundColor(_ color: UIColor) -> Self {
-        var new = self
-        new.backgroundColor = color
-        return new
-    }
-    
-    // Overwritten by font attributes in your HighlightRules
-    public func defaultColor(_ color: UIColor) -> Self {
-        var new = self
-        new.color = color
-        return new
-    }
-    
-    // Overwritten by font attributes in your HighlightRules
-    public func defaultFont(_ font: UIFont) -> Self {
-        var new = self
-        new.font = font
-        return new
-    }
-    
-    public func keyboardType(_ type: UIKeyboardType) -> Self {
-        var new = self
-        new.keyboardType = type
-        return new
-    }
-    
-    public func insertionPointColor(_ color: UIColor) -> Self {
-        var new = self
-        new.insertionPointColor = color
-        return new
-    }
-    
-    public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
-        var new = self
-        new.textAlignment = alignment
-        return new
-    }
-    
-    public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
-        var new = self
-        new.onSelectionChange = callback
-        return new
-    }
-    
-    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
-        var new = self
-        new.onSelectionChange = { ranges in
-            guard let range = ranges.first else { return }
-            callback(range)
-        }
-        return new
+    public func introspect(callback: (UITextView) -> Void) {
+        callback(self.textView)
     }
 }
 #endif
