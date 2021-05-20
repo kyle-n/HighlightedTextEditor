@@ -21,20 +21,11 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
     let highlightRules: [HighlightRule]
     
-    var isEditable: Bool = true
-    
     var onEditingChanged: () -> Void       = {}
     var onCommit        : () -> Void       = {}
     var onTextChange    : (String) -> Void = { _ in }
     
-    private(set) var allowsDocumentBackgroundColorChange: Bool                       = true
-    private(set) var backgroundColor                    : NSColor                    = .textBackgroundColor
-    private(set) var color                              : NSColor?                   = nil
-    private(set) var drawsBackground                    : Bool                       = true
-    private(set) var font                               : NSFont?                    = .systemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    private(set) var insertionPointColor                : NSColor?                   = nil
-    private(set) var onSelectionChange                  : OnSelectionChangeCallback? = nil
-    private(set) var textAlignment                      : TextAlignment              = .leading
+    private(set) var onSelectionChange: (([NSRange]) -> Void)? = nil
     
     public init(
         text: Binding<String>,
@@ -56,12 +47,9 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     
     public func makeNSView(context: Context) -> CustomTextView {
         let textView = CustomTextView(
-            text: text,
-            isEditable: isEditable,
-            font: font
+            text: text
         )
         textView.delegate = context.coordinator
-        updateTextViewModifiers(textView, isFirstRender: true)
         
         return textView
     }
@@ -72,25 +60,12 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
             text: text,
-            highlightRules: highlightRules,
-            font: font,
-            color: color
+            highlightRules: highlightRules
         )
-        updateTextViewModifiers(view, isFirstRender: false)
         
         view.attributedText = highlightedText
         view.selectedRanges = context.coordinator.selectedRanges
         context.coordinator.updatingNSView = false
-    }
-    
-    private func updateTextViewModifiers(_ textView: CustomTextView, isFirstRender: Bool) {
-        textView.drawsBackground = drawsBackground
-        textView.allowsDocumentBackgroundColorChange = allowsDocumentBackgroundColorChange
-        if isFirstRender || allowsDocumentBackgroundColorChange {
-            textView.backgroundColor = backgroundColor
-        }
-        textView.alignment = NSTextAlignment(textAlignment: textAlignment, userInterfaceLayoutDirection: textView.userInterfaceLayoutDirection)
-        textView.insertionPointColor = insertionPointColor
     }
 }
 
@@ -295,50 +270,7 @@ public final class CustomTextView: NSView {
 }
 
 extension HighlightedTextEditor {
-    public func allowsDocumentBackgroundColorChange(_ allowsChange: Bool) -> Self {
-        var editor = self
-        editor.allowsDocumentBackgroundColorChange = allowsChange
-        return editor
-    }
-    
-    public func backgroundColor(_ color: NSColor) -> Self {
-        var editor = self
-        editor.backgroundColor = color
-        return editor
-    }
-    
-    // Overwritten by font attributes in your HighlightRules
-    public func defaultColor(_ color: NSColor) -> Self {
-        var editor = self
-        editor.color = color
-        return editor
-    }
-    
-    // Overwritten by font attributes in your HighlightRules
-    public func defaultFont(_ font: NSFont) -> Self {
-        var editor = self
-        editor.font = font
-        return editor
-    }
-    
-    public func drawsBackground(_ shouldDraw: Bool) -> Self {
-        var editor = self
-        editor.drawsBackground = shouldDraw
-        return editor
-    }
-    
-    public func insertionPointColor(_ color: NSColor) -> Self {
-        var editor = self
-        editor.insertionPointColor = color
-        return editor
-    }
-    
-    public func multilineTextAlignment(_ alignment: TextAlignment) -> Self {
-        var editor = self
-        editor.textAlignment = alignment
-        return editor
-    }
-    
+
     public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
         var editor = self
         editor.onSelectionChange = callback
