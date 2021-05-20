@@ -21,9 +21,9 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
     let highlightRules: [HighlightRule]
     
-    var onEditingChanged: (() -> Void)?       = nil
-    var onCommit        : (() -> Void)?       = nil
-    var onTextChange    : ((String) -> Void)? = nil
+    private(set) var onEditingChanged: (() -> Void)?       = nil
+    private(set) var onCommit        : (() -> Void)?       = nil
+    private(set) var onTextChange    : ((String) -> Void)? = nil
     
     private(set) var onSelectionChange: (([NSRange]) -> Void)? = nil
     
