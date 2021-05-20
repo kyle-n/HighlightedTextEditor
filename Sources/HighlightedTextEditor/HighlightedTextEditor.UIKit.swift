@@ -6,30 +6,24 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
     @Binding var text: String {
         didSet {
-            self.onTextChange(text)
+            self.onTextChange?(text)
         }
     }
     let highlightRules: [HighlightRule]
-    let textView = UITextView()
+    private let textView = UITextView()
     
-    var onEditingChanged                   : () -> Void                   = {}
-    var onCommit                           : () -> Void                   = {}
-    var onTextChange                       : (String) -> Void             = { _ in }
+    private(set) var onEditingChanged                   : (() -> Void)?                   = nil
+    private(set) var onCommit                           : (() -> Void)?                   = nil
+    private(set) var onTextChange                       : ((String) -> Void)?             = nil
 
     private(set) var onSelectionChange     : OnSelectionChangeCallback?   = nil
     
     public init(
         text: Binding<String>,
-        highlightRules: [HighlightRule],
-        onEditingChanged: @escaping () -> Void = {},
-        onCommit: @escaping () -> Void = {},
-        onTextChange: @escaping (String) -> Void = { _ in }
+        highlightRules: [HighlightRule]
     ) {
         _text = text
         self.highlightRules = highlightRules
-        self.onEditingChanged = onEditingChanged
-        self.onCommit = onCommit
-        self.onTextChange = onTextChange
     }
 
     public func makeCoordinator() -> Coordinator {
@@ -99,11 +93,11 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         }
         
         public func textViewDidBeginEditing(_ textView: UITextView) {
-            parent.onEditingChanged()
+            parent.onEditingChanged?()
         }
         
         public func textViewDidEndEditing(_ textView: UITextView) {
-            parent.onCommit()
+            parent.onCommit?()
         }
     }
 }
@@ -121,6 +115,24 @@ extension HighlightedTextEditor {
             guard let range = ranges.first else { return }
             callback(range)
         }
+        return new
+    }
+    
+    public func onCommit(_ callback: @escaping () -> Void = {}) -> Self {
+        var new = self
+        new.onCommit = callback
+        return new
+    }
+    
+    public func onEditingChanged(_ callback: @escaping () -> Void) -> Self {
+        var new = self
+        new.onEditingChanged = callback
+        return new
+    }
+    
+    public func onTextChange(_ callback: @escaping (String) -> Void) -> Self {
+        var new = self
+        new.onTextChange = callback
         return new
     }
 }
