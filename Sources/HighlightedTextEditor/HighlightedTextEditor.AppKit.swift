@@ -261,7 +261,7 @@ public final class CustomTextView: NSView {
 
 extension HighlightedTextEditor {
     
-    public func introspect(callback: (CustomTextView) -> Void) -> Self {
+    public func introspect(callback: (_ editor: CustomTextView) -> Void) -> Self {
         callback(self.textView)
         return self
     }

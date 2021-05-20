@@ -104,8 +104,12 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
 extension HighlightedTextEditor {
     
-    public func introspect(callback: (UITextView) -> Void) -> Self {
-        callback(self.textView)
+    public func introspect(callback: (_ editor: UITextView) -> Void) -> Self {
+        struct TemporaryContainer {
+            let textView: UITextView
+        }
+        let container = TemporaryContainer(textView: self.textView)
+        callback(container)
         return self
     }
     
