@@ -20,7 +20,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         }
     }
     let highlightRules: [HighlightRule]
-    public let customTextView: CustomTextView = CustomTextView(text: "")
+    public let customTextView: CustomTextView = CustomTextView()
     
     private(set) var onEditingChanged: (() -> Void)?       = nil
     private(set) var onCommit        : (() -> Void)?       = nil
@@ -49,7 +49,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     
     public func updateNSView(_ view: CustomTextView, context: Context) {
         context.coordinator.updatingNSView = true
-        view.text = text
         
         let highlightedText = HighlightedTextEditor.getHighlightedText(
             text: text,
@@ -130,12 +129,6 @@ public final class CustomTextView: NSView {
         }
     }
     
-    var text: String {
-        didSet {
-            textView.string = text
-        }
-    }
-    
     var selectedRanges: [NSValue] = [] {
         didSet {
             guard selectedRanges.count > 0 else {
@@ -192,8 +185,7 @@ public final class CustomTextView: NSView {
     }()
     
     // MARK: - Init
-    init(text: String) {
-        self.text       = text
+    init() {
         self.attributedText = NSMutableAttributedString()
         
         super.init(frame: .zero)
