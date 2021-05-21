@@ -1,0 +1,15 @@
+--swiftversion 5
+--binarygrouping none
+--commas inline
+--decimalgrouping none
+--hexgrouping none
+--ifdef no-indent
+--nospaceoperators ..<
+--octalgrouping none
+--self init-only
+--semicolons never
+--stripunusedargs closure-only
+--wraparguments before-first
+--wrapcollections before-first
+--wrapparameters before-first
+--maxwidth 120
