@@ -29,7 +29,8 @@ import HighlightedTextEditor
 let betweenUnderscores = try! NSRegularExpression(pattern: "_[^_]+_", options: [])
 
 struct ContentView: View {
-    @State private var text: String = "here is _bold, italicized, red text_"
+    
+    @State private var text: String = ""
     
     private let rules: [HighlightRule] = [
         HighlightRule(pattern: betweenUnderscores, formattingRules: [
@@ -46,9 +47,14 @@ struct ContentView: View {
         VStack {
             HighlightedTextEditor(text: $text, highlightRules: rules)
                 // optional modifiers
-                .autocapitalizationType(.words)
-                .keyboardType(.numberPad)
-                .autocorrectionType(.no)
+                .onCommit { print("commited") }
+                .onEditingChanged { print("editing changed") }
+                .onTextChange { print("latest text value", $0) }
+                .onSelectionChange { print("NSRange of current selection", $0)}
+                .introspect { editor in
+                    // access underlying UITextView or NSTextView
+                    editor.textView.backgroundColor = .green
+                }
         }
     }
 }
