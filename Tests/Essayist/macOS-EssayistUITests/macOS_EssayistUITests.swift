@@ -77,59 +77,12 @@ class macOS_EssayistUITests: XCTestCase {
         }
     }
 
-    func testCustomFontTraits() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.font)
-
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
     func testCustomNSAttributedStringKeyValues() {
         let app = XCUIApplication()
         app.activate()
 
         selectEditor(.key)
 
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
-    func testFontModifiers() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.fontModifiers)
-
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
-    func testDrawsBackgroundAndBackgroundColor() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.drawsBackground)
-        assertSnapshot(matching: screenshot, as: .image)
-
-        app.buttons["Toggle drawsBackground"].click()
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
-    func testBackgroundColorChanges() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.backgroundChanges)
-
-        let toggleBackgroundColorButton = app.buttons["Toggle backgroundColor"]
-        let toggleChangesButton = app.buttons["Toggle allowsDocumentBackgroundColorChange"]
-
-        toggleBackgroundColorButton.click()
-        assertSnapshot(matching: screenshot, as: .image)
-        toggleBackgroundColorButton.click()
-
-        toggleChangesButton.click()
-        toggleBackgroundColorButton.click()
         assertSnapshot(matching: screenshot, as: .image)
     }
 
