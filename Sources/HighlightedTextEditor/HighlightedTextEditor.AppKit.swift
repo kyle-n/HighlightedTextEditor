@@ -243,19 +243,19 @@ extension HighlightedTextEditor {
         return editor
     }
     
-    public func onTextChange(_ callback: @escaping (String) -> Void) -> Self {
+    public func onTextChange(_ callback: @escaping (_ editorContent: String) -> Void) -> Self {
         var editor = self
         editor.onTextChange = callback
         return editor
     }
 
-    public func onSelectionChange(_ callback: @escaping ([NSRange]) -> Void) -> Self {
+    public func onSelectionChange(_ callback: @escaping (_ selectedRanges: [NSRange]) -> Void) -> Self {
         var editor = self
         editor.onSelectionChange = callback
         return editor
     }
     
-    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
+    public func onSelectionChange(_ callback: @escaping (_ selectedRange: NSRange) -> Void) -> Self {
         var editor = self
         editor.onSelectionChange = { ranges in
             guard let range = ranges.first else { return }

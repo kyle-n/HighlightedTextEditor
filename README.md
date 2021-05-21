@@ -91,9 +91,9 @@ HighlightedTextEditor(text: $text, highlightRules: .markdown)
 - `.introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void)`: Allows you the developer to access the underlying UIKit or AppKit objects used by HighlightedTextEditor
 - `.onCommit(_ callback: @escaping () -> Void)`: Called when the user stops editing
 - `.onEditingChanged(_ callback: @escaping () -> Void)`: Called when the user begins editing
-- `.onTextChange(_ callback: @escaping (String) -> Void)`: Called whenever `text` changes
-- `.onSelectionChange(_ callback: @escaping (NSRange) -> Void)`
-- `.onSelectionChange(_ callback: @escaping ([NSRange]) -> Void)` (AppKit only)
+- `.onTextChange(_ callback: @escaping (_ editorContent: String) -> Void)`: Called whenever `text` changes
+- `.onSelectionChange(_ callback: @escaping (_ selectedRange: NSRange) -> Void)`
+- `.onSelectionChange(_ callback: @escaping (_ selectedRanges: [NSRange]) -> Void)` (AppKit only)
 
 ### HighlightedTextEditorInternals
 

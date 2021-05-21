@@ -110,7 +110,7 @@ extension HighlightedTextEditor {
         return self
     }
     
-    public func onSelectionChange(_ callback: @escaping (NSRange) -> Void) -> Self {
+    public func onSelectionChange(_ callback: @escaping (_ selectedRange: NSRange) -> Void) -> Self {
         var new = self
         new.onSelectionChange = { ranges in
             guard let range = ranges.first else { return }
@@ -119,7 +119,7 @@ extension HighlightedTextEditor {
         return new
     }
     
-    public func onCommit(_ callback: @escaping () -> Void = {}) -> Self {
+    public func onCommit(_ callback: @escaping () -> Void) -> Self {
         var new = self
         new.onCommit = callback
         return new
@@ -131,7 +131,7 @@ extension HighlightedTextEditor {
         return new
     }
     
-    public func onTextChange(_ callback: @escaping (String) -> Void) -> Self {
+    public func onTextChange(_ callback: @escaping (_ editorContent: String) -> Void) -> Self {
         var new = self
         new.onTextChange = callback
         return new
