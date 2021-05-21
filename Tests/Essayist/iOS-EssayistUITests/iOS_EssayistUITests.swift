@@ -215,4 +215,27 @@ class iOS_EssayistUITests: XCTestCase {
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
     }
+
+    func testModifiers() {
+        let app = XCUIApplication()
+        app.launch()
+
+        selectEditor(.modifiers)
+        let textView = app.textViews.firstMatch
+        _ = textView.waitForExistence(timeout: 2)
+
+        textView.tap()
+        app.keys["A"].tap()
+
+        app.textFields.firstMatch.tap()
+
+        let indicators = [
+            app.staticTexts["editorContent: A"],
+            app.staticTexts["startedEditing: true"],
+            app.staticTexts["endedEditing: true"]
+        ]
+        indicators.forEach { indicator in
+            XCTAssertTrue(indicator.exists)
+        }
+    }
 }

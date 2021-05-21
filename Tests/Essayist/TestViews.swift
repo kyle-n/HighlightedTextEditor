@@ -144,6 +144,8 @@ struct ModifiersEditor: View {
             Text("editorContent: \(editorContent)")
             Text("startedEditing: \(String(startedEditing))")
             Text("endedEditing: \(String(endedEditing))")
+            TextField("Other field", text: $text)
+                .accessibility(identifier: "secondInput")
         }
     }
 }
