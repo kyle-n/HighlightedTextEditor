@@ -13,14 +13,7 @@ enum EditorType: String, CaseIterable, Equatable {
     case markdownB
     case markdownC
     case url
-    case font
     case key
-    case fontModifiers
-    case drawsBackground
-    case backgroundChanges
-    case autocapitalizationType
-    case autocorrectionType
-    case keyboardType
     case onSelectionChange
 }
 

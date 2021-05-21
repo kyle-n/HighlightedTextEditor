@@ -62,29 +62,8 @@ struct ContentView: View {
         case .url:
             return URLEditor()
                 .eraseToAnyView()
-        case .font:
-            return FontTraitEditor()
-                .eraseToAnyView()
         case .key:
             return NSAttributedStringKeyEditor()
-                .eraseToAnyView()
-        case .fontModifiers:
-            return FontModifiersEditor()
-                .eraseToAnyView()
-        case .drawsBackground:
-            return DrawsBackgroundEditor()
-                .eraseToAnyView()
-        case .backgroundChanges:
-            return BackgroundChangesEditor()
-                .eraseToAnyView()
-        case .autocapitalizationType:
-            return AutocapitalizationTypeEditor()
-                .eraseToAnyView()
-        case .autocorrectionType:
-            return AutocorrectionTypeEditor()
-                .eraseToAnyView()
-        case .keyboardType:
-            return KeyboardTypeEditor()
                 .eraseToAnyView()
         case .onSelectionChange:
             return OnSelectionChangeEditor()
