@@ -81,34 +81,28 @@ HighlightedTextEditor(text: $text, highlightRules: .markdown)
 
 ### HighlightedTextEditor
 
-| Parameter | Type | Optional | Description |
-| --- | --- | --- | --- |
-| `text` | Binding&lt;String\> | No | Text content of the field |
-| `highlightRules` | [HighlightRule] | No | Patterns and formatting for those patterns |
-| `onEditingChanged` | () -> Void | Yes | Called when the user begins editing |
-| `onCommit` | () -> Void | Yes | Called when the user stops editing |
-| `onTextChange` | (String) -> Void | Yes | Called whenever `text` changes |
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `text` | Binding&lt;String\> | Text content of the field |
+| `highlightRules` | [HighlightRule] | Patterns and formatting for those patterns |
 
-#### Modifiers (UIKit)
+#### Modifiers
 
-- `.autocapitalizationType(_ type: UITextAutocapitalizationType)`
-- `.autocorrectionType(_ type: UITextAutocorrectionType)`
-- `.backgroundColor(_ color: UIColor)`
-- `.defaultColor(_ color: UIColor)`
-- `.defaultFont(_ font: UIFont)`
-- `.keyboardType(_ type: UIKeyboardType)`
-- `.insertionPointColor(_ color: UIColor)`
-- `.multilineTextAlignment(_ alignment: TextAlignment)`
+- `.introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void)`: Allows you the developer to access the underlying UIKit or AppKit objects used by HighlightedTextEditor
+- `.onCommit(_ callback: @escaping () -> Void)`: Called when the user stops editing
+- `.onEditingChanged(_ callback: @escaping () -> Void)`: Called when the user begins editing
+- `.onTextChange(_ callback: @escaping (String) -> Void)`: Called whenever `text` changes
+- `.onSelectionChange(_ callback: @escaping (NSRange) -> Void)`
+- `.onSelectionChange(_ callback: @escaping ([NSRange]) -> Void)` (AppKit only)
 
-#### Modifiers (AppKit)
+### HighlightedTextEditorInternals
 
-- `.allowsDocumentBackgroundColorChange(_ allowsChange: Bool)`
-- `.backgroundColor(_ color: NSColor)`
-- `.defaultColor(_ color: NSColor)`
-- `.defaultFont(_ font: NSFont)`
-- `.drawsBackground(_ shouldDraw: Bool)`
-- `.insertionPointColor(_ color: NSColor)`
-- `.multilineTextAlignment(_ alignment: TextAlignment)`
+Passed as a parameter to `.introspect()` callbacks. Useful for customizing editor behavior in some way not supported by the HLTE API.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `textView` | UITextView or NSTextView | For customizing the UIKit/AppKit text editor |
+| `scrollView` | NSScrollView? | For customizing the NSScrollView wrapper. Returns `nil` in UIKit |
 
 ### HighlightRule
 
