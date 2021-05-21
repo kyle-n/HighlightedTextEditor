@@ -225,10 +225,9 @@ public final class CustomTextView: NSView {
 
 extension HighlightedTextEditor {
     
-    public func introspect(callback: (_ editor: CustomTextView) -> Void) -> Self {
-        // Workaround for handling lazy-loaded vars
-        customTextView.textView.accessibilityRole()
-        callback(self.customTextView)
+    public func introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void) -> Self {
+        let internals = HighlightedTextEditorInternals(textView: customTextView.textView, scrollView: customTextView.scrollView)
+        callback(internals)
         return self
     }
     

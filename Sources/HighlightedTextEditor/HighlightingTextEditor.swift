@@ -13,6 +13,8 @@ import AppKit
 public typealias SystemFontAlias = NSFont
 public typealias SystemColorAlias = NSColor
 public typealias SymbolicTraits = NSFontDescriptor.SymbolicTraits
+public typealias SystemTextView = NSTextView
+public typealias SystemScrollView = NSScrollView
 
 let defaultEditorFont = NSFont.systemFont(ofSize: NSFont.systemFontSize)
 let defaultEditorTextColor = NSColor.labelColor
@@ -23,6 +25,8 @@ import UIKit
 public typealias SystemFontAlias = UIFont
 public typealias SystemColorAlias = UIColor
 public typealias SymbolicTraits = UIFontDescriptor.SymbolicTraits
+public typealias SystemTextView = UITextView
+public typealias SystemScrollView = UIScrollView
 
 let defaultEditorFont = UIFont.preferredFont(forTextStyle: .body)
 let defaultEditorTextColor = UIColor.label
@@ -85,6 +89,11 @@ internal protocol HighlightingTextEditor {
 }
 
 public typealias OnSelectionChangeCallback = ([NSRange]) -> Void
+
+public struct HighlightedTextEditorInternals {
+    public let textView: SystemTextView
+    public let scrollView: SystemScrollView?
+}
 
 extension HighlightingTextEditor {
     
