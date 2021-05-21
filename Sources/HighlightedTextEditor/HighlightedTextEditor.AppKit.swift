@@ -20,7 +20,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         }
     }
     let highlightRules: [HighlightRule]
-    public let customTextView: CustomTextView
+    public let customTextView: CustomTextView = CustomTextView(text: "")
     
     private(set) var onEditingChanged: (() -> Void)?       = nil
     private(set) var onCommit        : (() -> Void)?       = nil
@@ -34,7 +34,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     ) {
         _text = text
         self.highlightRules = highlightRules
-        self.customTextView = CustomTextView(text: text.wrappedValue)
     }
     
     public func makeCoordinator() -> Coordinator {
@@ -262,7 +261,7 @@ public final class CustomTextView: NSView {
 extension HighlightedTextEditor {
     
     public func introspect(callback: (_ editor: CustomTextView) -> Void) -> Self {
-        callback(self.textView)
+        callback(self.customTextView)
         return self
     }
     
