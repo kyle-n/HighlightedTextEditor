@@ -5,21 +5,24 @@
 //  Created by Kyle Nazario on 11/25/20.
 //
 
-import SwiftUI
 import HighlightedTextEditor
+import SwiftUI
 
-let markdownFileURL = URL(string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
+let markdownFileURL =
+    URL(
+        string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md"
+    )!
 let markdown = try! String(contentsOf: markdownFileURL, encoding: .utf8)
 
 struct MarkdownEditorA: View {
     @State var text: String
-    
+
     init() {
         let end = markdown.index(of: "## Blockquotes")!
         let firstPart = String(markdown.prefix(upTo: end))
         _text = State<String>(initialValue: firstPart)
     }
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
@@ -27,14 +30,14 @@ struct MarkdownEditorA: View {
 
 struct MarkdownEditorB: View {
     @State var text: String
-    
+
     init() {
         let endOfFirstPart = markdown.index(of: "## Blockquotes")!
         let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
         let secondPart = String(markdown[endOfFirstPart..<endOfSecondPart])
         _text = State<String>(initialValue: secondPart)
     }
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
@@ -42,13 +45,13 @@ struct MarkdownEditorB: View {
 
 struct MarkdownEditorC: View {
     @State var text: String
-    
+
     init() {
         let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
         let thirdPart = String(markdown[endOfSecondPart..<markdown.endIndex])
         _text = State<String>(initialValue: thirdPart)
     }
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
@@ -56,7 +59,7 @@ struct MarkdownEditorC: View {
 
 struct URLEditor: View {
     @State var text: String = "No formatting\n\nhttps://www.google.com/"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .url)
     }
@@ -75,7 +78,7 @@ typealias NSUIFont = UIFont
 
 struct FontTraitEditor: View {
     @State private var text: String = "The text is _formatted_"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [
             HighlightRule(pattern: betweenUnderscores, formattingRules: [
@@ -87,7 +90,7 @@ struct FontTraitEditor: View {
 
 struct NSAttributedStringKeyEditor: View {
     @State private var text: String = "The text is _formatted_"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [
             HighlightRule(pattern: betweenUnderscores, formattingRules: [
@@ -103,7 +106,7 @@ struct NSAttributedStringKeyEditor: View {
 
 struct FontModifiersEditor: View {
     @State private var text: String = "The text is _formatted_"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [])
             .defaultColor(.red)
@@ -117,7 +120,7 @@ struct FontModifiersEditor: View {
 struct DrawsBackgroundEditor: View {
     @State private var text: String = "The text is _formatted_"
     @State private var drawsBackground: Bool = false
-    
+
     var body: some View {
         HStack {
             HighlightedTextEditor(text: $text, highlightRules: [])
@@ -138,7 +141,7 @@ struct DrawsBackgroundEditor: View {
 struct BackgroundChangesEditor: View {
     @State private var text: String = "The text is _formatted_"
     @State private var allowsDocumentBackgroundColorChange: Bool = false
-    
+
     #if os(macOS)
     @State var backgroundColor: NSColor = .red
     private var editor: some View {
@@ -153,7 +156,7 @@ struct BackgroundChangesEditor: View {
             .backgroundColor(backgroundColor)
     }
     #endif
-    
+
     var body: some View {
         HStack {
             editor
@@ -176,7 +179,7 @@ struct AutocapitalizationTypeEditor: View {
     @State private var text2: String = ""
     @State private var text3: String = ""
     @State private var text4: String = ""
-    
+
     var body: some View {
         #if os(macOS)
         return EmptyView()
@@ -185,7 +188,7 @@ struct AutocapitalizationTypeEditor: View {
         return ForEach(0..<autocapitalizationTypes.count, id: \.self) { i -> AnyView in
             let type = autocapitalizationTypes[i]
             let binding = bindings[i]
-            
+
             return HighlightedTextEditor(text: binding, highlightRules: [])
                 .autocapitalizationType(type)
                 .border(Color.black)
@@ -198,7 +201,7 @@ struct AutocapitalizationTypeEditor: View {
 struct AutocorrectionTypeEditor: View {
     @State private var text: String = ""
     @State private var autocorrect: Bool = true
-    
+
     var body: some View {
         #if os(macOS)
         return EmptyView()
@@ -219,7 +222,7 @@ struct AutocorrectionTypeEditor: View {
 
 struct KeyboardTypeEditor: View {
     @State private var text: String = ""
-    
+
     var body: some View {
         #if os(macOS)
         return EmptyView()
@@ -234,7 +237,7 @@ struct OnSelectionChangeEditor: View {
     @State private var text: String = ""
     @State private var selectionChanges: Int = 0
     @State private var selectedRange: NSRange? = nil
-    
+
     var body: some View {
         VStack {
             HighlightedTextEditor(text: $text, highlightRules: [])
@@ -248,7 +251,7 @@ struct OnSelectionChangeEditor: View {
             }
         }
     }
-    
+
     private var selectedRangeString: String {
         guard let selectedRange = selectedRange else { return "" }
         return "\(selectedRange.location) \(selectedRange.length)"

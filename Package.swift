@@ -12,11 +12,13 @@ public let package = Package(
     products: [
         .library(
             name: "HighlightedTextEditor",
-            targets: ["HighlightedTextEditor"]),
+            targets: ["HighlightedTextEditor"]
+        )
     ],
     targets: [
         .target(
             name: "HighlightedTextEditor",
-            dependencies: [])
+            dependencies: []
+        )
     ]
 )

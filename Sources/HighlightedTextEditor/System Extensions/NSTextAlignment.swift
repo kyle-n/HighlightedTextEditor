@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Kyle Nazario on 11/1/20.
 //
@@ -16,7 +16,7 @@ typealias LayoutDirection = UIUserInterfaceLayoutDirection
 #endif
 
 extension NSTextAlignment {
-    internal init(textAlignment: TextAlignment, userInterfaceLayoutDirection direction: LayoutDirection) {
+    init(textAlignment: TextAlignment, userInterfaceLayoutDirection direction: LayoutDirection) {
         switch textAlignment {
         case .center:
             self.init(rawValue: NSTextAlignment.center.rawValue)!

@@ -3,21 +3,21 @@ import SwiftUI
 import UIKit
 
 public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
-
     @Binding var text: String {
         didSet {
-            self.onTextChange?(text)
+            onTextChange?(text)
         }
     }
+
     let highlightRules: [HighlightRule]
     private let textView = UITextView()
-    
-    private(set) var onEditingChanged                   : (() -> Void)?                   = nil
-    private(set) var onCommit                           : (() -> Void)?                   = nil
-    private(set) var onTextChange                       : ((String) -> Void)?             = nil
 
-    private(set) var onSelectionChange     : OnSelectionChangeCallback?   = nil
-    
+    private(set) var onEditingChanged: (() -> Void)?
+    private(set) var onCommit: (() -> Void)?
+    private(set) var onTextChange: ((String) -> Void)?
+
+    private(set) var onSelectionChange: OnSelectionChangeCallback?
+
     public init(
         text: Binding<String>,
         highlightRules: [HighlightRule]
@@ -29,7 +29,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
+
     public func makeUIView(context: Context) -> UITextView {
         let textView = self.textView
         textView.delegate = context.coordinator
@@ -43,7 +43,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.isScrollEnabled = false
         context.coordinator.updatingUIView = true
-        
+
         let highlightedText = HighlightedTextEditor.getHighlightedText(
             text: text,
             highlightRules: highlightRules
@@ -59,7 +59,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         uiView.selectedTextRange = context.coordinator.selectedTextRange
         context.coordinator.updatingUIView = false
     }
-    
+
     private func updateTextViewModifiers(_ textView: UITextView) {
         // BUGFIX #19: https://stackoverflow.com/questions/60537039/change-prompt-color-for-uitextfield-on-mac-catalyst
         let textInputTraits = textView.value(forKey: "textInputTraits") as? NSObject
@@ -68,22 +68,21 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
     public class Coordinator: NSObject, UITextViewDelegate {
         var parent: HighlightedTextEditor
-        var selectedTextRange: UITextRange? = nil
+        var selectedTextRange: UITextRange?
         var updatingUIView = false
 
         init(_ markdownEditorView: HighlightedTextEditor) {
             self.parent = markdownEditorView
         }
-        
-        public func textViewDidChange(_ textView: UITextView) {
 
+        public func textViewDidChange(_ textView: UITextView) {
             // For Multistage Text Input
             guard textView.markedTextRange == nil else { return }
-            
-            self.parent.text = textView.text
+
+            parent.text = textView.text
             selectedTextRange = textView.selectedTextRange
         }
-        
+
         public func textViewDidChangeSelection(_ textView: UITextView) {
             guard let onSelectionChange = parent.onSelectionChange,
                   !updatingUIView
@@ -91,26 +90,25 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             selectedTextRange = textView.selectedTextRange
             onSelectionChange([textView.selectedRange])
         }
-        
+
         public func textViewDidBeginEditing(_ textView: UITextView) {
             parent.onEditingChanged?()
         }
-        
+
         public func textViewDidEndEditing(_ textView: UITextView) {
             parent.onCommit?()
         }
     }
 }
 
-extension HighlightedTextEditor {
-    
-    public func introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void) -> Self {
+public extension HighlightedTextEditor {
+    func introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void) -> Self {
         let internals = HighlightedTextEditorInternals(textView: textView, scrollView: nil)
         callback(internals)
         return self
     }
-    
-    public func onSelectionChange(_ callback: @escaping (_ selectedRange: NSRange) -> Void) -> Self {
+
+    func onSelectionChange(_ callback: @escaping (_ selectedRange: NSRange) -> Void) -> Self {
         var new = self
         new.onSelectionChange = { ranges in
             guard let range = ranges.first else { return }
@@ -118,20 +116,20 @@ extension HighlightedTextEditor {
         }
         return new
     }
-    
-    public func onCommit(_ callback: @escaping () -> Void) -> Self {
+
+    func onCommit(_ callback: @escaping () -> Void) -> Self {
         var new = self
         new.onCommit = callback
         return new
     }
-    
-    public func onEditingChanged(_ callback: @escaping () -> Void) -> Self {
+
+    func onEditingChanged(_ callback: @escaping () -> Void) -> Self {
         var new = self
         new.onEditingChanged = callback
         return new
     }
-    
-    public func onTextChange(_ callback: @escaping (_ editorContent: String) -> Void) -> Self {
+
+    func onTextChange(_ callback: @escaping (_ editorContent: String) -> Void) -> Self {
         var new = self
         new.onTextChange = callback
         return new

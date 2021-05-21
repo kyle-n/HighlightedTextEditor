@@ -8,8 +8,9 @@
 import Foundation
 import SwiftUI
 
-fileprivate let urlRegexPattern = "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
-fileprivate let _urlRegex = try! NSRegularExpression(pattern: urlRegexPattern, options: [])
+private let urlRegexPattern =
+    "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
+private let _urlRegex = try! NSRegularExpression(pattern: urlRegexPattern, options: [])
 
 public extension Sequence where Iterator.Element == HighlightRule {
     static var url: [HighlightRule] {

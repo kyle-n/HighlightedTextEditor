@@ -5,23 +5,23 @@
 //  Created by Kyle Nazario on 11/25/20.
 //
 
-import XCTest
 import SnapshotTesting
 import SwiftUI
+import XCTest
 
 class iOS_EssayistUITests: XCTestCase {
-    
-    private let device = Snapshotting<AnyView, UIImage>.image(layout: .device(config: .iPadPro12_9), traits: .init(userInterfaceStyle: .dark))
-    
+    private let device = Snapshotting<AnyView, UIImage>
+        .image(layout: .device(config: .iPadPro12_9), traits: .init(userInterfaceStyle: .dark))
+
     private var screenshot: UIImage {
         XCUIApplication().screenshot().image
     }
-    
+
     override class func setUp() {
         // enable Chinese-language keyboard
         let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
         settings.launch()
-        
+
         settings.tables.firstMatch.staticTexts["General"].tap()
         settings.tables.firstMatch.staticTexts["Keyboard"].tap()
         settings.tables.firstMatch.staticTexts["Keyboards"].tap()
@@ -29,14 +29,14 @@ class iOS_EssayistUITests: XCTestCase {
         settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
         settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
         settings.buttons["Done"].tap()
-        
+
         XCUIDevice.shared.press(.home)
     }
 
     override func setUpWithError() throws {
         continueAfterFailure = true
     }
-    
+
     func tryLaunch(_ counter: Int = 10) {
         sleep(3)
         XCUIApplication().terminate()
@@ -45,15 +45,15 @@ class iOS_EssayistUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         sleep(3)
-        if !app.exists && counter > 0 {
+        if !app.exists, counter > 0 {
             tryLaunch(counter - 1)
         }
     }
-    
+
     func selectEditor(_ editorType: EditorType) {
         let app = XCUIApplication()
         let selectEditorMenu = app.buttons["Select Editor"]
-        let _ = selectEditorMenu.waitForExistence(timeout: 5)
+        _ = selectEditorMenu.waitForExistence(timeout: 5)
         selectEditorMenu.tap()
         app.buttons[editorType.rawValue.uppercaseFirst()].tap()
     }
@@ -70,7 +70,7 @@ class iOS_EssayistUITests: XCTestCase {
         if !nextKeyboardButton.exists {
             app.textViews.firstMatch.tap()
         }
-        nextKeyboardButton.press(forDuration: 0.9);
+        nextKeyboardButton.press(forDuration: 0.9)
         app.tables["InputSwitcherTable"].staticTexts[keyboardType.rawValue].tap()
     }
 
@@ -195,7 +195,7 @@ class iOS_EssayistUITests: XCTestCase {
         let space = app.keys["space"]
         let delete = app.keys["delete"]
 
-        let _ = IKey.waitForExistence(timeout: 2)
+        _ = IKey.waitForExistence(timeout: 2)
         IKey.tap()
         mKey.tap()
         space.tap()
@@ -214,7 +214,7 @@ class iOS_EssayistUITests: XCTestCase {
         // -------------------------------------------- //
 
         textView.tap()
-        let _ = IKey.waitForExistence(timeout: 2)
+        _ = IKey.waitForExistence(timeout: 2)
         IKey.tap()
         mKey.tap()
         space.tap()
@@ -231,7 +231,7 @@ class iOS_EssayistUITests: XCTestCase {
 
         app.textViews.firstMatch.tap()
         sleep(1)
-        (0...9).forEach { num in
+        (0 ... 9).forEach { num in
             XCTAssertTrue(app.keys[String(num)].exists)
         }
     }
@@ -300,26 +300,26 @@ class iOS_EssayistUITests: XCTestCase {
 
         XCTAssertTrue(safariLaunched)
     }
-    
+
     func testOnSelectionChange() {
         let app = XCUIApplication()
         tryLaunch()
-        
+
         selectEditor(.onSelectionChange)
         let textView = app.textViews.firstMatch
-        let _ = textView.waitForExistence(timeout: 2)
-        
+        _ = textView.waitForExistence(timeout: 2)
+
         textView.tap()
         app.keys["C"].tap()
         app.keys["a"].tap()
         app.keys["t"].tap()
         textView.doubleTap()
-        
+
         let selectedRangeDisplay = app.staticTexts["5"]
         let selectionChangesDisplay = app.staticTexts["0 3"]
         let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
         let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
-        
+
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
     }

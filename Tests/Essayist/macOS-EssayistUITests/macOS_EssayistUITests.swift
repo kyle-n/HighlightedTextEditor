@@ -5,42 +5,41 @@
 //  Created by Kyle Nazario on 11/27/20.
 //
 
-import XCTest
 import SnapshotTesting
 import SwiftUI
+import XCTest
 
 class macOS_EssayistUITests: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = true
-        
+
         let app = XCUIApplication()
         app.launch()
         let fullScreenButton = app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow]
-        let _ = fullScreenButton.waitForExistence(timeout: 1)
+        _ = fullScreenButton.waitForExistence(timeout: 1)
         if fullScreenButton.exists {
             fullScreenButton.click()
         }
     }
-    
+
     private func selectEditor(_ editorType: EditorType) {
         let window = XCUIApplication().windows.firstMatch
         window.popUpButtons["Select Editor"].click()
         window.menuItems[editorType.rawValue.uppercaseFirst()].click()
-        
-        if (editorType == .blank) {
+
+        if editorType == .blank {
             let textView = window.textViews.firstMatch
-            let _ = textView.waitForExistence(timeout: 3)
+            _ = textView.waitForExistence(timeout: 3)
             textView.click()
             textView.typeKey("a", modifierFlags: .command)
             textView.typeKey(.delete, modifierFlags: [])
         }
     }
-    
+
     private var screenshot: NSImage {
         XCUIApplication().windows.firstMatch.screenshot().image
     }
-    
+
     func testTypingInMiddle() {
         let app = XCUIApplication()
         app.activate()
@@ -148,27 +147,26 @@ class macOS_EssayistUITests: XCTestCase {
 
         XCTAssertTrue(safariLaunched)
     }
-    
+
     func testOnSelectionChange() {
         let app = XCUIApplication()
         app.activate()
-        
+
         selectEditor(.onSelectionChange)
-        
+
         let window = app.windows.firstMatch
         let textView = window.textViews.firstMatch
-        
+
         textView.click()
         textView.typeText("Cat")
         textView.doubleClick()
-        
+
         let selectedRangeDisplay = app.staticTexts["6"]
         let selectionChangesDisplay = app.staticTexts["0 3"]
         let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
         let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
-        
+
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
     }
-    
 }
