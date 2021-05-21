@@ -119,6 +119,7 @@ extension HighlightingTextEditor {
                     var font = SystemFontAlias()
                     highlightedString.enumerateAttributes(in: match.range, options: []) { attributes, _, _ in
                         let fontAttribute = attributes.first { $0.key == .font }!
+                        // swiftlint:disable:next force_cast
                         let previousFont = fontAttribute.value as! SystemFontAlias
                         font = previousFont.with(formattingRule.fontTraits)
                     }
