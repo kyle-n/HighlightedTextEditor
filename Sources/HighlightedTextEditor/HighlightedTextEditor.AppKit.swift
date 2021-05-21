@@ -146,31 +146,6 @@ public final class CustomTextView: NSView {
         }
     }
     
-    var alignment: NSTextAlignment {
-        get { textView.alignment }
-        set { textView.alignment = newValue }
-    }
-    
-    var allowsDocumentBackgroundColorChange: Bool {
-        get { textView.allowsDocumentBackgroundColorChange }
-        set { textView.allowsDocumentBackgroundColorChange = newValue }
-    }
-    
-    var backgroundColor: NSColor {
-        get { textView.backgroundColor }
-        set { textView.backgroundColor = newValue }
-    }
-    
-    var drawsBackground: Bool {
-        get { textView.drawsBackground }
-        set { textView.drawsBackground = newValue }
-    }
-    
-    var insertionPointColor: NSColor? {
-        get { textView.insertionPointColor }
-        set { textView.insertionPointColor = newValue ?? textView.insertionPointColor }
-    }
-    
     public lazy var scrollView: NSScrollView = {
         let scrollView = NSScrollView()
         scrollView.drawsBackground = true
@@ -207,8 +182,6 @@ public final class CustomTextView: NSView {
         textView.backgroundColor         = NSColor.textBackgroundColor
         textView.delegate                = self.delegate
         textView.drawsBackground         = true
-//        textView.font                    = self.font
-//        textView.isEditable              = self.isEditable
         textView.isHorizontallyResizable = false
         textView.isVerticallyResizable   = true
         textView.maxSize                 = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
