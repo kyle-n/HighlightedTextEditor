@@ -68,6 +68,9 @@ struct ContentView: View {
         case .onSelectionChange:
             return OnSelectionChangeEditor()
                 .eraseToAnyView()
+        case .modifiers:
+            return ModifiersEditor()
+                .eraseToAnyView()
         }
     }
 }

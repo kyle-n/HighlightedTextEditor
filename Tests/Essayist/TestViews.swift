@@ -128,3 +128,22 @@ struct OnSelectionChangeEditor: View {
         return "\(selectedRange.location) \(selectedRange.length)"
     }
 }
+
+struct ModifiersEditor: View {
+    @State private var text: String = ""
+    @State private var editorContent: String = ""
+    @State private var startedEditing: Bool = false
+    @State private var endedEditing: Bool = false
+
+    var body: some View {
+        VStack {
+            HighlightedTextEditor(text: $text, highlightRules: [])
+                .onEditingChanged { startedEditing = true }
+                .onCommit { endedEditing = true }
+                .onTextChange { editorContent = $0 }
+            Text("editorContent: \(editorContent)")
+            Text("startedEditing: \(String(startedEditing))")
+            Text("endedEditing: \(String(endedEditing))")
+        }
+    }
+}
