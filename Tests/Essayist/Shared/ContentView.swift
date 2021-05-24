@@ -71,6 +71,9 @@ struct ContentView: View {
         case .modifiers:
             return ModifiersEditor()
                 .eraseToAnyView()
+        case .introspect:
+            return IntrospectEditor()
+                .eraseToAnyView()
         }
     }
 }

@@ -149,3 +149,20 @@ struct ModifiersEditor: View {
         }
     }
 }
+
+struct IntrospectEditor: View {
+    @State private var text: String = ""
+    @State private var enabled: Bool = false
+
+    var body: some View {
+        VStack {
+            HighlightedTextEditor(text: $text, highlightRules: [])
+                .introspect { internals in
+                    internals.textView.isEditable = enabled
+                }
+            Button("Toggle Enabled") {
+                enabled.toggle()
+            }
+        }
+    }
+}
