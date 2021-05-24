@@ -33,8 +33,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     public func makeUIView(context: Context) -> UITextView {
         let textView = self.textView
         textView.delegate = context.coordinator
-        textView.isEditable = true
-        textView.isScrollEnabled = true
         updateTextViewModifiers(textView)
 
         return textView
