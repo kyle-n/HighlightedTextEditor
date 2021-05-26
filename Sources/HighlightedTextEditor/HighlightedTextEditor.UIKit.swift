@@ -1,4 +1,11 @@
 #if os(iOS)
+//
+//  HighlightedTextEditor.UIKit.swift
+//
+//
+//  Created by Kyle Nazario on 5/26/21.
+//
+
 import SwiftUI
 import UIKit
 

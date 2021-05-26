@@ -1,4 +1,10 @@
-import Foundation
+//
+//  Markdown.swift
+//
+//
+//  Created by Kyle Nazario on 5/26/21.
+//
+
 import SwiftUI
 
 private let inlineCodeRegex = try! NSRegularExpression(pattern: "`[^`]*`", options: [])

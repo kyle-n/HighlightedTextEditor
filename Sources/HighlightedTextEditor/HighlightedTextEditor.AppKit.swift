@@ -1,3 +1,4 @@
+#if os(macOS)
 /**
  *  MacEditorTextView
  *  Copyright (c) Thiago Holanda 2020
@@ -7,7 +8,7 @@
  *
  *  MIT license
  */
-#if os(macOS)
+
 import AppKit
 import Combine
 import SwiftUI

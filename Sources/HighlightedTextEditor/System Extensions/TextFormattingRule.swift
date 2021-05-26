@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  TextFormattingRule.swift
 //
 //
 //  Created by Kyle Nazario on 9/8/20.

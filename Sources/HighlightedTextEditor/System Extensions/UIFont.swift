@@ -1,5 +1,10 @@
-// Maksymilian Wojakowski
-// https://stackoverflow.com/questions/4713236/how-do-i-set-bold-and-italic-on-uilabel-of-iphone-ipad
+//
+//  UIFont.swift
+//
+//
+//  Created by Kyle Nazario on 9/8/20.
+//  Based on NSFont extension by Maksymilian Wojakowski
+//
 
 #if os(iOS)
 import Foundation
