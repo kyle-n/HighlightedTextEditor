@@ -15,7 +15,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
 
     let highlightRules: [HighlightRule]
-    private let textView = UITextView()
 
     private(set) var onEditingChanged: OnEditingChangedCallback?
     private(set) var onCommit: OnCommitCallback?
@@ -36,7 +35,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     }
 
     public func makeUIView(context: Context) -> UITextView {
-        let textView = self.textView
+        let textView = UITextView()
         textView.delegate = context.coordinator
         updateTextViewModifiers(textView)
 

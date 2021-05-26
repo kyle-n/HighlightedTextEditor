@@ -25,7 +25,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
 
     let highlightRules: [HighlightRule]
-    public let customTextView = ScrollableTextView()
 
     private(set) var onEditingChanged: OnEditingChangedCallback?
     private(set) var onCommit: OnCommitCallback?
@@ -46,7 +45,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
 
     public func makeNSView(context: Context) -> ScrollableTextView {
-        let textView = customTextView
+        let textView = ScrollableTextView()
         textView.delegate = context.coordinator
 
         return textView
