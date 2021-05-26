@@ -15,7 +15,6 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var onEditingChanged: (() -> Void)?
     private(set) var onCommit: (() -> Void)?
     private(set) var onTextChange: ((String) -> Void)?
-
     private(set) var onSelectionChange: OnSelectionChangeCallback?
     private(set) var introspect: IntrospectCallback?
 
