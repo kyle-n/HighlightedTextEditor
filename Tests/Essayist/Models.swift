@@ -17,7 +17,7 @@ enum EditorType: String, CaseIterable, Equatable {
     case onSelectionChange
     case modifiers
     case introspect
-    case fontTrait
+    case font
 }
 
 #if !os(macOS)

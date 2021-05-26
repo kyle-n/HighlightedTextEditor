@@ -81,7 +81,7 @@ class macOS_EssayistUITests: XCTestCase {
         let app = XCUIApplication()
         app.activate()
 
-        selectEditor(.fontTrait)
+        selectEditor(.font)
 
         assertSnapshot(matching: screenshot, as: .image)
     }
