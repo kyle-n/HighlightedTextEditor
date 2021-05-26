@@ -25,7 +25,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
 
     let highlightRules: [HighlightRule]
-    public let customTextView = CustomTextView()
+    public let customTextView = ScrollableTextView()
 
     private(set) var onEditingChanged: OnEditingChangedCallback?
     private(set) var onCommit: OnCommitCallback?
@@ -45,14 +45,14 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         Coordinator(self)
     }
 
-    public func makeNSView(context: Context) -> CustomTextView {
+    public func makeNSView(context: Context) -> ScrollableTextView {
         let textView = customTextView
         textView.delegate = context.coordinator
 
         return textView
     }
 
-    public func updateNSView(_ view: CustomTextView, context: Context) {
+    public func updateNSView(_ view: ScrollableTextView, context: Context) {
         context.coordinator.updatingNSView = true
 
         let highlightedText = HighlightedTextEditor.getHighlightedText(
@@ -66,7 +66,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         context.coordinator.updatingNSView = false
     }
 
-    private func runIntrospect(_ view: CustomTextView) {
+    private func runIntrospect(_ view: ScrollableTextView) {
         guard let introspect = introspect else { return }
         let internals = Internals(textView: view.textView, scrollView: view.scrollView)
         introspect(internals)
@@ -133,9 +133,7 @@ public extension HighlightedTextEditor {
     }
 }
 
-// MARK: - CustomTextView
-
-public final class CustomTextView: NSView {
+public final class ScrollableTextView: NSView {
     weak var delegate: NSTextViewDelegate?
 
     var attributedText: NSAttributedString {
