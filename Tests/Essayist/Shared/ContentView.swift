@@ -74,6 +74,9 @@ struct ContentView: View {
         case .introspect:
             return IntrospectEditor()
                 .eraseToAnyView()
+        case .fontTrait:
+            return FontTraitEditor()
+                .eraseToAnyView()
         }
     }
 }

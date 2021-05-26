@@ -77,6 +77,15 @@ class macOS_EssayistUITests: XCTestCase {
         }
     }
 
+    func testCustomFontTraits() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.fontTrait)
+
+        assertSnapshot(matching: screenshot, as: .image)
+    }
+
     func testCustomNSAttributedStringKeyValues() {
         let app = XCUIApplication()
         app.activate()
