@@ -73,8 +73,6 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     }
 }
 
-// MARK: - Coordinator
-
 public extension HighlightedTextEditor {
     class Coordinator: NSObject, NSTextViewDelegate {
         var parent: HighlightedTextEditor
@@ -133,104 +131,106 @@ public extension HighlightedTextEditor {
     }
 }
 
-public final class ScrollableTextView: NSView {
-    weak var delegate: NSTextViewDelegate?
+public extension HighlightedTextEditor {
+    final class ScrollableTextView: NSView {
+        weak var delegate: NSTextViewDelegate?
 
-    var attributedText: NSAttributedString {
-        didSet {
-            textView.textStorage?.setAttributedString(attributedText)
-        }
-    }
-
-    var selectedRanges: [NSValue] = [] {
-        didSet {
-            guard selectedRanges.count > 0 else {
-                return
+        var attributedText: NSAttributedString {
+            didSet {
+                textView.textStorage?.setAttributedString(attributedText)
             }
-
-            textView.selectedRanges = selectedRanges
         }
-    }
 
-    public lazy var scrollView: NSScrollView = {
-        let scrollView = NSScrollView()
-        scrollView.drawsBackground = true
-        scrollView.borderType = .noBorder
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalRuler = false
-        scrollView.autoresizingMask = [.width, .height]
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        var selectedRanges: [NSValue] = [] {
+            didSet {
+                guard selectedRanges.count > 0 else {
+                    return
+                }
 
-        return scrollView
-    }()
+                textView.selectedRanges = selectedRanges
+            }
+        }
 
-    public lazy var textView: NSTextView = {
-        let contentSize = scrollView.contentSize
-        let textStorage = NSTextStorage()
+        public lazy var scrollView: NSScrollView = {
+            let scrollView = NSScrollView()
+            scrollView.drawsBackground = true
+            scrollView.borderType = .noBorder
+            scrollView.hasVerticalScroller = true
+            scrollView.hasHorizontalRuler = false
+            scrollView.autoresizingMask = [.width, .height]
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
 
-        let layoutManager = NSLayoutManager()
-        textStorage.addLayoutManager(layoutManager)
+            return scrollView
+        }()
 
-        let textContainer = NSTextContainer(containerSize: scrollView.frame.size)
-        textContainer.widthTracksTextView = true
-        textContainer.containerSize = NSSize(
-            width: contentSize.width,
-            height: CGFloat.greatestFiniteMagnitude
-        )
+        public lazy var textView: NSTextView = {
+            let contentSize = scrollView.contentSize
+            let textStorage = NSTextStorage()
 
-        layoutManager.addTextContainer(textContainer)
+            let layoutManager = NSLayoutManager()
+            textStorage.addLayoutManager(layoutManager)
 
-        let textView = NSTextView(frame: .zero, textContainer: textContainer)
-        textView.autoresizingMask = .width
-        textView.backgroundColor = NSColor.textBackgroundColor
-        textView.delegate = self.delegate
-        textView.drawsBackground = true
-        textView.isHorizontallyResizable = false
-        textView.isVerticallyResizable = true
-        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        textView.minSize = NSSize(width: 0, height: contentSize.height)
-        textView.textColor = NSColor.labelColor
+            let textContainer = NSTextContainer(containerSize: scrollView.frame.size)
+            textContainer.widthTracksTextView = true
+            textContainer.containerSize = NSSize(
+                width: contentSize.width,
+                height: CGFloat.greatestFiniteMagnitude
+            )
 
-        return textView
-    }()
+            layoutManager.addTextContainer(textContainer)
 
-    // MARK: - Init
+            let textView = NSTextView(frame: .zero, textContainer: textContainer)
+            textView.autoresizingMask = .width
+            textView.backgroundColor = NSColor.textBackgroundColor
+            textView.delegate = self.delegate
+            textView.drawsBackground = true
+            textView.isHorizontallyResizable = false
+            textView.isVerticallyResizable = true
+            textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+            textView.minSize = NSSize(width: 0, height: contentSize.height)
+            textView.textColor = NSColor.labelColor
 
-    init() {
-        self.attributedText = NSMutableAttributedString()
+            return textView
+        }()
 
-        super.init(frame: .zero)
-    }
+        // MARK: - Init
 
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+        init() {
+            self.attributedText = NSMutableAttributedString()
 
-    // MARK: - Life cycle
+            super.init(frame: .zero)
+        }
 
-    override public func viewWillDraw() {
-        super.viewWillDraw()
+        @available(*, unavailable)
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
 
-        setupScrollViewConstraints()
-        setupTextView()
-    }
+        // MARK: - Life cycle
 
-    func setupScrollViewConstraints() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        override public func viewWillDraw() {
+            super.viewWillDraw()
 
-        addSubview(scrollView)
+            setupScrollViewConstraints()
+            setupTextView()
+        }
 
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        ])
-    }
+        func setupScrollViewConstraints() {
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
 
-    func setupTextView() {
-        scrollView.documentView = textView
+            addSubview(scrollView)
+
+            NSLayoutConstraint.activate([
+                scrollView.topAnchor.constraint(equalTo: topAnchor),
+                scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                scrollView.leadingAnchor.constraint(equalTo: leadingAnchor)
+            ])
+        }
+
+        func setupTextView() {
+            scrollView.documentView = textView
+        }
     }
 }
 
