@@ -71,7 +71,7 @@ jobs:
           sed -i '' "s/kyle-n/${GITHUB_ACTOR//\//\\/}/g" $XCODEPROJ
       - name: Boot Simulator
         env:
-          IOS_SIM_NAME: iPhone 11
+          IOS_SIM_NAME: iPhone 12
         run: |
           IOS_SIM_UDID=`xcrun simctl list | grep -w "$IOS_SIM_NAME" | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' | head -1`
           SIMULATOR_PATH='/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
@@ -91,7 +91,7 @@ jobs:
       - name: Run UIKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
-          xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
+          xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
           killall Simulator
       - name: Save non-matching iOS snapshots
         if: failure()
