@@ -122,4 +122,25 @@ class macOS_EssayistUITests: XCTestCase {
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
     }
+
+    func testIntrospect() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.introspect)
+
+        let window = app.windows.firstMatch
+        let textView = window.textViews.firstMatch
+
+        textView.click()
+        textView.typeText("1")
+        let disabledContent = textView.value as! String
+        XCTAssertEqual(disabledContent, "")
+
+        window.buttons["Toggle Enabled"].click()
+        textView.click()
+        textView.typeText("2")
+        let enabledContent = textView.value as! String
+        XCTAssertEqual(enabledContent, "2")
+    }
 }
