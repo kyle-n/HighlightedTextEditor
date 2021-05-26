@@ -238,4 +238,21 @@ class iOS_EssayistUITests: XCTestCase {
             XCTAssertTrue(indicator.exists)
         }
     }
+
+    func testIntrospect() {
+        let app = XCUIApplication()
+        app.launch()
+
+        selectEditor(.introspect)
+        let textView = app.textViews.firstMatch
+        _ = textView.waitForExistence(timeout: 2)
+
+        textView.tap()
+        let aKey = app.keys["A"]
+        XCTAssertFalse(aKey.waitForExistence(timeout: 2))
+
+        app.buttons["Toggle Enabled"].tap()
+        textView.tap()
+        XCTAssertTrue(aKey.waitForExistence(timeout: 2))
+    }
 }

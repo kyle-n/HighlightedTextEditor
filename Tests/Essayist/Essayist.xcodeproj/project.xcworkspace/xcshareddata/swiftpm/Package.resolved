@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/kyle-n/HighlightedTextEditor",
         "state": {
           "branch": "2.0",
-          "revision": "79c404e07c0a8cc7b2fc984e82e0f4d7758cf96a",
+          "revision": "8bc505cdbc179335cca7020fa67048216eb63ee2",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-snapshot-testing",
         "state": {
           "branch": null,
-          "revision": "c466812aa2e22898f27557e2e780d3aad7a27203",
-          "version": "1.8.2"
+          "revision": "f8a9c997c3c1dab4e216a8ec9014e23144cbab37",
+          "version": "1.9.0"
         }
       }
     ]
