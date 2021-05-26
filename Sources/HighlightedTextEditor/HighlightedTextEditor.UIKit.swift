@@ -76,7 +76,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         textInputTraits?.setValue(textView.tintColor, forKey: "insertionPointColor")
     }
 
-    public class Coordinator: NSObject, UITextViewDelegate {
+    public final class Coordinator: NSObject, UITextViewDelegate {
         var parent: HighlightedTextEditor
         var selectedTextRange: UITextRange?
         var updatingUIView = false

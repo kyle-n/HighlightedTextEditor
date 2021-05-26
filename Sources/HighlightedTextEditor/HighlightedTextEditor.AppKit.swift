@@ -74,7 +74,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
 }
 
 public extension HighlightedTextEditor {
-    class Coordinator: NSObject, NSTextViewDelegate {
+    final class Coordinator: NSObject, NSTextViewDelegate {
         var parent: HighlightedTextEditor
         var selectedRanges: [NSValue] = []
         var updatingNSView = false
