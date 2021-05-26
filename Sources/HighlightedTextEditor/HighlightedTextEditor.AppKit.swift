@@ -27,10 +27,10 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     let highlightRules: [HighlightRule]
     public let customTextView = CustomTextView()
 
-    private(set) var onEditingChanged: (() -> Void)?
-    private(set) var onCommit: (() -> Void)?
-    private(set) var onTextChange: ((String) -> Void)?
-    private(set) var onSelectionChange: (([NSRange]) -> Void)?
+    private(set) var onEditingChanged: OnEditingChangedCallback?
+    private(set) var onCommit: OnCommitCallback?
+    private(set) var onTextChange: OnTextChangeCallback?
+    private(set) var onSelectionChange: OnSelectionChangeCallback?
     private(set) var introspect: IntrospectCallback?
 
     public init(
@@ -243,25 +243,25 @@ public extension HighlightedTextEditor {
         return editor
     }
 
-    func onCommit(_ callback: @escaping () -> Void) -> Self {
+    func onCommit(_ callback: @escaping OnCommitCallback) -> Self {
         var editor = self
         editor.onCommit = callback
         return editor
     }
 
-    func onEditingChanged(_ callback: @escaping () -> Void) -> Self {
+    func onEditingChanged(_ callback: @escaping OnEditingChangedCallback) -> Self {
         var editor = self
         editor.onEditingChanged = callback
         return editor
     }
 
-    func onTextChange(_ callback: @escaping (_ editorContent: String) -> Void) -> Self {
+    func onTextChange(_ callback: @escaping OnTextChangeCallback) -> Self {
         var editor = self
         editor.onTextChange = callback
         return editor
     }
 
-    func onSelectionChange(_ callback: @escaping (_ selectedRanges: [NSRange]) -> Void) -> Self {
+    func onSelectionChange(_ callback: @escaping OnSelectionChangeCallback) -> Self {
         var editor = self
         editor.onSelectionChange = callback
         return editor

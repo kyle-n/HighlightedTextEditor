@@ -93,6 +93,10 @@ internal protocol HighlightingTextEditor {
 
 public typealias OnSelectionChangeCallback = ([NSRange]) -> Void
 public typealias IntrospectCallback = (_ editor: HighlightedTextEditor.Internals) -> Void
+public typealias EmptyCallback = () -> Void
+public typealias OnCommitCallback = EmptyCallback
+public typealias OnEditingChangedCallback = EmptyCallback
+public typealias OnTextChangeCallback = (_ editorContent: String) -> Void
 
 extension HighlightingTextEditor {
     var placeholderFont: SystemColorAlias { SystemColorAlias() }

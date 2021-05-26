@@ -17,9 +17,9 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     let highlightRules: [HighlightRule]
     private let textView = UITextView()
 
-    private(set) var onEditingChanged: (() -> Void)?
-    private(set) var onCommit: (() -> Void)?
-    private(set) var onTextChange: ((String) -> Void)?
+    private(set) var onEditingChanged: OnEditingChangedCallback?
+    private(set) var onCommit: OnCommitCallback?
+    private(set) var onTextChange: OnTextChangeCallback?
     private(set) var onSelectionChange: OnSelectionChangeCallback?
     private(set) var introspect: IntrospectCallback?
 
@@ -127,19 +127,19 @@ public extension HighlightedTextEditor {
         return new
     }
 
-    func onCommit(_ callback: @escaping () -> Void) -> Self {
+    func onCommit(_ callback: @escaping OnCommitCallback) -> Self {
         var new = self
         new.onCommit = callback
         return new
     }
 
-    func onEditingChanged(_ callback: @escaping () -> Void) -> Self {
+    func onEditingChanged(_ callback: @escaping OnEditingChangedCallback) -> Self {
         var new = self
         new.onEditingChanged = callback
         return new
     }
 
-    func onTextChange(_ callback: @escaping (_ editorContent: String) -> Void) -> Self {
+    func onTextChange(_ callback: @escaping OnTextChangeCallback) -> Self {
         var new = self
         new.onTextChange = callback
         return new
