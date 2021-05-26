@@ -66,7 +66,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 
     private func runIntrospect(_ textView: UITextView) {
         guard let introspect = introspect else { return }
-        let internals = HighlightedTextEditorInternals(textView: textView, scrollView: nil)
+        let internals = Internals(textView: textView, scrollView: nil)
         introspect(internals)
     }
 
