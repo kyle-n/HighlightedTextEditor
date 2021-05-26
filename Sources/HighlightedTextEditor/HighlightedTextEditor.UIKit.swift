@@ -17,6 +17,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
     private(set) var onTextChange: ((String) -> Void)?
 
     private(set) var onSelectionChange: OnSelectionChangeCallback?
+    private(set) var introspect: IntrospectCallback?
 
     public init(
         text: Binding<String>,
@@ -53,9 +54,16 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
             uiView.attributedText = highlightedText
         }
         updateTextViewModifiers(uiView)
+        runIntrospect(uiView)
         uiView.isScrollEnabled = true
         uiView.selectedTextRange = context.coordinator.selectedTextRange
         context.coordinator.updatingUIView = false
+    }
+
+    private func runIntrospect(_ textView: UITextView) {
+        guard let introspect = introspect else { return }
+        let internals = HighlightedTextEditorInternals(textView: textView, scrollView: nil)
+        introspect(internals)
     }
 
     private func updateTextViewModifiers(_ textView: UITextView) {
@@ -100,10 +108,10 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
 }
 
 public extension HighlightedTextEditor {
-    func introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void) -> Self {
-        let internals = HighlightedTextEditorInternals(textView: textView, scrollView: nil)
-        callback(internals)
-        return self
+    func introspect(callback: @escaping IntrospectCallback) -> Self {
+        var new = self
+        new.introspect = callback
+        return new
     }
 
     func onSelectionChange(_ callback: @escaping (_ selectedRange: NSRange) -> Void) -> Self {
