@@ -77,6 +77,18 @@ Example of using a preset:
 HighlightedTextEditor(text: $text, highlightRules: .markdown)
 ```
 
+### Regex Presets
+
+I've also added a preset variable, `NSRegularExpression.all`, for easily selecting a whole string.
+
+Example of using it:
+
+```swift
+HighlightedTextEditor(text: $text, highlightRules: [
+    HighlightRule(pattern: .all, formattingRule: TextFormattingRule(key: .underlineStyle, value: NSUnderlineStyle.single.rawValue))
+])
+```
+
 ## API
 
 ### HighlightedTextEditor
