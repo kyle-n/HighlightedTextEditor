@@ -92,12 +92,7 @@ internal protocol HighlightingTextEditor {
 }
 
 public typealias OnSelectionChangeCallback = ([NSRange]) -> Void
-public typealias IntrospectCallback = (_ editor: HighlightedTextEditorInternals) -> Void
-
-public struct HighlightedTextEditorInternals {
-    public let textView: SystemTextView
-    public let scrollView: SystemScrollView?
-}
+public typealias IntrospectCallback = (_ editor: HighlightedTextEditor.Internals) -> Void
 
 extension HighlightingTextEditor {
     var placeholderFont: SystemColorAlias { SystemColorAlias() }

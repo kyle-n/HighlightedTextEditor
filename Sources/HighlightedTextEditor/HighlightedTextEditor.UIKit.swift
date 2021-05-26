@@ -3,6 +3,11 @@ import SwiftUI
 import UIKit
 
 public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor {
+    public struct Internals {
+        public let textView: SystemTextView
+        public let scrollView: SystemScrollView?
+    }
+
     @Binding var text: String {
         didSet {
             onTextChange?(text)

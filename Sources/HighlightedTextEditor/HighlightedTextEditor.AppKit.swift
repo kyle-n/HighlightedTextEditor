@@ -13,6 +13,11 @@ import Combine
 import SwiftUI
 
 public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
+    public struct Internals {
+        public let textView: SystemTextView
+        public let scrollView: SystemScrollView?
+    }
+
     @Binding var text: String {
         didSet {
             onTextChange?(text)
@@ -63,7 +68,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
 
     private func runIntrospect(_ view: CustomTextView) {
         guard let introspect = introspect else { return }
-        let internals = HighlightedTextEditorInternals(textView: view.textView, scrollView: view.scrollView)
+        let internals = HighlightedTextEditor.Internals(textView: view.textView, scrollView: view.scrollView)
         introspect(internals)
     }
 }
