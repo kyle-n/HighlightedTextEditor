@@ -27,6 +27,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
     private(set) var onTextChange: ((String) -> Void)?
 
     private(set) var onSelectionChange: (([NSRange]) -> Void)?
+    private(set) var introspect: IntrospectCallback?
 
     public init(
         text: Binding<String>,
@@ -56,8 +57,15 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         )
 
         view.attributedText = highlightedText
+        runIntrospect(view)
         view.selectedRanges = context.coordinator.selectedRanges
         context.coordinator.updatingNSView = false
+    }
+
+    private func runIntrospect(_ view: CustomTextView) {
+        guard let introspect = introspect else { return }
+        let internals = HighlightedTextEditorInternals(textView: view.textView, scrollView: view.scrollView)
+        introspect(internals)
     }
 }
 
@@ -225,13 +233,10 @@ public final class CustomTextView: NSView {
 }
 
 public extension HighlightedTextEditor {
-    func introspect(callback: (_ editor: HighlightedTextEditorInternals) -> Void) -> Self {
-        let internals = HighlightedTextEditorInternals(
-            textView: customTextView.textView,
-            scrollView: customTextView.scrollView
-        )
-        callback(internals)
-        return self
+    func introspect(callback: @escaping IntrospectCallback) -> Self {
+        var editor = self
+        editor.introspect = callback
+        return editor
     }
 
     func onCommit(_ callback: @escaping () -> Void) -> Self {
