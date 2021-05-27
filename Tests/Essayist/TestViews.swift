@@ -10,6 +10,7 @@ import SwiftUI
 
 let markdownFileURL =
     URL(
+        // swiftlint:disable:next line_length
         string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md"
     )!
 let markdown = try! String(contentsOf: markdownFileURL, encoding: .utf8)
@@ -107,7 +108,7 @@ struct NSAttributedStringKeyEditor: View {
 struct OnSelectionChangeEditor: View {
     @State private var text: String = ""
     @State private var selectionChanges: Int = 0
-    @State private var selectedRange: NSRange? = nil
+    @State private var selectedRange: NSRange?
 
     var body: some View {
         VStack {
