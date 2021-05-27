@@ -15,6 +15,6 @@ osascript -e 'tell application "Simulator" to activate'
 osascript -e 'tell application "System Events" to keystroke "k" using {command down, shift down}'
 osascript -e 'tell application "System Events" to keystroke "k" using {command down, shift down}'
 xcodebuild -resolvePackageDependencies
-xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' -scheme "$test_project_name (iOS)" -project $test_project_path || true
+xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12' -scheme "$test_project_name (iOS)" -project $test_project_path || true
 killall Simulator
 defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool true

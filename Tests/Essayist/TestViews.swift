@@ -5,21 +5,25 @@
 //  Created by Kyle Nazario on 11/25/20.
 //
 
-import SwiftUI
 import HighlightedTextEditor
+import SwiftUI
 
-let markdownFileURL = URL(string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md")!
+let markdownFileURL =
+    URL(
+        // swiftlint:disable:next line_length
+        string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md"
+    )!
 let markdown = try! String(contentsOf: markdownFileURL, encoding: .utf8)
 
 struct MarkdownEditorA: View {
     @State var text: String
-    
+
     init() {
         let end = markdown.index(of: "## Blockquotes")!
         let firstPart = String(markdown.prefix(upTo: end))
         _text = State<String>(initialValue: firstPart)
     }
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
@@ -27,14 +31,14 @@ struct MarkdownEditorA: View {
 
 struct MarkdownEditorB: View {
     @State var text: String
-    
+
     init() {
         let endOfFirstPart = markdown.index(of: "## Blockquotes")!
         let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
         let secondPart = String(markdown[endOfFirstPart..<endOfSecondPart])
         _text = State<String>(initialValue: secondPart)
     }
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
@@ -42,13 +46,13 @@ struct MarkdownEditorB: View {
 
 struct MarkdownEditorC: View {
     @State var text: String
-    
+
     init() {
         let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
         let thirdPart = String(markdown[endOfSecondPart..<markdown.endIndex])
         _text = State<String>(initialValue: thirdPart)
     }
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .markdown)
     }
@@ -56,7 +60,7 @@ struct MarkdownEditorC: View {
 
 struct URLEditor: View {
     @State var text: String = "No formatting\n\nhttps://www.google.com/"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: .url)
     }
@@ -75,7 +79,7 @@ typealias NSUIFont = UIFont
 
 struct FontTraitEditor: View {
     @State private var text: String = "The text is _formatted_"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [
             HighlightRule(pattern: betweenUnderscores, formattingRules: [
@@ -87,7 +91,7 @@ struct FontTraitEditor: View {
 
 struct NSAttributedStringKeyEditor: View {
     @State private var text: String = "The text is _formatted_"
-    
+
     var body: some View {
         HighlightedTextEditor(text: $text, highlightRules: [
             HighlightRule(pattern: betweenUnderscores, formattingRules: [
@@ -101,140 +105,11 @@ struct NSAttributedStringKeyEditor: View {
     }
 }
 
-struct FontModifiersEditor: View {
-    @State private var text: String = "The text is _formatted_"
-    
-    var body: some View {
-        HighlightedTextEditor(text: $text, highlightRules: [])
-            .defaultColor(.red)
-            .defaultFont(.systemFont(ofSize: 30))
-            .insertionPointColor(.green)
-            .multilineTextAlignment(.trailing)
-    }
-}
-
-#if os(macOS)
-struct DrawsBackgroundEditor: View {
-    @State private var text: String = "The text is _formatted_"
-    @State private var drawsBackground: Bool = false
-    
-    var body: some View {
-        HStack {
-            HighlightedTextEditor(text: $text, highlightRules: [])
-                .drawsBackground(drawsBackground)
-                .backgroundColor(.red)
-            Button("Toggle drawsBackground") { drawsBackground.toggle() }
-        }
-    }
-}
-#else
-struct DrawsBackgroundEditor: View {
-    var body: some View {
-        EmptyView()
-    }
-}
-#endif
-
-struct BackgroundChangesEditor: View {
-    @State private var text: String = "The text is _formatted_"
-    @State private var allowsDocumentBackgroundColorChange: Bool = false
-    
-    #if os(macOS)
-    @State var backgroundColor: NSColor = .red
-    private var editor: some View {
-        HighlightedTextEditor(text: $text, highlightRules: [])
-            .backgroundColor(backgroundColor)
-            .allowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange)
-    }
-    #else
-    @State var backgroundColor: UIColor = .red
-    private var editor: some View {
-        HighlightedTextEditor(text: $text, highlightRules: [])
-            .backgroundColor(backgroundColor)
-    }
-    #endif
-    
-    var body: some View {
-        HStack {
-            editor
-            VStack {
-                Button("Toggle backgroundColor") {
-                    if backgroundColor == .red {
-                        backgroundColor = .blue
-                    } else {
-                        backgroundColor = .red
-                    }
-                }
-                Button("Toggle allowsDocumentBackgroundColorChange") { allowsDocumentBackgroundColorChange.toggle() }
-            }
-        }
-    }
-}
-
-struct AutocapitalizationTypeEditor: View {
-    @State private var text1: String = ""
-    @State private var text2: String = ""
-    @State private var text3: String = ""
-    @State private var text4: String = ""
-    
-    var body: some View {
-        #if os(macOS)
-        return EmptyView()
-        #else
-        let bindings = [$text1, $text2, $text3, $text4]
-        return ForEach(0..<autocapitalizationTypes.count, id: \.self) { i -> AnyView in
-            let type = autocapitalizationTypes[i]
-            let binding = bindings[i]
-            
-            return HighlightedTextEditor(text: binding, highlightRules: [])
-                .autocapitalizationType(type)
-                .border(Color.black)
-                .eraseToAnyView()
-        }
-        #endif
-    }
-}
-
-struct AutocorrectionTypeEditor: View {
-    @State private var text: String = ""
-    @State private var autocorrect: Bool = true
-    
-    var body: some View {
-        #if os(macOS)
-        return EmptyView()
-        #else
-        return VStack {
-            Button("Toggle Autocorrect") { autocorrect.toggle() }
-            if autocorrect {
-                HighlightedTextEditor(text: $text, highlightRules: [])
-                    .autocorrectionType(.yes)
-            } else {
-                HighlightedTextEditor(text: $text, highlightRules: [])
-                    .autocorrectionType(.no)
-            }
-        }
-        #endif
-    }
-}
-
-struct KeyboardTypeEditor: View {
-    @State private var text: String = ""
-    
-    var body: some View {
-        #if os(macOS)
-        return EmptyView()
-        #else
-        return HighlightedTextEditor(text: $text, highlightRules: [])
-            .keyboardType(.phonePad)
-        #endif
-    }
-}
-
 struct OnSelectionChangeEditor: View {
     @State private var text: String = ""
     @State private var selectionChanges: Int = 0
-    @State private var selectedRange: NSRange? = nil
-    
+    @State private var selectedRange: NSRange?
+
     var body: some View {
         VStack {
             HighlightedTextEditor(text: $text, highlightRules: [])
@@ -248,9 +123,47 @@ struct OnSelectionChangeEditor: View {
             }
         }
     }
-    
+
     private var selectedRangeString: String {
         guard let selectedRange = selectedRange else { return "" }
         return "\(selectedRange.location) \(selectedRange.length)"
+    }
+}
+
+struct ModifiersEditor: View {
+    @State private var text: String = ""
+    @State private var editorContent: String = ""
+    @State private var startedEditing: Bool = false
+    @State private var endedEditing: Bool = false
+
+    var body: some View {
+        VStack {
+            HighlightedTextEditor(text: $text, highlightRules: [])
+                .onEditingChanged { startedEditing = true }
+                .onCommit { endedEditing = true }
+                .onTextChange { editorContent = $0 }
+            Text("editorContent: \(editorContent)")
+            Text("startedEditing: \(String(startedEditing))")
+            Text("endedEditing: \(String(endedEditing))")
+            TextField("Other field", text: $text)
+                .accessibility(identifier: "secondInput")
+        }
+    }
+}
+
+struct IntrospectEditor: View {
+    @State private var text: String = ""
+    @State private var enabled: Bool = false
+
+    var body: some View {
+        VStack {
+            HighlightedTextEditor(text: $text, highlightRules: [])
+                .introspect { internals in
+                    internals.textView.isEditable = enabled
+                }
+            Button("Toggle Enabled") {
+                enabled.toggle()
+            }
+        }
     }
 }

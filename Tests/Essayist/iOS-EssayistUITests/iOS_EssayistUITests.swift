@@ -5,23 +5,23 @@
 //  Created by Kyle Nazario on 11/25/20.
 //
 
-import XCTest
 import SnapshotTesting
 import SwiftUI
+import XCTest
 
 class iOS_EssayistUITests: XCTestCase {
-    
-    private let device = Snapshotting<AnyView, UIImage>.image(layout: .device(config: .iPadPro12_9), traits: .init(userInterfaceStyle: .dark))
-    
+    private let device = Snapshotting<AnyView, UIImage>
+        .image(layout: .device(config: .iPadPro12_9), traits: .init(userInterfaceStyle: .dark))
+
     private var screenshot: UIImage {
         XCUIApplication().screenshot().image
     }
-    
+
     override class func setUp() {
         // enable Chinese-language keyboard
         let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
         settings.launch()
-        
+
         settings.tables.firstMatch.staticTexts["General"].tap()
         settings.tables.firstMatch.staticTexts["Keyboard"].tap()
         settings.tables.firstMatch.staticTexts["Keyboards"].tap()
@@ -29,14 +29,14 @@ class iOS_EssayistUITests: XCTestCase {
         settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
         settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
         settings.buttons["Done"].tap()
-        
+
         XCUIDevice.shared.press(.home)
     }
 
     override func setUpWithError() throws {
         continueAfterFailure = true
     }
-    
+
     func tryLaunch(_ counter: Int = 10) {
         sleep(3)
         XCUIApplication().terminate()
@@ -45,15 +45,15 @@ class iOS_EssayistUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         sleep(3)
-        if !app.exists && counter > 0 {
+        if !app.exists, counter > 0 {
             tryLaunch(counter - 1)
         }
     }
-    
+
     func selectEditor(_ editorType: EditorType) {
         let app = XCUIApplication()
         let selectEditorMenu = app.buttons["Select Editor"]
-        let _ = selectEditorMenu.waitForExistence(timeout: 5)
+        _ = selectEditorMenu.waitForExistence(timeout: 5)
         selectEditorMenu.tap()
         app.buttons[editorType.rawValue.uppercaseFirst()].tap()
     }
@@ -70,7 +70,7 @@ class iOS_EssayistUITests: XCTestCase {
         if !nextKeyboardButton.exists {
             app.textViews.firstMatch.tap()
         }
-        nextKeyboardButton.press(forDuration: 0.9);
+        nextKeyboardButton.press(forDuration: 0.9)
         app.tables["InputSwitcherTable"].staticTexts[keyboardType.rawValue].tap()
     }
 
@@ -126,114 +126,6 @@ class iOS_EssayistUITests: XCTestCase {
         app.keys["s"].tap()
 
         XCTAssertEqual(hlteTextView.value as! String, "A\n\nB\n\nCars\n\nD\n\n")
-    }
-
-    func testFontModifiers() {
-        assertSnapshot(matching: FontModifiersEditor().eraseToAnyView(), as: device)
-    }
-
-    func testBackgroundColor() {
-        let backgroundChangesEditor = BackgroundChangesEditor()
-        assertSnapshot(matching: backgroundChangesEditor.eraseToAnyView(), as: device)
-
-        backgroundChangesEditor.backgroundColor = .blue
-        assertSnapshot(matching: backgroundChangesEditor.eraseToAnyView(), as: device)
-    }
-
-    func testAutocapitalizationModifier() {
-        tryLaunch()
-        let app = XCUIApplication()
-
-        selectEditor(.autocapitalizationType)
-
-        let keySets = autocapitalizationTypes.map { type -> String in
-            switch type {
-            case .allCharacters:
-                return "CAPS"
-            case .none:
-                return "none"
-            case .sentences:
-                return "Sentence.Case."
-            case .words:
-                return "One Two"
-            default:
-                return ""
-            }
-        }
-
-        (0..<autocapitalizationTypes.count).forEach { i in
-            let editor = app.textViews.element(boundBy: i)
-            let keySet = keySets[i]
-
-            editor.tap()
-            for char in keySet {
-                if char == " " {
-                    app.keys["space"].tap()
-                } else if char == "." {
-                    app.keys["space"].doubleTap()
-                } else {
-                    app.keys[String(char)].tap()
-                }
-            }
-        }
-
-        // If it gets here without crashing because it can't find a key, the test has passed
-    }
-
-    // Tests screenshots for grey bar above keyboard with autocorrect suggestions
-    func testAutocorrectionTypeModifier() {
-        tryLaunch()
-        let app = XCUIApplication()
-
-        selectEditor(.autocorrectionType)
-
-        let textView = app.textViews.firstMatch
-        textView.tap()
-
-        let IKey = app.keys["I"]
-        let mKey = app.keys["m"]
-        let space = app.keys["space"]
-        let delete = app.keys["delete"]
-
-        let _ = IKey.waitForExistence(timeout: 2)
-        IKey.tap()
-        mKey.tap()
-        space.tap()
-
-        var textViewValue = textView.value as! String
-        XCTAssertEqual(textViewValue, "I’m ")
-
-        // -------------------------------------------- //
-
-        (0..<textViewValue.count).forEach { _ in
-            delete.tap()
-        }
-
-        app.buttons["Toggle Autocorrect"].tap()
-
-        // -------------------------------------------- //
-
-        textView.tap()
-        let _ = IKey.waitForExistence(timeout: 2)
-        IKey.tap()
-        mKey.tap()
-        space.tap()
-
-        textViewValue = textView.value as! String
-        XCTAssertEqual(textViewValue, "Im ")
-    }
-
-    func testKeyboardTypeModifier() {
-        tryLaunch()
-        let app = XCUIApplication()
-
-        selectEditor(.keyboardType)
-
-        app.textViews.firstMatch.tap()
-        sleep(1)
-        (0...9).forEach { num in
-            XCTAssertTrue(app.keys[String(num)].exists)
-        }
     }
 
     func testTwoStageInput() {
@@ -300,27 +192,67 @@ class iOS_EssayistUITests: XCTestCase {
 
         XCTAssertTrue(safariLaunched)
     }
-    
+
     func testOnSelectionChange() {
         let app = XCUIApplication()
         tryLaunch()
-        
+
         selectEditor(.onSelectionChange)
         let textView = app.textViews.firstMatch
-        let _ = textView.waitForExistence(timeout: 2)
-        
+        _ = textView.waitForExistence(timeout: 2)
+
         textView.tap()
         app.keys["C"].tap()
         app.keys["a"].tap()
         app.keys["t"].tap()
         textView.doubleTap()
-        
+
         let selectedRangeDisplay = app.staticTexts["5"]
         let selectionChangesDisplay = app.staticTexts["0 3"]
         let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
         let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
-        
+
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
+    }
+
+    func testModifiers() {
+        let app = XCUIApplication()
+        app.launch()
+
+        selectEditor(.modifiers)
+        let textView = app.textViews.firstMatch
+        _ = textView.waitForExistence(timeout: 2)
+
+        textView.tap()
+        app.keys["A"].tap()
+
+        app.textFields.firstMatch.tap()
+
+        let indicators = [
+            app.staticTexts["editorContent: A"],
+            app.staticTexts["startedEditing: true"],
+            app.staticTexts["endedEditing: true"]
+        ]
+        indicators.forEach { indicator in
+            XCTAssertTrue(indicator.exists)
+        }
+    }
+
+    func testIntrospect() {
+        let app = XCUIApplication()
+        app.launch()
+
+        selectEditor(.introspect)
+        let textView = app.textViews.firstMatch
+        _ = textView.waitForExistence(timeout: 2)
+
+        textView.tap()
+        let aKey = app.keys["A"]
+        XCTAssertFalse(aKey.waitForExistence(timeout: 2))
+
+        app.buttons["Toggle Enabled"].tap()
+        textView.tap()
+        XCTAssertTrue(aKey.waitForExistence(timeout: 2))
     }
 }
