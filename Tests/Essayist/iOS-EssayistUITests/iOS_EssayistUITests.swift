@@ -255,4 +255,23 @@ class iOS_EssayistUITests: XCTestCase {
         textView.tap()
         XCTAssertTrue(aKey.waitForExistence(timeout: 2))
     }
+
+    func testTypingEmoji() {
+        let app = XCUIApplication()
+        app.launch()
+
+        selectEditor(.blank)
+
+        let textView = app.textViews.firstMatch
+        _ = textView.waitForExistence(timeout: 2)
+
+        UIPasteboard.general.string = "💩"
+
+        textView.tap()
+        textView.doubleTap()
+        app.menuItems["Paste"].tap()
+
+        let textViewContent = textView.value as! String
+        XCTAssertEqual(textViewContent, "💩")
+    }
 }

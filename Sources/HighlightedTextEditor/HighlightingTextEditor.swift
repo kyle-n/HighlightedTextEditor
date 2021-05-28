@@ -103,7 +103,7 @@ extension HighlightingTextEditor {
 
     static func getHighlightedText(text: String, highlightRules: [HighlightRule]) -> NSMutableAttributedString {
         let highlightedString = NSMutableAttributedString(string: text)
-        let all = NSRange(location: 0, length: text.count)
+        let all = NSRange(location: 0, length: text.utf16.count)
 
         let editorFont = defaultEditorFont
         let editorTextColor = defaultEditorTextColor

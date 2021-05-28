@@ -132,6 +132,22 @@ class macOS_EssayistUITests: XCTestCase {
         XCTAssertTrue(selectionChangesExists)
     }
 
+    func testTypingEmoji() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.blank)
+
+        let window = app.windows.firstMatch
+        let textView = window.textViews.firstMatch
+
+        textView.click()
+        textView.typeText("💩")
+
+        let textViewContent = textView.value as! String
+        XCTAssertEqual(textViewContent, "💩")
+    }
+
     func testIntrospect() {
         let app = XCUIApplication()
         app.activate()
