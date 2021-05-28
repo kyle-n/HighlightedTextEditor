@@ -266,7 +266,6 @@ class iOS_EssayistUITests: XCTestCase {
         _ = textView.waitForExistence(timeout: 2)
 
         UIPasteboard.general.string = "💩"
-        sleep(2)
 
         textView.tap()
         textView.doubleTap()
