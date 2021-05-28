@@ -141,12 +141,8 @@ class macOS_EssayistUITests: XCTestCase {
         let window = app.windows.firstMatch
         let textView = window.textViews.firstMatch
 
-        NSPasteboard.general.setString("💩", forType: .string)
-
         textView.click()
-        textView.typeKey("a", modifierFlags: .command)
-        textView.typeKey(.delete, modifierFlags: [])
-        textView.typeKey("v", modifierFlags: .command)
+        textView.typeText("💩")
 
         let textViewContent = textView.value as! String
         XCTAssertEqual(textViewContent, "💩")
