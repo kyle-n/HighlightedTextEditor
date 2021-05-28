@@ -5,42 +5,41 @@
 //  Created by Kyle Nazario on 11/27/20.
 //
 
-import XCTest
 import SnapshotTesting
 import SwiftUI
+import XCTest
 
 class macOS_EssayistUITests: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = true
-        
+
         let app = XCUIApplication()
         app.launch()
         let fullScreenButton = app.windows.firstMatch.buttons[XCUIIdentifierFullScreenWindow]
-        let _ = fullScreenButton.waitForExistence(timeout: 1)
+        _ = fullScreenButton.waitForExistence(timeout: 1)
         if fullScreenButton.exists {
             fullScreenButton.click()
         }
     }
-    
+
     private func selectEditor(_ editorType: EditorType) {
         let window = XCUIApplication().windows.firstMatch
         window.popUpButtons["Select Editor"].click()
         window.menuItems[editorType.rawValue.uppercaseFirst()].click()
-        
-        if (editorType == .blank) {
+
+        if editorType == .blank {
             let textView = window.textViews.firstMatch
-            let _ = textView.waitForExistence(timeout: 3)
+            _ = textView.waitForExistence(timeout: 3)
             textView.click()
             textView.typeKey("a", modifierFlags: .command)
             textView.typeKey(.delete, modifierFlags: [])
         }
     }
-    
+
     private var screenshot: NSImage {
         XCUIApplication().windows.firstMatch.screenshot().image
     }
-    
+
     func testTypingInMiddle() {
         let app = XCUIApplication()
         app.activate()
@@ -96,44 +95,6 @@ class macOS_EssayistUITests: XCTestCase {
         assertSnapshot(matching: screenshot, as: .image)
     }
 
-    func testFontModifiers() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.fontModifiers)
-
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
-    func testDrawsBackgroundAndBackgroundColor() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.drawsBackground)
-        assertSnapshot(matching: screenshot, as: .image)
-
-        app.buttons["Toggle drawsBackground"].click()
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
-    func testBackgroundColorChanges() {
-        let app = XCUIApplication()
-        app.activate()
-
-        selectEditor(.backgroundChanges)
-
-        let toggleBackgroundColorButton = app.buttons["Toggle backgroundColor"]
-        let toggleChangesButton = app.buttons["Toggle allowsDocumentBackgroundColorChange"]
-
-        toggleBackgroundColorButton.click()
-        assertSnapshot(matching: screenshot, as: .image)
-        toggleBackgroundColorButton.click()
-
-        toggleChangesButton.click()
-        toggleBackgroundColorButton.click()
-        assertSnapshot(matching: screenshot, as: .image)
-    }
-
     func testURLPresetLinkClicks() {
         let app = XCUIApplication()
         app.launch()
@@ -170,25 +131,45 @@ class macOS_EssayistUITests: XCTestCase {
         XCTAssertTrue(selectedRangeExists)
         XCTAssertTrue(selectionChangesExists)
     }
-    
+
     func testTypingEmoji() {
         let app = XCUIApplication()
         app.activate()
-        
+
         selectEditor(.blank)
-        
+
         let window = app.windows.firstMatch
         let textView = window.textViews.firstMatch
-        
+
         NSPasteboard.general.setString("💩", forType: .string)
-        
+
         textView.click()
         textView.typeKey("a", modifierFlags: .command)
         textView.typeKey(.delete, modifierFlags: [])
         textView.typeKey("v", modifierFlags: .command)
-        
+
         let textViewContent = textView.value as! String
         XCTAssertEqual(textViewContent, "💩")
     }
-    
+
+    func testIntrospect() {
+        let app = XCUIApplication()
+        app.activate()
+
+        selectEditor(.introspect)
+
+        let window = app.windows.firstMatch
+        let textView = window.textViews.firstMatch
+
+        textView.click()
+        textView.typeText("1")
+        let disabledContent = textView.value as! String
+        XCTAssertEqual(disabledContent, "")
+
+        window.buttons["Toggle Enabled"].click()
+        textView.click()
+        textView.typeText("2")
+        let enabledContent = textView.value as! String
+        XCTAssertEqual(enabledContent, "2")
+    }
 }

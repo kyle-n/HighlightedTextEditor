@@ -1,5 +1,4 @@
 // swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -12,11 +11,13 @@ public let package = Package(
     products: [
         .library(
             name: "HighlightedTextEditor",
-            targets: ["HighlightedTextEditor"]),
+            targets: ["HighlightedTextEditor"]
+        )
     ],
     targets: [
         .target(
             name: "HighlightedTextEditor",
-            dependencies: [])
+            dependencies: []
+        )
     ]
 )
