@@ -50,7 +50,9 @@ struct ContentView: View {
                 .onCommit { print("commited") }
                 .onEditingChanged { print("editing changed") }
                 .onTextChange { print("latest text value", $0) }
-                .onSelectionChange { print("NSRange of current selection", $0)}
+                .onSelectionChange { (range: NSRange) in
+                    print(range)
+                }
                 .introspect { editor in
                     // access underlying UITextView or NSTextView
                     editor.textView.backgroundColor = .green
