@@ -34,8 +34,8 @@ struct ContentView: View {
     
     private let rules: [HighlightRule] = [
         HighlightRule(pattern: betweenUnderscores, formattingRules: [
-            TextFormattingRule(fontTraits: [.traitItalic, .traitBold]),
-            TextFormattingRule(key: .foregroundColor, value: UIColor.red),
+            TextFormattingRule(fontTraits: [.italic, .bold]),
+            TextFormattingRule(key: .foregroundColor, value: Color.red),
             TextFormattingRule(key: .underlineStyle) { content, range in
                 if content.count > 10 { return NSUnderlineStyle.double.rawValue }
                 else { return NSUnderlineStyle.single.rawValue }
