@@ -162,17 +162,16 @@ class iOS_EssayistUITests: XCTestCase {
 
         selectKeyboard(.pinyin10Key)
 
-        app.keys["拼音"].tap()
         app.keys["A B C "].tap()
         app.keys["D E F "].tap()
         app.keys["M N O "].tap()
-        app.collectionViews.staticTexts["笨"].tap()
+        app.collectionViews.staticTexts["本"].tap()
 
         let targetText = """
         1. A
         2. B
 
-        Test 笨
+        Test 本
         """
 
         XCTAssertEqual(hlteTextView.value as! String, targetText)
