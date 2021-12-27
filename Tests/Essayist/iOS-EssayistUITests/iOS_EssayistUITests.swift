@@ -207,7 +207,7 @@ class iOS_EssayistUITests: XCTestCase {
         app.keys["t"].tap()
         textView.doubleTap()
 
-        let selectedRangeDisplay = app.staticTexts["5"]
+        let selectedRangeDisplay = app.staticTexts["4"]
         let selectionChangesDisplay = app.staticTexts["0 3"]
         let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
         let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
