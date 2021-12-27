@@ -270,6 +270,7 @@ class iOS_EssayistUITests: XCTestCase {
         textView.tap()
         textView.doubleTap()
         app.menuItems["Paste"].tap()
+        sleep(1)
 
         let textViewContent = textView.value as! String
         XCTAssertEqual(textViewContent, "💩")
