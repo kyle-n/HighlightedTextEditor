@@ -25,7 +25,7 @@ class iOS_EssayistUITests: XCTestCase {
         settings.tables.firstMatch.staticTexts["General"].tap()
         settings.tables.firstMatch.staticTexts["Keyboard"].tap()
         settings.tables.firstMatch.staticTexts["Keyboards"].tap()
-        settings.tables.firstMatch.staticTexts["Add New Keyboard..."].tap()
+        settings.tables.firstMatch.staticTexts["Add New Keyboard…"].tap()
         settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
         settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
         settings.buttons["Done"].tap()
