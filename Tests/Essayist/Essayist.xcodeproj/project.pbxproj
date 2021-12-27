@@ -12,6 +12,10 @@
 		99095E23256EE1AD0048EB2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99095E0E256EE1AB0048EB2F /* ContentView.swift */; };
 		99095E24256EE1AE0048EB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
 		99095E25256EE1AE0048EB2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
+		99171271277A76B100643A2D /* MarkdownSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99171270277A76B100643A2D /* MarkdownSample.swift */; };
+		99171272277A76B100643A2D /* MarkdownSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99171270277A76B100643A2D /* MarkdownSample.swift */; };
+		99171273277A76B100643A2D /* MarkdownSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99171270277A76B100643A2D /* MarkdownSample.swift */; };
+		99171274277A76B100643A2D /* MarkdownSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99171270277A76B100643A2D /* MarkdownSample.swift */; };
 		993CE97525C1E8DB00497085 /* macOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993CE97425C1E8DB00497085 /* macOS_EssayistUITests.swift */; };
 		993CE98025C1E91E00497085 /* TestViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F378F5256F025000C5DF2F /* TestViews.swift */; };
 		993CE98125C1E91E00497085 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
@@ -19,7 +23,6 @@
 		993CE98325C1E91E00497085 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		993CE98925C1E93200497085 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 993CE98825C1E93200497085 /* SnapshotTesting */; };
 		993CE98B25C1E93200497085 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 993CE98A25C1E93200497085 /* HighlightedTextEditor */; };
-		993CE98C25C1E96800497085 /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
 		993CE99D25C2063200497085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
 		993CE9A225C2063400497085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99095E0F256EE1AD0048EB2F /* Assets.xcassets */; };
 		994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */; };
@@ -29,12 +32,9 @@
 		994FB3D5256EEB3F008F0208 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3D3256EEB3F008F0208 /* Models.swift */; };
 		994FB3DD256EF068008F0208 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994FB3CD256EE80C008F0208 /* String.swift */; };
 		994FB3E3256EF903008F0208 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 994FB3E2256EF903008F0208 /* SnapshotTesting */; };
-		994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
 		994FF6E4257B342E00B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6E3257B342E00B9858A /* HighlightedTextEditor */; };
 		994FF6EA257B343800B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6E9257B343800B9858A /* HighlightedTextEditor */; };
 		994FF6EC257B344300B9858A /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 994FF6EB257B344300B9858A /* HighlightedTextEditor */; };
-		994FF701257BD18D00B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
-		994FF706257BD18E00B9858A /* MarkdownSample.md in Resources */ = {isa = PBXBuildFile; fileRef = 994FB3E7256EF9B8008F0208 /* MarkdownSample.md */; };
 		9957D65325741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		9957D65425741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
 		9957D65525741DD7004194BD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957D65225741DD7004194BD /* View.swift */; };
@@ -72,6 +72,7 @@
 		99095E1C256EE1AD0048EB2F /* Essayist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Essayist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99095E1E256EE1AD0048EB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99095E1F256EE1AD0048EB2F /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		99171270277A76B100643A2D /* MarkdownSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownSample.swift; sourceTree = "<group>"; };
 		993CE97225C1E8DB00497085 /* macOS-EssayistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "macOS-EssayistUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		993CE97425C1E8DB00497085 /* macOS_EssayistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOS_EssayistUITests.swift; sourceTree = "<group>"; };
 		993CE97625C1E8DB00497085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		994FB3C3256EE54A008F0208 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		994FB3CD256EE80C008F0208 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		994FB3D3256EEB3F008F0208 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		994FB3E7256EF9B8008F0208 /* MarkdownSample.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MarkdownSample.md; sourceTree = "<group>"; };
 		9957D65225741DD7004194BD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		99F378F5256F025000C5DF2F /* TestViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViews.swift; sourceTree = "<group>"; };
 		99FF579025C1CF2200959C72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,12 +128,12 @@
 		99095E07256EE1AB0048EB2F = {
 			isa = PBXGroup;
 			children = (
-				99F378F5256F025000C5DF2F /* TestViews.swift */,
 				994FB3D3256EEB3F008F0208 /* Models.swift */,
 				994FB3CC256EE7FE008F0208 /* System Extensions */,
 				99095E0C256EE1AB0048EB2F /* Shared */,
 				99095E16256EE1AD0048EB2F /* iOS */,
 				99095E1D256EE1AD0048EB2F /* macOS */,
+				9917126F277A768F00643A2D /* Shared Test */,
 				994FB3C0256EE549008F0208 /* iOS-EssayistUITests */,
 				993CE97325C1E8DB00497085 /* macOS-EssayistUITests */,
 				99095E15256EE1AD0048EB2F /* Products */,
@@ -181,6 +181,15 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		9917126F277A768F00643A2D /* Shared Test */ = {
+			isa = PBXGroup;
+			children = (
+				99F378F5256F025000C5DF2F /* TestViews.swift */,
+				99171270277A76B100643A2D /* MarkdownSample.swift */,
+			);
+			path = "Shared Test";
+			sourceTree = "<group>";
+		};
 		993CE97325C1E8DB00497085 /* macOS-EssayistUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,7 +204,6 @@
 			children = (
 				994FB3C1256EE54A008F0208 /* iOS_EssayistUITests.swift */,
 				994FB3C3256EE54A008F0208 /* Info.plist */,
-				994FB3E7256EF9B8008F0208 /* MarkdownSample.md */,
 			);
 			path = "iOS-EssayistUITests";
 			sourceTree = "<group>";
@@ -359,7 +367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				99095E24256EE1AE0048EB2F /* Assets.xcassets in Resources */,
-				994FF701257BD18D00B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +376,6 @@
 			files = (
 				99FF579725C1D0D700959C72 /* Main.storyboard in Resources */,
 				99095E25256EE1AE0048EB2F /* Assets.xcassets in Resources */,
-				994FF706257BD18E00B9858A /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +384,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				993CE9A225C2063400497085 /* Assets.xcassets in Resources */,
-				993CE98C25C1E96800497085 /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				993CE99D25C2063200497085 /* Assets.xcassets in Resources */,
-				994FB3E8256EF9B8008F0208 /* MarkdownSample.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +408,7 @@
 				99095E20256EE1AD0048EB2F /* EssayistApp.swift in Sources */,
 				994FB3D4256EEB3F008F0208 /* Models.swift in Sources */,
 				99F378F6256F025000C5DF2F /* TestViews.swift in Sources */,
+				99171271277A76B100643A2D /* MarkdownSample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +422,7 @@
 				9957D65425741DD7004194BD /* View.swift in Sources */,
 				994FB3D5256EEB3F008F0208 /* Models.swift in Sources */,
 				99F378F7256F025000C5DF2F /* TestViews.swift in Sources */,
+				99171272277A76B100643A2D /* MarkdownSample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +434,7 @@
 				993CE98125C1E91E00497085 /* Models.swift in Sources */,
 				993CE98225C1E91E00497085 /* String.swift in Sources */,
 				993CE98325C1E91E00497085 /* View.swift in Sources */,
+				99171274277A76B100643A2D /* MarkdownSample.swift in Sources */,
 				993CE97525C1E8DB00497085 /* macOS_EssayistUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +447,7 @@
 				99F37902256F033700C5DF2F /* Models.swift in Sources */,
 				9957D65525741DD7004194BD /* View.swift in Sources */,
 				994FB3DD256EF068008F0208 /* String.swift in Sources */,
+				99171273277A76B100643A2D /* MarkdownSample.swift in Sources */,
 				994FB3C2256EE54A008F0208 /* iOS_EssayistUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

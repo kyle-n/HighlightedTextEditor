@@ -1,3 +1,11 @@
+//
+//  MarkdownSample.swift
+//  Essayist
+//
+//  Created by Kyle Nazario on 12/27/21.
+//
+
+let markdownSample = """
 <!-- courtesy markdown-it.github.io -->
 
 # h1 Heading 8-)
@@ -26,7 +34,7 @@ __This is bold text__
 
 _This is italic text_
 
-~~Strikethrough~~
+~Strikethrough~
 
 <aside>html tag</aside>
 
@@ -114,4 +122,4 @@ Like links, Images also have a footnote style syntax
 With a reference later in the document defining the URL location:
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
-
+"""
