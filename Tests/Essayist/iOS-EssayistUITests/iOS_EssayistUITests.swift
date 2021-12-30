@@ -25,7 +25,7 @@ class iOS_EssayistUITests: XCTestCase {
         settings.tables.firstMatch.staticTexts["General"].tap()
         settings.tables.firstMatch.staticTexts["Keyboard"].tap()
         settings.tables.firstMatch.staticTexts["Keyboards"].tap()
-        settings.tables.firstMatch.staticTexts["Add New Keyboard..."].tap()
+        settings.tables.firstMatch.staticTexts["Add New Keyboard…"].tap()
         settings.tables.firstMatch.staticTexts["Chinese, Simplified"].tap()
         settings.tables.firstMatch.staticTexts["Pinyin – 10 Key"].tap()
         settings.buttons["Done"].tap()
@@ -162,17 +162,16 @@ class iOS_EssayistUITests: XCTestCase {
 
         selectKeyboard(.pinyin10Key)
 
-        app.keys["拼音"].tap()
         app.keys["A B C "].tap()
         app.keys["D E F "].tap()
         app.keys["M N O "].tap()
-        app.collectionViews.staticTexts["笨"].tap()
+        app.collectionViews.staticTexts["本"].tap()
 
         let targetText = """
         1. A
         2. B
 
-        Test 笨
+        Test 本
         """
 
         XCTAssertEqual(hlteTextView.value as! String, targetText)
@@ -207,7 +206,7 @@ class iOS_EssayistUITests: XCTestCase {
         app.keys["t"].tap()
         textView.doubleTap()
 
-        let selectedRangeDisplay = app.staticTexts["5"]
+        let selectedRangeDisplay = app.staticTexts["4"]
         let selectionChangesDisplay = app.staticTexts["0 3"]
         let selectedRangeExists = selectedRangeDisplay.waitForExistence(timeout: 2)
         let selectionChangesExists = selectionChangesDisplay.waitForExistence(timeout: 2)
@@ -270,6 +269,7 @@ class iOS_EssayistUITests: XCTestCase {
         textView.tap()
         textView.doubleTap()
         app.menuItems["Paste"].tap()
+        sleep(1)
 
         let textViewContent = textView.value as! String
         XCTAssertEqual(textViewContent, "💩")

@@ -8,19 +8,12 @@
 import HighlightedTextEditor
 import SwiftUI
 
-let markdownFileURL =
-    URL(
-        // swiftlint:disable:next line_length
-        string: "https://raw.githubusercontent.com/kyle-n/HighlightedTextEditor/main/Tests/Essayist/iOS-EssayistUITests/MarkdownSample.md"
-    )!
-let markdown = try! String(contentsOf: markdownFileURL, encoding: .utf8)
-
 struct MarkdownEditorA: View {
     @State var text: String
 
     init() {
-        let end = markdown.index(of: "## Blockquotes")!
-        let firstPart = String(markdown.prefix(upTo: end))
+        let end = markdownSample.index(of: "## Blockquotes")!
+        let firstPart = String(markdownSample.prefix(upTo: end))
         _text = State<String>(initialValue: firstPart)
     }
 
@@ -33,9 +26,9 @@ struct MarkdownEditorB: View {
     @State var text: String
 
     init() {
-        let endOfFirstPart = markdown.index(of: "## Blockquotes")!
-        let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
-        let secondPart = String(markdown[endOfFirstPart..<endOfSecondPart])
+        let endOfFirstPart = markdownSample.index(of: "## Blockquotes")!
+        let endOfSecondPart = markdownSample.index(of: "\n\n## Tables")!
+        let secondPart = String(markdownSample[endOfFirstPart..<endOfSecondPart])
         _text = State<String>(initialValue: secondPart)
     }
 
@@ -48,8 +41,8 @@ struct MarkdownEditorC: View {
     @State var text: String
 
     init() {
-        let endOfSecondPart = markdown.index(of: "\n\n## Tables")!
-        let thirdPart = String(markdown[endOfSecondPart..<markdown.endIndex])
+        let endOfSecondPart = markdownSample.index(of: "\n\n## Tables")!
+        let thirdPart = String(markdownSample[endOfSecondPart..<markdownSample.endIndex])
         _text = State<String>(initialValue: thirdPart)
     }
 

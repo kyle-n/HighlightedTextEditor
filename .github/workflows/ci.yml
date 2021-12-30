@@ -1,10 +1,8 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   BUNDLE_IDENTIFIER: com.kylenazario.Essayist
@@ -12,10 +10,9 @@ env:
   TEST_PROJECT_NAME: Essayist
 
 jobs:
-
   linting:
     name: Linting
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - name: Checkout
@@ -25,20 +22,16 @@ jobs:
 
   appkit:
     name: AppKit Tests
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
       - name: Turn on Do Not Disturb
         run: |
-          npm i -g do-not-disturb-cli
-          do-not-disturb on
-          do-not-disturb status
+          brew install vitorgalvao/tiny-scripts/calm-notifications
+          calm-notifications on
       - name: Change to testing branch
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
@@ -53,22 +46,20 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: macOS-failing-snapshots
+          name: macOS-non-matching-snapshots
           path: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/com.kylenazario.macOS-EssayistUITests.xctrunner/macOS_EssayistUITests
           if-no-files-found: ignore
       - name: Save existing/new macOS snapshots
         if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: macOS-new-snapshots
+          name: macOS-existing-or-new-snapshots
           path: /Users/runner/work/HighlightedTextEditor/HighlightedTextEditor/Tests/Essayist/macOS-EssayistUITests/__Snapshots__
           if-no-files-found: ignore
 
-
-
   uikit:
     name: UIKit Tests
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - name: Checkout
@@ -81,7 +72,7 @@ jobs:
           sed -i '' "s/kyle-n/${GITHUB_ACTOR//\//\\/}/g" $XCODEPROJ
       - name: Boot Simulator
         env:
-          IOS_SIM_NAME: iPhone 12
+          IOS_SIM_NAME: iPhone 13
         run: |
           IOS_SIM_UDID=`xcrun simctl list | grep -w "$IOS_SIM_NAME" | awk 'match($0, /\(([-0-9A-F]+)\)/) { print substr( $0, RSTART + 1, RLENGTH - 2 )}' | head -1`
           SIMULATOR_PATH='/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
@@ -101,7 +92,7 @@ jobs:
       - name: Run UIKit tests
         run: |
           xcodebuild -resolvePackageDependencies -project "$TEST_PROJECT_PATH"
-          xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
+          xcodebuild test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13' -scheme "$TEST_PROJECT_NAME (iOS)" -project $TEST_PROJECT_PATH
           killall Simulator
       - name: Save non-matching iOS snapshots
         if: failure()
