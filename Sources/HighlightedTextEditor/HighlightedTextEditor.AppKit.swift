@@ -54,6 +54,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
 
     public func updateNSView(_ view: ScrollableTextView, context: Context) {
         context.coordinator.updatingNSView = true
+        let typingAttributes = view.textView.typingAttributes
 
         let highlightedText = HighlightedTextEditor.getHighlightedText(
             text: text,
@@ -63,6 +64,7 @@ public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor
         view.attributedText = highlightedText
         runIntrospect(view)
         view.selectedRanges = context.coordinator.selectedRanges
+        view.textView.typingAttributes = typingAttributes
         context.coordinator.updatingNSView = false
     }
 
