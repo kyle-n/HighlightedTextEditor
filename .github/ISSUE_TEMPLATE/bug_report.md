@@ -7,11 +7,17 @@ assignees: kyle-n
 
 ---
 
+**DO NOT DELETE THIS TEMPLATE**
+
+If you do not fill out this template, your issue will be automatically closed. 
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+
+Please provide a small snippet of sample code and steps to reproduce the behavior. Write them like:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'

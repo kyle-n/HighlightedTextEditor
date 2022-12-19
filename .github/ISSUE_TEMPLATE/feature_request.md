@@ -7,6 +7,10 @@ assignees: kyle-n
 
 ---
 
+**DO NOT DELETE THIS TEMPLATE**
+
+If you do not fill out this template, your issue will be automatically closed. 
+
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
