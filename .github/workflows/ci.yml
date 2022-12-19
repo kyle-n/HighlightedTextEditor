@@ -28,10 +28,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: actions/checkout@v2
-      - name: Turn on Do Not Disturb
-        run: |
-          brew install vitorgalvao/tiny-scripts/calm-notifications
-          calm-notifications on
       - name: Change to testing branch
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
