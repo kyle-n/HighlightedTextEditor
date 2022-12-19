@@ -12,7 +12,7 @@ env:
 jobs:
   linting:
     name: Linting
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -22,7 +22,7 @@ jobs:
 
   appkit:
     name: AppKit Tests
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -59,7 +59,7 @@ jobs:
 
   uikit:
     name: UIKit Tests
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
