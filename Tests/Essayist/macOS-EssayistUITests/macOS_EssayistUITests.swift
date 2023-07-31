@@ -97,7 +97,7 @@ class macOS_EssayistUITests: XCTestCase {
 
     func testURLPresetLinkClicks() {
         let app = XCUIApplication()
-        app.launch()
+        app.activate()
 
         selectEditor(.url)
 
