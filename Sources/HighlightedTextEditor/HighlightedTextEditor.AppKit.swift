@@ -10,7 +10,6 @@
  */
 
 import AppKit
-import Combine
 import SwiftUI
 
 public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
