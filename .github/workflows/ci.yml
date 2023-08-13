@@ -12,7 +12,7 @@ env:
 jobs:
   linting:
     name: Linting
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - name: Checkout
@@ -22,12 +22,16 @@ jobs:
 
   appkit:
     name: AppKit Tests
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - uses: actions/checkout@v2
+      - name: Turn on Do Not Disturb
+        run: |
+          brew install vitorgalvao/tiny-scripts/calm-notifications
+          calm-notifications on
       - name: Change to testing branch
         env:
           XCODEPROJ: Tests/Essayist/Essayist.xcodeproj/project.pbxproj
@@ -55,7 +59,7 @@ jobs:
 
   uikit:
     name: UIKit Tests
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - name: Checkout

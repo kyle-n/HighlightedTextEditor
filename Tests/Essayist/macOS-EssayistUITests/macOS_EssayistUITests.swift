@@ -24,7 +24,7 @@ class macOS_EssayistUITests: XCTestCase {
 
     private func selectEditor(_ editorType: EditorType) {
         let window = XCUIApplication().windows.firstMatch
-        window.popUpButtons["Select Editor"].click()
+        window.popUpButtons.firstMatch.click()
         window.menuItems[editorType.rawValue.uppercaseFirst()].click()
 
         if editorType == .blank {
@@ -97,7 +97,7 @@ class macOS_EssayistUITests: XCTestCase {
 
     func testURLPresetLinkClicks() {
         let app = XCUIApplication()
-        app.launch()
+        app.activate()
 
         selectEditor(.url)
 
