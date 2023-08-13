@@ -10,7 +10,6 @@
  */
 
 import AppKit
-import Combine
 import SwiftUI
 
 public struct HighlightedTextEditor: NSViewRepresentable, HighlightingTextEditor {
@@ -191,6 +190,7 @@ public extension HighlightedTextEditor {
             textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
             textView.minSize = NSSize(width: 0, height: contentSize.height)
             textView.textColor = NSColor.labelColor
+            textView.allowsUndo = true
 
             return textView
         }()
