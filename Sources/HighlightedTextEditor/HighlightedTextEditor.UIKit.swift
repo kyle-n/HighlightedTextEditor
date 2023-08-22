@@ -45,6 +45,7 @@ public struct HighlightedTextEditor: UIViewRepresentable, HighlightingTextEditor
         let textView = UITextView()
         textView.delegate = context.coordinator
         updateTextViewModifiers(textView)
+        runIntrospect(textView)
 
         return textView
     }
