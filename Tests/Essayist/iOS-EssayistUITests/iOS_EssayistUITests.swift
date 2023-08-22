@@ -21,6 +21,10 @@ class iOS_EssayistUITests: XCTestCase {
         // enable Chinese-language keyboard
         let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
         settings.launch()
+        sleep(1)
+        settings.terminate()
+        sleep(1)
+        settings.launch()
 
         settings.tables.firstMatch.staticTexts["General"].tap()
         settings.tables.firstMatch.staticTexts["Keyboard"].tap()
@@ -71,7 +75,7 @@ class iOS_EssayistUITests: XCTestCase {
             app.textViews.firstMatch.tap()
         }
         nextKeyboardButton.press(forDuration: 0.9)
-        app.tables["InputSwitcherTable"].staticTexts[keyboardType.rawValue].tap()
+        app.staticTexts[keyboardType.rawValue].firstMatch.tap()
     }
 
     func testMarkdownPresetHighlighting() {
